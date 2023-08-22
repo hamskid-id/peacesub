@@ -6,7 +6,7 @@ export const Services =()=>{
         <div className="pb-10 py-10 px-10">
             <div className="mb-4 mt-6 w-fit ">
                 <div className="text-xl c-brown">Service We</div>
-                <div className="service c-blue text-8xl">Provide</div>
+                <div className="service c-blue text-7xl break-all">Provide</div>
             </div>
             <Text
                 style="text-start text-sm leading-6 c-brown font-normal lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full"

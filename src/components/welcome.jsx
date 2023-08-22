@@ -13,7 +13,7 @@ export const WelcomeSection =()=>{
             <div className="lg:w-1/2 xl:w-1/2 md:w-1/2 sm:w-full xs:w-full xxs:w-full pt-8 px-2">
                 <div className="mb-6">
                     <span className="text-start text-6xl font-medium c-brown">
-                        Welcome To<span className="text-start text-6xl font-extrabold c-blue ms-2">Peacesub</span>
+                        Welcome To<span className="text-start text-6xl font-extrabold c-blue ms-2 break-all">Peacesub</span>
                     </span>
                 </div>
                  <Text
