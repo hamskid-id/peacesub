@@ -13,7 +13,7 @@ export const Agent =()=>{
                     style="leading-6 font-light c-brown text-sm text-start mb-4 w-full"
                     value="Join our network of outstanding entrepreneurs patnering with network.com Bring the Network.com 'easy-payments' experience closer to your network and earn a commission for every transaction you perform for your customers... We offer our Referrers the best referral program incentives to encourage entrepreneurial and managerial skill acquisition; enhance growth and development and general empowerment among our students on campuses of higher learning and youths in diaspora. Finally, to promote technology via the use of ICT tools in our society..."
                 />
-                <div className="pb-3">
+                <div className="pb-4">
                     <Btn
                         style="text-white bg-light-blue py-5 px-8 text-sm"
                         value="Get Started"
@@ -49,7 +49,7 @@ export const Agent =()=>{
                     return(
                         <div 
                             key={index}
-                            className="mb-2 bg-white p-4 rounded-md m-2 lg:w-2/6 xl:w-2/6 md:w-2/6 sm:w-full xs:w-full xxs:w-full flex flex-col justify-between">
+                            className="mb-2 bg-white p-4 rounded-md md:m-2 lg:m-2 xl:m-2 sm:mx-auto xs:mx-auto xxs:mx-auto lg:w-2/6 xl:w-2/6 md:w-2/6 sm:w-full xs:w-full xxs:w-full flex flex-col justify-between">
                             <div className="w-16 mb-3">
                                 <img 
                                     src="https://assets.website-files.com/63e4cc8d2ac61a3dee9bb0ee/63e5591f791726bd27710248_favourite-31.svg" 
@@ -85,7 +85,7 @@ export const Agent =()=>{
                 }
             </div>
             <div>
-            <div className="flex justify-between lg:flex-row xl:flex-row md:flex-row sm:flex-col xs:flex-col  xxs:flex-col m-auto mt-20">
+            <div className="flex justify-between lg:flex-row xl:flex-row md:flex-row sm:flex-col xs:flex-col  xxs:flex-col mx-auto mt-20">
                 {
                     [
                         {
@@ -108,7 +108,7 @@ export const Agent =()=>{
                             text
                         }=card;
                         return(
-                            <div className="w-2/6 sm:w-full xs:w-full xxs:w-full m-4 rounded-lg bg-white flex flex-col justify-between">
+                            <div className="w-2/6 sm:w-full xs:w-full xxs:w-full my-4 rounded-lg bg-white flex flex-col justify-between md:m-4 lg:m-4 xl:m-4 sm:mx-auto xs:mx-auto xxs:mx-auto">
                                 <div className="w-full">
                                     <img 
                                         src={img}
