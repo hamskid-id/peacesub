@@ -10,7 +10,7 @@ import { Footer } from "../components/footer"
 export const HomePage =()=>{
     return(
         <div className="bg-light-pink">
-            <div className="pt-4 pb-20 px-10 bg-light-pink relative">
+            <div className="pt-4  px-10 sm:px-4 xxs:px-4 xs:px-4 md:px-10 lg:px-10 xl:px-10 bg-light-pink relative">
                 
                  <Nav/>
                 <WelcomeSection/>

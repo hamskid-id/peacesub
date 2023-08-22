@@ -6,7 +6,7 @@ export const WelcomeSection =()=>{
             <div className="lg:w-5/12 xl:w-5/12 md:w-5/12 sm:w-full xs:w-full xxs:w-full">
                 <img
                     src="https://peacesub.com.ng/static/styling/img/illustrations/cup boy.png"
-                    className="w-full"
+                    className="w-full h-96"
                     alt="object not found"
                 />
             </div>

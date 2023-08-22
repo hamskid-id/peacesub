@@ -3,7 +3,7 @@ import { Text } from "../elements/text"
 
 export const Data=()=>{
     return(
-        <div  className="px-16 py-20">
+        <div  className="lg:px-16 md:px-16 xl:px-16 py-20 sm:px-4 xxs:px-4 xs:px-4">
             <Text
                 style="font-medium text-5xl text-center c-brown mb-6"
                 value="Affordable Data Plans And Prices"
