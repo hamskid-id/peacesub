@@ -38,11 +38,20 @@
 .read-the-docs {
   color: #888;
 }
+.bg-grey{
+  background-color: lightgray;
+}
+.bg-whitesmoke{
+  background-color: whitesmoke;
+}
 .bg-light-blue{
   background-color: #410603!important;
 }
 .bg-tick-blue{
   background-color: #ed4c4e!important;
+}
+.border-black{
+  border:1px solid black;
 }
 .c-blue{
   color: #ed4c4e!important;
@@ -94,6 +103,9 @@
 .bg-light{
   background-color: #fcfafa;
 }
+.bg-light-green{
+  background-color: #edf5ff;
+}
 .bg-golden{
   background-color:gold;
 }
@@ -143,6 +155,18 @@
 .hv{height: 100vh;}
 .ht-100{
   height: 100%;
+}
+.bg-mtn{
+  background:goldenrod;
+}
+.bg-airtel{
+  background-color: #ed4c4e;
+}
+.bg-glo{
+  background-color: greenyellow;
+}
+.bg-9mobile{
+  background-color: green;
 }
 @media only screen and (min-width:320px) and (max-width:767px){
   .nav.active{

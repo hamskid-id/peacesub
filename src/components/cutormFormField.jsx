@@ -16,8 +16,7 @@ export const InputField=({
         case "checkbox":
             return(
                 <div className="flex items-center mb-3">
-                    <input 
-                        className={style}
+                    <input
                         type={type}
                         name={name}
                         placeholder={placeHolder}
@@ -27,7 +26,7 @@ export const InputField=({
                     }
                     />
                     <label
-                        className={labelStyle}
+                        className={`ms-2 ${labelStyle}`}
                         htmlFor={name}>
                         {labelTitle}
                     </label>
@@ -39,7 +38,7 @@ export const InputField=({
             return(
                 <div className="flex flex-col mb-3">
                     <label
-                        className={labelStyle}
+                         className={`mb-2 ${labelStyle}`}
                         htmlFor={name}>
                         {labelTitle}
                     </label>
@@ -72,9 +71,9 @@ export const InputField=({
             break;
         case "password" :
             return(
-                <div className="w-100 mb-2 relative">
+                <div className="flex flex-col align-items-start w-full mb-2 relative">
                     <label
-                        className={labelStyle}
+                        className={`mb-2 ${labelStyle}`}
                         htmlFor={name}>
                         {labelTitle}
                     </label>
@@ -111,14 +110,14 @@ export const InputField=({
             break;
             case "textArea":
             return(
-                <div className=" flex flex-col align-items-start w-100 mb-2 relative">
+                <div className=" flex flex-col align-items-start w-full mb-2 relative">
                     <label
                         className={labelStyle}
                         htmlFor={name}>
                         {labelTitle}
                     </label>
                     <textarea
-                        className={style}
+                        className={`mb-2 ${labelStyle}`}
                         type={type}
                         name={name}
                         defaultValue={defaultValue?defaultValue:null}
@@ -146,9 +145,9 @@ export const InputField=({
             break;
             default :
                 return(
-                    <div className=" flex flex-col align-items-start w-100 mb-2 relative">
+                    <div className="flex flex-col align-items-start w-full mb-2 relative">
                         <label
-                            className={labelStyle}
+                            className={`mb-2 ${labelStyle}`}
                             htmlFor={name}>
                             {labelTitle}
                         </label>

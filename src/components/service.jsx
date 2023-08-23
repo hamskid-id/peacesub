@@ -1,17 +1,20 @@
 import { Text } from "../elements/text"
 import { AiOutlineDeliveredProcedure, AiOutlineControl, AiOutlineAudit,AiOutlineMacCommand, AiOutlineRadarChart } from "react-icons/ai";
+import { RevealAnimation } from "./reveal";
 
 export const Services =()=>{
     return(
         <div className="pb-10 py-10 px-10">
             <div className="mb-4 mt-6 w-fit ">
-                <div className="text-xl c-brown">Service We</div>
-                <div className="service c-blue text-7xl break-normal">Provide</div>
+                <RevealAnimation side={true}><div className="text-xl c-brown">Service We</div></RevealAnimation>
+                <RevealAnimation side={true}><div className="service c-blue text-7xl break-normal">Provide</div></RevealAnimation>
             </div>
-            <Text
-                style="text-start text-sm leading-6 c-brown font-normal lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full"
-                value="We Provide Awesome Services We use cutting-edge technology to run our services. Our data delivery and wallet funding is automated, airtime top-up and data purchase are automated and get delivered to you almost instantly. We offer instant recharge of Airtime, Databundle, CableTV (DStv, GOtv & Startimes), Electricity Bill Payment and Airtime to cash..."
-            />
+            <RevealAnimation>
+                <Text
+                    style="text-start text-sm leading-6 c-brown font-normal lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full"
+                    value="We Provide Awesome Services We use cutting-edge technology to run our services. Our data delivery and wallet funding is automated, airtime top-up and data purchase are automated and get delivered to you almost instantly. We offer instant recharge of Airtime, Databundle, CableTV (DStv, GOtv & Startimes), Electricity Bill Payment and Airtime to cash..."
+                />
+            </RevealAnimation>
             <div className="py-4 grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1 gap-6 my-4">
                 {
                     [
@@ -62,17 +65,23 @@ export const Services =()=>{
                                 key={index}
                                 className=" mb-2 p-4 rounded-lg bg-white"
                             >
-                                <div className="icon p-4 bg-light-yellow w-fit mb-4">
-                                    {icon}
-                                </div>
-                                <Text   
-                                    value={title}
-                                    style="text-lg c-brown mb-4 font-medium"
-                                />
-                                <Text   
-                                    value={name}
-                                    style="text-sm c-brown"
-                                />
+                                <RevealAnimation>
+                                    <div className="icon p-4 bg-light-yellow w-fit mb-4">
+                                        {icon}
+                                    </div>
+                                </RevealAnimation>
+                                <RevealAnimation>
+                                    <Text   
+                                        value={title}
+                                        style="text-lg c-brown mb-4 font-medium"
+                                    />
+                                </RevealAnimation>
+                                <RevealAnimation>
+                                    <Text   
+                                        value={name}
+                                        style="text-sm c-brown"
+                                    />
+                                </RevealAnimation>
                             </div>
                         )
                     })

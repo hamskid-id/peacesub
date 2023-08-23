@@ -50,13 +50,13 @@ export const Register =()=>{
     }
 
     return(
-        <AuthLayout>
+        <AuthLayout adjHeight={true}>
             <Text
-                style="c-brown font-mediumn text-3xl mb-2"
+                style="c-brown font-semibold text-3xl mb-2"
                 value="Sign Up"
             />
             <Text
-                style="c-brown font-light text-lg mb-6"
+                style="font-medium text-lg mb-6"
                 value="kindly create an account to proceed."
             />
             <form  onSubmit={handleSubmit(SubmitHandler)}>
@@ -123,10 +123,10 @@ export const Register =()=>{
                                     placeHolder={placeHold}
                                     type={type}
                                     labelTitle={labelName}
-                                    labelStyle="text-sm font-medium text-start c-brown"
+                                    labelStyle="text-sm font-medium text-start"
                                     register={register}
                                     errors={error}
-                                    style="w-full text-start rounded-md p-3 text-xs border"
+                                    style="w-full text-start rounded-sm p-4 text-xs border"
                                 />
                             </div>
                         )
@@ -140,10 +140,10 @@ export const Register =()=>{
                     placeHolder="Enter password"
                     type="password"
                     labelTitle="Password"
-                    labelStyle="text-sm font-medium text-start c-brown"
+                    labelStyle="text-sm font-medium text-start"
                     register={register}
                     errors={errors.password}
-                    style="w-full text-start rounded-md p-3 text-xs border"
+                    style="w-full text-start rounded-sm p-4 text-xs border"
                 />
             </div>
             <div 
@@ -154,10 +154,10 @@ export const Register =()=>{
                     placeHolder="confirm password"
                     type="password"
                     labelTitle="Confirm password"
-                    labelStyle="text-sm font-medium text-start c-brown"
+                    labelStyle="text-sm font-medium text-start"
                     register={register}
                     errors={errors.cpassword}
-                    style="w-full text-start rounded-md p-3 text-xs border"
+                    style="w-full text-start rounded-sm p-4 text-xs border"
                 />
             </div>
             <div 
@@ -167,18 +167,18 @@ export const Register =()=>{
                     name="check"
                     type="checkbox"
                     labelTitle="I agree with the terms and condition"
-                    labelStyle="text-sm font-medium text-start c-brown"
+                    labelStyle="text-sm font-medium text-start"
                     register={register}
                     errors={errors.check}
-                    style="me-2 text-start rounded-md p-3 text-xs border"
+                    style="me-2 text-start rounded-sm p-4 text-xs border"
                 />
             </div>
             <Btn
                 value="sign up"
-                style="w-full p-2 text-center bg-light-blue text-white mt-3 mb-3"
+                style="w-full p-3 text-center bg-light-blue text-white mt-3 mb-3"
             />
             <div className="flex items-center m-auto w-fit">
-                <span className="me-1 text-sm c-brown">Already have an account?</span>
+                <span className="me-1 text-sm font-medium">Already have an account?</span>
                 <Link to="/login" className="text-sm">Sigin here?</Link>
             </div>
             </form>

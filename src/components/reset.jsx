@@ -21,13 +21,13 @@ export const Reset =()=>{
     }
 
     return(
-        <AuthLayout adjHeight={true}>
+        <AuthLayout>
             <Text
                 style="c-brown font-mediumn text-3xl mb-2"
                 value="Reset Password"
             />
             <Text
-                style="c-brown font-light text-lg mb-6"
+                style="font-medium text-lg mb-6"
                 value="kindly enter your email to proceed"
             />
             <form  onSubmit={handleSubmit(SubmitHandler)}>
@@ -35,7 +35,7 @@ export const Reset =()=>{
                     [
                         {
                             title:"email",
-                            labelName:"email Address",
+                            labelName:"Email Address",
                             type:"text",
                             error:errors.email,
                             placeHold:"Enter email",
@@ -59,10 +59,10 @@ export const Reset =()=>{
                                     placeHolder={placeHold}
                                     type={type}
                                     labelTitle={labelName}
-                                    labelStyle="text-sm font-medium text-start mb-3 c-brown"
+                                    labelStyle="text-sm font-medium text-start mb-3"
                                     register={register}
                                     errors={error}
-                                    style="w-full text-start rounded-md p-3 text-xs border"
+                                    style="w-full text-start rounded-sm p-4 text-xs border"
                                 />
                             </div>
                         )
@@ -70,7 +70,7 @@ export const Reset =()=>{
             }
             <Btn
                 value="send"
-                style="w-full p-2 text-center bg-light-blue text-white mt-3 mb-3"
+                style="w-full p-3 text-center bg-light-blue text-white mt-3 mb-3"
             />
             </form>
         </AuthLayout>

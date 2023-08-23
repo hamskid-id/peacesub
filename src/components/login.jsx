@@ -25,11 +25,11 @@ export const SignIn =()=>{
     return(
         <AuthLayout>
             <Text
-                style="c-brown font-mediumn text-3xl mb-2"
+                style="c-brown font-semibold text-3xl mb-2"
                 value="Login"
             />
             <Text
-                style="c-brown font-light text-lg mb-6"
+                style="font-medium text-lg mb-6"
                 value="Sign in to your account to continue."
             />
             <form  onSubmit={handleSubmit(SubmitHandler)}>
@@ -68,10 +68,10 @@ export const SignIn =()=>{
                                     placeHolder={placeHold}
                                     type={type}
                                     labelTitle={labelName}
-                                    labelStyle="text-sm font-medium text-start mb-3 c-brown"
+                                    labelStyle="text-sm font-medium text-start mb-3"
                                     register={register}
                                     errors={error}
-                                    style="w-full text-start rounded-md p-3 text-xs border"
+                                    style="w-full text-start rounded-sm p-4 text-xs border"
                                 />
                             </div>
                         )
@@ -80,10 +80,10 @@ export const SignIn =()=>{
             <Link to="/reset">Forgot your password?</Link>
             <Btn
                 value="Log In"
-                style="w-full p-2 text-center bg-light-blue text-white mt-3 mb-3"
+                style="w-full p-3 text-center bg-light-blue text-white mt-3 mb-3"
             />
             <div className="flex items-center m-auto w-fit">
-                <span className="me-1 text-sm c-brown">Dont have an account?</span>
+                <span className="me-1 text-sm font-medium">Dont have an account?</span>
                 <Link to="/register" className="text-sm">Sigup here?</Link>
             </div>
             </form>
