@@ -155,7 +155,7 @@ export const KYC=()=>{
                             value="Proceed"
                         />
                     </form>
-                    <div className="px-4">
+                    <div className="px-4 py-4">
                         <div className="mb-2">
                             <Text
                                 style="font-medium text-start text-xl mb-3"

@@ -1,3 +1,4 @@
+
 export const AuthLayout =({children,adjHeight})=>{
     return(
         <div className={`${adjHeight?"ht-100":" h-screen"} authLayout flex justify-cebter items-center `}>

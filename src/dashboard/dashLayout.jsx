@@ -1,7 +1,18 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom"
+import {
+    Sidenav,
+    Ripple,
+    Tab,
+    initTE,
+  } from "tw-elements";
 
 export const DashboardLayout=({children})=>{
     const navigate = useNavigate();
+    useEffect(() => {
+        initTE({ Sidenav, Ripple,Tab });
+        console.log("helo")
+    });
     return(
         <div className="bg-light-pink">
             <nav

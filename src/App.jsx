@@ -1,12 +1,7 @@
 import { useEffect} from 'react'
 import './App.css'
 import {BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
-import {
-  Sidenav,
-  Ripple,
-  Tab,
-  initTE,
-} from "tw-elements";
+
 import { HomePage } from './pages/homePage';
 import { SignIn } from './components/login';
 import { Register } from './components/register';
@@ -30,10 +25,6 @@ import { DataWalletSummary } from './dashboard/mainView/dataWalletSummary';
 import { WalletSummary } from './dashboard/mainView/walletSummary';
 
 function App() {
-  useEffect(() => {
-    
-  initTE({ Sidenav, Ripple,Tab });
-  }, []);
 
   return (
     <>

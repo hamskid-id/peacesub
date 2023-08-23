@@ -104,7 +104,7 @@ export const CableSub=()=>{
                         />
                     </form>
                     <div className="px-4">
-                        <div className="mb-2">
+                        <div className="my-2">
                             <Text
                                 style="font-normal text-start text-xl mb-3"
                                 value="YOU CAN CONTACT DSTV/GOTV UNIT CUSTOMER CARE..."

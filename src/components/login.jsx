@@ -2,7 +2,7 @@ import { Text } from "../elements/text"
 import { AuthLayout } from "./authLayout"
 import { useForm } from "react-hook-form"
 import { InputField } from "./cutormFormField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Btn } from "../elements/btn";
 
 export const SignIn =()=>{
@@ -11,7 +11,7 @@ export const SignIn =()=>{
         handleSubmit, 
         formState: { errors } 
     } = useForm();
-
+    const navigate = useNavigate()
     const SubmitHandler =({
         userName,
         password
@@ -20,6 +20,8 @@ export const SignIn =()=>{
                 userName,
                 password
             )
+            navigate("/dashboard");
+            
     }
 
     return(
@@ -32,12 +34,12 @@ export const SignIn =()=>{
                 style="font-medium text-lg mb-6"
                 value="Sign in to your account to continue."
             />
-            <form  onSubmit={handleSubmit(SubmitHandler)}>
+            <form onSubmit={handleSubmit(SubmitHandler)}>
                 {
                     [
                         {
                             title:"userName",
-                            labelName:"userName Address",
+                            labelName:"userName",
                             type:"text",
                             error:errors.userName,
                             placeHold:"Enter userName",
