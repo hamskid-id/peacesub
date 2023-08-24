@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form"
-import { DashboardLayout } from "../dashLayout";
+import { DashboardLayout } from "../dashLayout"
 import { Text } from "../../elements/text";
 import { Btn } from "../../elements/btn";
 import { InputField } from "../../components/cutormFormField";
 
-export const BankToPay=()=>{
+export const BulkSmS=()=>{
 
     const { 
         register, 
@@ -12,14 +12,14 @@ export const BankToPay=()=>{
         formState: { errors } 
     } = useForm();
     const SubmitHandler =({
-        BankToPay,
-        Amount,
-        Reference,
+        From,
+        Message,
+        To
     })=>{
             console.log(
-                BankToPay,
-                Amount,
-                Reference,
+                From,
+                Message,
+                To
             )
     }
 
@@ -29,7 +29,7 @@ export const BankToPay=()=>{
                 <div className="bg-whitesmoke w-full p-6 mb-2">
                     <Text   
                         style="text-center font-medium text-xl"
-                        value="BankPayment (minimum amount is ₦3000)"
+                        value="BULK SMS"
                     />
                 </div>
                 <div className="grid lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1 p-4">
@@ -37,28 +37,28 @@ export const BankToPay=()=>{
                         {
                             [
                                 {
-                                    title:"BankToPay",
-                                    labelName:"Bank paid to",
+                                    title:"From",
+                                    labelName:"From",
                                     selectArrayOption:null,
                                     type:"text",
-                                    error:errors.BankToPay,
-                                    placeHold:"Bank paid to",
+                                    error:errors.From,
+                                    placeHold:"From",
                                     subTitle:null
                                 },{
-                                    title:"Reference",
-                                    labelName:"Reference or Narration*",
+                                    title:"To",
+                                    labelName:"To",
                                     selectArrayOption:null,
                                     type:"text",
-                                    error:errors.Reference,
-                                    placeHold:"Reference or Narration*",
+                                    error:errors.To,
+                                    placeHold:"To",
                                     subTitle:null
                                 },{
-                                    title:"Amount",
-                                    labelName:"Amount",
+                                    title:"Message",
+                                    labelName:"Message",
                                     selectArrayOption:null,
-                                    type:"text",
-                                    error:errors.Amount,
-                                    placeHold:"Amount",
+                                    type:"textArea",
+                                    error:errors.Message,
+                                    placeHold:"Message",
                                     subTitle:null
                                 }
                             ].map((prof,index)=>{
@@ -90,29 +90,16 @@ export const BankToPay=()=>{
                                 )
                             })
                         }
-                        <div>
-                            <Text
-                                value="Your account will be suspended, if you submit without transfer
-                                Please note that there is a charge of N50 if the amount greater than N9,999."
-                                style="font-light text-start text-sm mb-4"
-                            />
-                        </div>
                          <Btn
                             style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
-                            value="Proceed"
+                            value="Send"
                         />
                     </form>
-                    <div className="px-4">
+                    <div className="p-4">
                         <div className="mb-2">
                             <Text
-                                style="font-medium text-start text-xl mb-3"
-                                value="Guarantee Trust Bank (GT bank)
-                                        AZEEZ OLAIDE SHOBAMIKE
-                                        0623169129"
-                                />
-                            <Text
-                                style="font-light text-start text-sm mb-3 leading-6"
-                                value="You can deposit or transfer fund into our account stated above. Use your registered username as depositor's name, naration or remarks Your account will be funded as soon as your payment is confirmed."
+                                style="font-medium text-center text-xl mb-3"
+                                value="3.5naira per unit"
                             />
                         </div>
                     </div>

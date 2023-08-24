@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form"
-import { DashboardLayout } from "../dashLayout";
+import { DashboardLayout } from "../dashLayout"
 import { Text } from "../../elements/text";
 import { Btn } from "../../elements/btn";
 import { InputField } from "../../components/cutormFormField";
 
-export const BankToPay=()=>{
+export const BuyDataCoupon=()=>{
 
     const { 
         register, 
@@ -12,14 +12,14 @@ export const BankToPay=()=>{
         formState: { errors } 
     } = useForm();
     const SubmitHandler =({
-        BankToPay,
-        Amount,
-        Reference,
+        dataPlan,
+        NameOfPlan,
+        Quantity
     })=>{
             console.log(
-                BankToPay,
-                Amount,
-                Reference,
+                dataPlan,
+                NameOfPlan,
+                Quantity
             )
     }
 
@@ -29,36 +29,36 @@ export const BankToPay=()=>{
                 <div className="bg-whitesmoke w-full p-6 mb-2">
                     <Text   
                         style="text-center font-medium text-xl"
-                        value="BankPayment (minimum amount is ₦3000)"
+                        value="GENERATE MTN DATA E-PIN"
                     />
                 </div>
                 <div className="grid lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1 p-4">
-                    <form onSubmit={handleSubmit(SubmitHandler)} className="xs:order-last xxs:order-last sm:order-last md:order-first lg:order-first xl:order-first" >
+                    <form onSubmit={handleSubmit(SubmitHandler)} className="xs:order-last xxs:order-last sm:order-last md:order-first lg:order-first xl:order-first">
                         {
                             [
                                 {
-                                    title:"BankToPay",
-                                    labelName:"Bank paid to",
+                                    title:"dataPlan",
+                                    labelName:"Data Plan",
                                     selectArrayOption:null,
                                     type:"text",
-                                    error:errors.BankToPay,
-                                    placeHold:"Bank paid to",
+                                    error:errors.dataPlan,
+                                    placeHold:"dataPlan",
                                     subTitle:null
                                 },{
-                                    title:"Reference",
-                                    labelName:"Reference or Narration*",
+                                    title:"Quantity",
+                                    labelName:"Data Type",
                                     selectArrayOption:null,
-                                    type:"text",
-                                    error:errors.Reference,
-                                    placeHold:"Reference or Narration*",
+                                    type:"number",
+                                    error:errors.Quantity,
+                                    placeHold:"Quantity",
                                     subTitle:null
                                 },{
-                                    title:"Amount",
-                                    labelName:"Amount",
+                                    title:"NameOfPlan",
+                                    labelName:"Name of plan",
                                     selectArrayOption:null,
                                     type:"text",
-                                    error:errors.Amount,
-                                    placeHold:"Amount",
+                                    error:errors.NameOfPlan,
+                                    placeHold:"NameOfPlan",
                                     subTitle:null
                                 }
                             ].map((prof,index)=>{
@@ -90,30 +90,22 @@ export const BankToPay=()=>{
                                 )
                             })
                         }
-                        <div>
-                            <Text
-                                value="Your account will be suspended, if you submit without transfer
-                                Please note that there is a charge of N50 if the amount greater than N9,999."
-                                style="font-light text-start text-sm mb-4"
-                            />
-                        </div>
                          <Btn
                             style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
                             value="Proceed"
                         />
                     </form>
-                    <div className="px-4">
+                    <div className="p-4">
                         <div className="mb-2">
                             <Text
-                                style="font-medium text-start text-xl mb-3"
-                                value="Guarantee Trust Bank (GT bank)
-                                        AZEEZ OLAIDE SHOBAMIKE
-                                        0623169129"
-                                />
-                            <Text
-                                style="font-light text-start text-sm mb-3 leading-6"
-                                value="You can deposit or transfer fund into our account stated above. Use your registered username as depositor's name, naration or remarks Your account will be funded as soon as your payment is confirmed."
+                                style="font-light text-center text-lg mb-3"
+                                value="MTN data e-pins allows you to load data on your phone just like any conventional airtime recharge card!"
                             />
+                        </div>
+                        <div className="mb-2">
+                            <div className="p-3 rounded-sm bg-mtn text-white mb-2">
+                                AVAILABLE MTN PIN - 0
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -2,8 +2,10 @@ import {  AiOutlineArrowRight, AiOutlineCopy } from "react-icons/ai"
 import { Btn } from "../../elements/btn"
 import { Text } from "../../elements/text"
 import { DashboardLayout } from "../dashLayout"
+import { useNavigate } from "react-router-dom"
 
 export const DashView=()=>{
+    const navigate = useNavigate();
     return(
         <DashboardLayout>
             <div className="py-4">
@@ -287,38 +289,40 @@ export const DashView=()=>{
                                 [
                                     {
                                         name:"Buy Data",
-                                        route:""
+                                        route:"/buy data"
                                     },{
                                         name:"Buy Data Pin/Coupon",
-                                        route:""
+                                        route:"/buydatacoupon"
                                     },{
                                         name:"Buy Airtime",
-                                        route:""
+                                        route:"/buy airtime"
                                     },{
                                         name:"Airtime to Cash",
-                                        route:""
+                                        route:"/"
                                     },{
                                         name:"Cable Subscription",
-                                        route:""
+                                        route:"/cablesub"
                                     },{
                                         name:"Electricity Payment",
-                                        route:""
+                                        route:"/electrcitybill"
                                     },{
                                         name:"Recharge Card Printing",
-                                        route:""
+                                        route:"/rechargeCardPin"
                                     },{
                                         name:"Education Pin",
-                                        route:""
+                                        route:"/resultChecker"
                                     },{
                                         name:"Bulk Sim",
-                                        route:""
+                                        route:"/bulkSms"
                                     }
                                 ].map((prod,index)=>{
                                     const{name,route}=prod
                                     return(
                                         <div 
                                             key={index}
-                                            className="flex justify-between border mb-1 p-4 rounded cursor-auto">
+                                            className="flex justify-between border mb-1 p-4 rounded cursor-auto"
+                                            onClick={()=>navigate(route)}
+                                        >
                                             <Text
                                                 style="text-start text-sm font-mdiumn"
                                                 value={name}

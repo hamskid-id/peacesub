@@ -37,7 +37,7 @@ export const BuyData=()=>{
                     />
                 </div>
                 <div className="grid lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1 p-4">
-                    <form onSubmit={handleSubmit(SubmitHandler)} >
+                    <form onSubmit={handleSubmit(SubmitHandler)} className="xs:order-last xxs:order-last sm:order-last md:order-first lg:order-first xl:order-first">
                         {
                             [
                                 {

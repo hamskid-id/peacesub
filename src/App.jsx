@@ -23,6 +23,10 @@ import { Transaction } from './dashboard/transaction';
 import { DataTransaction } from './dashboard/mainView/dataTrasaction';
 import { DataWalletSummary } from './dashboard/mainView/dataWalletSummary';
 import { WalletSummary } from './dashboard/mainView/walletSummary';
+import { RechargePin } from './dashboard/pin/rechargePin';
+import { ResultChecker } from './dashboard/pin/resultChecker';
+import { BuyDataCoupon } from './dashboard/buy data/dataCupon';
+import { BulkSmS } from './dashboard/pin/bulkSim';
 
 function App() {
 
@@ -51,6 +55,10 @@ function App() {
               <Route exact path="/datatransaction" element={<DataTransaction/>}/>
               <Route exact path="/dataWalletSum" element={<DataWalletSummary/>}/>
               <Route exact path="/walletSum" element={<WalletSummary/>}/>
+              <Route exact path="/resultChecker" element={<ResultChecker/>}/>
+              <Route exact path="/rechargeCardPin" element={<RechargePin/>}/>
+              <Route exact path="/buydatacoupon" element={<BuyDataCoupon/>}/>
+              <Route exact path="/bulkSms" element={<BulkSmS/>}/>
             </Routes>
       </Router>
     </>
