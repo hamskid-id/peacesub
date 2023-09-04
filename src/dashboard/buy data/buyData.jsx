@@ -6,6 +6,7 @@ import { InputField } from "../../components/cutormFormField";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getDataAirtimeType, purchaseData } from "../../store/dataSlice";
+import Spinner from "../../spinners/spinner";
 
 export const BuyData=()=>{
 
@@ -13,7 +14,8 @@ export const BuyData=()=>{
     const {
         purchaseDataStatus,
         dataAirtimeTp,
-        purchaseDataRes
+        purchaseDataRes,
+        getDataAirtimeTypeStatus
     } = useSelector(state=>state.data);
     useEffect(()=>{
         dispatch(getDataAirtimeType());
@@ -41,6 +43,9 @@ export const BuyData=()=>{
 
     return(
         <DashboardLayout>
+            {
+                getDataAirtimeTypeStatus === "pending"?
+                    <Spinner/>:
             <div className="bg-white shadow lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto">
                 <div className="bg-whitesmoke w-full p-6 mb-2">
                     <Text   
@@ -160,6 +165,7 @@ export const BuyData=()=>{
                     </div>
                 </div>
             </div>
+         }
         </DashboardLayout>
     )
 }

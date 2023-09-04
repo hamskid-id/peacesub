@@ -23,7 +23,7 @@ export const Reset =()=>{
     return(
         <AuthLayout>
             <Text
-                style="c-brown font-mediumn text-3xl mb-2"
+                style="font-extrabold text-3xl mb-2"
                 value="Reset Password"
             />
             <Text
@@ -70,7 +70,7 @@ export const Reset =()=>{
             }
             <Btn
                 value="send"
-                style="w-full p-3 text-center bg-light-blue text-white mt-3 mb-3"
+                style="w-full p-3 text-center bg-tick-blue text-white mt-3 mb-3"
             />
             </form>
         </AuthLayout>

@@ -6,11 +6,14 @@ import { InputField } from "../../components/cutormFormField";
 import { useDispatch,useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getcableName, getcableType, subscribeCable } from "../../store/cableSlice";
+import Spinner from "../../spinners/spinner";
 
 export const CableSub=()=>{
     const dispatch = useDispatch();
     const {
         subscribeCableStatus,
+        getcableTypeStatus,
+        getcableNameStatus,
         subCableRes,
         cableTp,
         cableName
@@ -47,6 +50,10 @@ export const CableSub=()=>{
 
     return(
         <DashboardLayout>
+            {
+                getcableNameStatus ==="pending" || getcableTypeStatus ==="pending"?
+                    <Spinner/>:
+            
             <div className="bg-white shadow lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto">
                 <div className="bg-whitesmoke w-full p-6 mb-2">
                     <Text   
@@ -169,6 +176,7 @@ export const CableSub=()=>{
                     </div>
                 </div>
             </div>
+            }
         </DashboardLayout>
     )
 }

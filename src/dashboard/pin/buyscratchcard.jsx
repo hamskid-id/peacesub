@@ -6,18 +6,19 @@ import { DashboardLayout } from "../dashLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { buyscratchcard, getCard, scratchcardvtpass } from "../../store/eduSlice";
 import { useEffect } from "react";
+import Spinner from "../../spinners/spinner";
 
 export const ResultChecker =()=>{
     const dispatch = useDispatch();
     const {
         buyCardStatus,
         vtpassStatus,
+        getCardStatus,
         buyCardRes,
         card
     } = useSelector(state=>state.edu);
     useEffect(()=>{
         dispatch(getCard())
-        console.log("card")
     },[dispatch,getCard])
     const { 
         register, 
@@ -40,6 +41,9 @@ export const ResultChecker =()=>{
 
     return(
         <DashboardLayout>
+             {
+                getCardStatus ==="pending"?
+                    <Spinner/>:
             <div className="bg-white shadow lg:w-1/2 xl:w-1/2 md:w-1/2 sm:w-full xs:w-full xxs:w-full m-auto">
                 <form  
                     onSubmit={handleSubmit(SubmitHandler)} 
@@ -121,6 +125,7 @@ export const ResultChecker =()=>{
                     />
                 </form>
             </div>
+            }
          </DashboardLayout>
     )
 }

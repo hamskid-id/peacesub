@@ -6,19 +6,20 @@ import { DashboardLayout } from "../dashLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { electricityPay, electricityvtpass, getElectricityBill } from "../../store/electricitySlice";
 import { useEffect } from "react";
+import Spinner from "../../spinners/spinner";
 
 export const ElectricityBill =()=>{
     const dispatch = useDispatch();
     const {
         elePayStatus,
+        getElectricityBillStatus,
         vtpassStatus,
         elePayRes,
         EleBill
     } = useSelector(state=>state.electricity);
     useEffect(()=>{
         dispatch(getElectricityBill());
-        console.log("hello")
-    },[dispatch,getcableName,getcableType])
+    },[dispatch,getElectricityBill])
     const { 
         register, 
         handleSubmit, 
@@ -61,9 +62,11 @@ export const ElectricityBill =()=>{
                     }))
             }
     }
-
     return(
         <DashboardLayout>
+            {
+                getElectricityBillStatus === "pending"?
+                    <Spinner/>:
             <div className="bg-white shadow lg:w-1/2 xl:w-1/2 md:w-1/2 sm:w-full xs:w-full xxs:w-full m-auto">
                 <form  
                     onSubmit={handleSubmit(SubmitHandler)} 
@@ -163,6 +166,7 @@ export const ElectricityBill =()=>{
                     />
                 </form>
             </div>
+           }
          </DashboardLayout>
     )
 }

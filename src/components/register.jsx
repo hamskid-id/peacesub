@@ -56,11 +56,11 @@ export const Register =()=>{
     return(
         <AuthLayout adjHeight={true}>
             <Text
-                style="c-brown font-semibold text-3xl mb-2"
+                style="text-center text-lg "
                 value="Sign Up"
             />
             <Text
-                style="font-medium text-lg mb-6"
+               style="font-semibold text-center text-lg mb-6"
                 value="kindly create an account to proceed."
             />
             <form onSubmit={handleSubmit(SubmitHandler)}>
@@ -174,7 +174,7 @@ export const Register =()=>{
             {registerError && <Text style="text-danger" value={registerError}/>}
             <Btn
                 value="sign up"
-                style="w-full p-3 text-center bg-light-blue text-white mt-3 mb-3"
+                style="w-full p-3 text-center bg-tick-blue text-white mt-3 mb-3"
                 loadingStatus={registerStatus ==="pending"?true:false}
             />
             <div className="flex items-center m-auto w-fit">

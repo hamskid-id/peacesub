@@ -115,7 +115,7 @@ const auth_Slice = createSlice({
     reducers:{
         LogOutUser(state, action){
             localStorage.removeItem('DataHubUserToken');
-            // window.location.replace("/login")
+            window.location.replace("/")
             return {
                 ...state,
                 userdata:{},
@@ -186,7 +186,6 @@ const auth_Slice = createSlice({
             }=action.payload;
             console.log(action?.payload?.data)
             if( success){
-                console.log(hello);
                 toast(message);
                 window.location.replace("/login");
                 return{

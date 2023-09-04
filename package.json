@@ -20,6 +20,9 @@
     "react-icons": "^4.10.1",
     "react-redux": "^8.1.2",
     "react-router-dom": "^6.15.0",
+    "react-spinners": "^0.13.8",
+    "react-toastify": "^9.1.3",
+    "sweetalert2": "^11.7.27",
     "tw-elements": "^1.0.0-beta3",
     "yup": "^1.2.0"
   },

@@ -28,11 +28,11 @@ export const SignIn =()=>{
     return(
         <AuthLayout>
             <Text
-                style="c-brown font-semibold text-3xl mb-2"
+                style="text-center text-lg "
                 value="Login"
             />
             <Text
-                style="font-medium text-lg mb-6"
+                style="font-semibold text-center text-lg mb-6"
                 value="Sign in to your account to continue."
             />
             <form onSubmit={handleSubmit(SubmitHandler)}>
@@ -84,7 +84,7 @@ export const SignIn =()=>{
             {LoginError && <Text style="text-danger text-xs" value={LoginError}/>}
             <Btn
                 value="Log In"
-                style="w-full p-3 text-center bg-light-blue text-white mt-3 mb-3"
+                style="w-full p-3 text-center bg-tick-blue text-white mt-3 mb-3"
                 loadingStatus={LoginStatus ==="pending"?true:false}
             />
             <div className="flex items-center m-auto w-fit">

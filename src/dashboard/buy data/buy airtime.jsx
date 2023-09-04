@@ -6,12 +6,14 @@ import { InputField } from "../../components/cutormFormField";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getairtimeNetwork, purchaseAirtime } from "../../store/airtimeSlice";
+import Spinner from "../../spinners/spinner";
 
 export const BuyAirtime=()=>{
     const dispatch = useDispatch();
     const {
         purchaseAirtimeStatus,
         airtimeNetwork,
+        getAirtimeNetworkStatus,
         purchaseAirtimeRes
     } = useSelector(state=>state.airtime);
     useEffect(()=>{
@@ -38,6 +40,9 @@ export const BuyAirtime=()=>{
 
     return(
         <DashboardLayout>
+             {
+                getAirtimeNetworkStatus === "pending"?
+                    <Spinner/>:
             <div className="bg-white shadow lg:w-1/2 xl:w-1/2 md:w-1/2 sm:w-full xs:w-full xxs:w-full m-auto">
                 <div className="bg-whitesmoke w-full p-6 mb-2">
                     <Text   
@@ -120,6 +125,7 @@ export const BuyAirtime=()=>{
                     </form>
                 </div>
             </div>
+            }
         </DashboardLayout>
     )
 }
