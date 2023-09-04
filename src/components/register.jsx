@@ -6,8 +6,34 @@ import { Link } from "react-router-dom";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { Btn } from "../elements/btn";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../store/authSlice";
 
 export const Register =()=>{
+    const dispatch = useDispatch();
+    const {registerError,registerStatus} = useSelector(state=>state.auth);
+
+    const SubmitHandler =({
+        lastname,
+        email,
+        address,
+        phone,
+        gender,
+        dob,
+        password,
+        firstname
+    })=>{
+            dispatch(registerUser({
+                lastname,
+                email,
+                address,
+                phone,
+                gender,
+                dob,
+                password,
+                firstname
+            }))
+    }
 
      const validationSchema = Yup.object().shape({
         password: Yup.string()
@@ -27,28 +53,6 @@ export const Register =()=>{
         formState: { errors } 
     } = useForm(formOptions);
 
-    const SubmitHandler =({
-        userName,
-        email,
-        address,
-        phone,
-        referrraluserName,
-        password,
-        cpassword,
-        fullName
-    })=>{
-            console.log(
-                userName,
-                email,
-                address,
-                phone,
-                referrraluserName,
-                password,
-                cpassword,
-                fullName
-            )
-    }
-
     return(
         <AuthLayout adjHeight={true}>
             <Text
@@ -59,29 +63,29 @@ export const Register =()=>{
                 style="font-medium text-lg mb-6"
                 value="kindly create an account to proceed."
             />
-            <form  onSubmit={handleSubmit(SubmitHandler)}>
+            <form onSubmit={handleSubmit(SubmitHandler)}>
                 {
                     [
                         {
-                            title:"userName",
-                            labelName:"userName Address",
+                            title:"lastname",
+                            labelName:"Lastname",
                             type:"text",
-                            error:errors.userName,
-                            placeHold:"Enter userName",
+                            error:errors.lastname,
+                            placeHold:"Enter lastname",
 
                         },{
-                            title:"fullName",
-                            labelName:"fullName",
+                            title:"firstname",
+                            labelName:"firstname",
                             type:"text",
-                            error:errors.fullName,
-                            placeHold:"Enter fullName"
+                            error:errors.firstname,
+                            placeHold:"Enter firstname"
 
                         }, {
                             title:"email",
-                            labelName:"Email Address",
+                            labelName:"Email",
                             type:"email",
                             error:errors.email,
-                            placeHold:"enter email",
+                            placeHold:"Enter email",
 
                         },{
                             title:"phone",
@@ -98,21 +102,28 @@ export const Register =()=>{
                             placeHold:"enter address",
 
                         },{
-                            title:"referrraluserName",
-                            labelName:"Referral userName ",
+                            title:"gender",
+                            labelName:"Gender",
                             type:"text",
-                            error:errors.referrraluserName,
-                            placeHold:"Enter userName",
+                            error:errors.gender,
+                            placeHold:"Enter lastname",
+
+                        },,{
+                            title:"dob",
+                            labelName:"Date of Birth",
+                            type:"date",
+                            error:errors.dob,
+                            placeHold:"Dob",
 
                         }
-                    ].map((option,index)=>{
+                    ].map((arroption,index)=>{
                         const{
                             title,
                             labelName,
                             placeHold,
                             type,
                             error
-                        }=option;
+                        }=arroption;
                         return(
                             <div 
                                 className="w-full mb-2"
@@ -123,7 +134,7 @@ export const Register =()=>{
                                     placeHolder={placeHold}
                                     type={type}
                                     labelTitle={labelName}
-                                    labelStyle="text-sm font-medium text-start"
+                                    labelStyle="text-sm font-medium text-start mb-3"
                                     register={register}
                                     errors={error}
                                     style="w-full text-start rounded-sm p-4 text-xs border"
@@ -160,28 +171,17 @@ export const Register =()=>{
                     style="w-full text-start rounded-sm p-4 text-xs border"
                 />
             </div>
-            <div 
-                className="w-full mb-2"
-            >
-                <InputField
-                    name="check"
-                    type="checkbox"
-                    labelTitle="I agree with the terms and condition"
-                    labelStyle="text-sm font-medium text-start"
-                    register={register}
-                    errors={errors.check}
-                    style="me-2 text-start rounded-sm p-4 text-xs border"
-                />
-            </div>
+            {registerError && <Text style="text-danger" value={registerError}/>}
             <Btn
                 value="sign up"
                 style="w-full p-3 text-center bg-light-blue text-white mt-3 mb-3"
+                loadingStatus={registerStatus ==="pending"?true:false}
             />
             <div className="flex items-center m-auto w-fit">
                 <span className="me-1 text-sm font-medium">Already have an account?</span>
                 <Link to="/login" className="text-sm">Sigin here?</Link>
             </div>
-            </form>
+        </form>
         </AuthLayout>
     )
 }

@@ -3,24 +3,39 @@ import { Btn } from "../../elements/btn";
 import { Text } from "../../elements/text";
 import { useForm } from "react-hook-form"
 import { DashboardLayout } from "../dashLayout";
+import { useDispatch, useSelector } from "react-redux";
+import { buyscratchcard, getCard, scratchcardvtpass } from "../../store/eduSlice";
+import { useEffect } from "react";
 
 export const ResultChecker =()=>{
+    const dispatch = useDispatch();
+    const {
+        buyCardStatus,
+        vtpassStatus,
+        buyCardRes,
+        card
+    } = useSelector(state=>state.edu);
+    useEffect(()=>{
+        dispatch(getCard())
+        console.log("card")
+    },[dispatch,getCard])
     const { 
         register, 
         handleSubmit, 
         formState: { errors } 
     } = useForm();
     const SubmitHandler =({
-        examname,
         quantity,
-        Amount
-        
+        Amount,
+        examName,
+        phone
     })=>{
-            console.log(
-                examname,
-                quantity,
-                Amount
-            )
+        dispatch(buyscratchcard({
+            amount:Amount,
+            examName,
+            phone:phone,
+            quantity:quantity
+        }))
     }
 
     return(
@@ -30,18 +45,18 @@ export const ResultChecker =()=>{
                     onSubmit={handleSubmit(SubmitHandler)} 
                     className="flex flex-col shadow p-4 bg-white">
                     <Text   
-                        style="text-center font-medium text-2xl"
-                        value="GENERATE RESULT CHECKER PIN"
+                        style="text-center font-medium text-2xl mb-4"
+                        value="RESULT CHECKER PIN"
                     />
                     {
                         [
                             {
-                                title:"examname",
-                                labelName:"Exam Name",
-                                selectArrayOption:null,
-                                type:"text",
-                                error:errors.examname,
-                                placeHold:"examname",
+                                title:"examName",
+                                labelName:"Exam name",
+                                selectArrayOption:card,
+                                type:"select",
+                                error:errors.examName,
+                                placeHold:"exam name",
                                 subTitle:null
                             },{
                                 title:"quantity",
@@ -55,8 +70,16 @@ export const ResultChecker =()=>{
                                 title:"Amount",
                                 labelName:"Amount*",
                                 selectArrayOption:null,
-                                type:"password",
+                                type:"number",
                                 error:errors.Amount,
+                                placeHold:"",
+                                subTitle:null
+                            },{
+                                title:"phone",
+                                labelName:"Phone*",
+                                selectArrayOption:null,
+                                type:"tel",
+                                error:errors.phone,
                                 placeHold:"",
                                 subTitle:null
                             }
@@ -67,6 +90,7 @@ export const ResultChecker =()=>{
                                 subTitle,
                                 placeHold,
                                 selectArrayOption,
+                                value,
                                 type,
                                 error
                             }=prof;
@@ -77,6 +101,7 @@ export const ResultChecker =()=>{
                                     <InputField
                                         name={title}
                                         subTitle={subTitle}
+                                        selectArrayOption={selectArrayOption}
                                         placeHolder={placeHold}
                                         type={type}
                                         labelTitle={labelName}
@@ -92,6 +117,7 @@ export const ResultChecker =()=>{
                     <Btn
                         style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
                         value="Generate"
+                        loadingStatus={( buyCardStatus ==="pending" || vtpassStatus ==="pending")?true:false}
                     />
                 </form>
             </div>

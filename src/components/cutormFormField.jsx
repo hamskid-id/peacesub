@@ -2,6 +2,7 @@ export const InputField=({
     inputIcon,
     placeHolder,
     name,
+    value,
     type,
     errors,
     register,
@@ -55,7 +56,7 @@ export const InputField=({
                     }
                     >
                         { 
-                            selectArrayOption && selectArrayOption.map((option,index)=>{
+                            selectArrayOption && selectArrayOption?.map((option,index)=>{
                                 return(
                                     <option value={option} key={index}>{option}</option>
                                 )
@@ -65,7 +66,7 @@ export const InputField=({
                             selectOption && <option value={selectOption}>{selectOption}</option>
                         }
                     </select>
-                    {errors && (<p className="text-danger ">{errors.message}</p>)}
+                    {errors && (<p className="text-danger text-sm text-start">{errors.message}</p>)}
                 </div>
             )
             break;
@@ -95,7 +96,7 @@ export const InputField=({
                         )
                     }
                     />
-                    {errors && (<p className="text-danger ">{errors.message}</p>)}
+                    {errors && (<p className="text-danger text-sm text-start">{errors.message}</p>)}
                     { 
                         inputIcon && (
                             <img 
@@ -130,7 +131,7 @@ export const InputField=({
                         )
                     }
                     />
-                    {errors && (<p className="text-danger ">{errors.message}</p>)}
+                    {errors && (<p className="text-danger text-sm text-start">{errors.message}</p>)}
                     { 
                         inputIcon && (
                             <img 
@@ -155,17 +156,18 @@ export const InputField=({
                             className={style}
                             type={type}
                             name={name}
-                            defaultValue={defaultValue?defaultValue:null}
+                            required
+                            defaultValue={defaultValue?defaultValue:""}
                             placeholder={placeHolder}
                             {...register(
-                                `${name}`, 
+                                `${name}`,
                                 {
                                     required:`${ labelTitle ? labelTitle : name } field is invalid`,
                                 }
                             )
                         }
                         />
-                        {errors && (<p className="text-danger ">{errors.message}</p>)}
+                        {errors && (<p className="text-danger text-sm text-start">{errors.message}</p>)}
                         { 
                             inputIcon && (
                                 <img 

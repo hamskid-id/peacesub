@@ -32,7 +32,7 @@ export const Footer =()=>{
                             return(
                                 <li 
                                     key={index}
-                                    className="text-white font-normal text-xs mb-3 ms-8"
+                                    className="text-white font-normal text-sm mb-3 ms-8"
                                 >
                                     <RevealAnimation>
                                         {link}
@@ -69,7 +69,7 @@ export const Footer =()=>{
                                     </RevealAnimation>
                                     <RevealAnimation>
                                         <Text
-                                            style="text-white text-xs font-light mb-4"
+                                            style="text-white text-sm font-light mb-4"
                                             value={value}
                                         />
                                     </RevealAnimation>
@@ -87,7 +87,7 @@ export const Footer =()=>{
             </RevealAnimation>
             <RevealAnimation>
                 <Text
-                    style="text-white mb-4 font-light text-xs"
+                    style="text-white mb-4 font-light text-sm"
                     value="We offer fast and reliable data Bundles for all network, cable TV subscriptions, vtu for all network, phcn prepaid meter subscription. We are number one trusted vendor. Patronise us now and you won't regret it."
                 />
             </RevealAnimation>

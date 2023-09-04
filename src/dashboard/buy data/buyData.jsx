@@ -3,8 +3,22 @@ import { DashboardLayout } from "../dashLayout"
 import { Text } from "../../elements/text";
 import { Btn } from "../../elements/btn";
 import { InputField } from "../../components/cutormFormField";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getDataAirtimeType, purchaseData } from "../../store/dataSlice";
 
 export const BuyData=()=>{
+
+    const dispatch = useDispatch();
+    const {
+        purchaseDataStatus,
+        dataAirtimeTp,
+        purchaseDataRes
+    } = useSelector(state=>state.data);
+    useEffect(()=>{
+        dispatch(getDataAirtimeType());
+        console.log("hello")
+    },[dispatch,getDataAirtimeType])
 
     const { 
         register, 
@@ -12,19 +26,17 @@ export const BuyData=()=>{
         formState: { errors } 
     } = useForm();
     const SubmitHandler =({
-        Network,
+        // Network,
         MobileNumber,
         DataType,
-        bypass,
+        // bypass,
         Amount
     })=>{
-            console.log(
-                Network,
-                MobileNumber,
-                DataType,
-                bypass,
-                Amount
-            )
+            dispatch(purchaseData({
+                service:DataType,
+                amount:Amount,
+                phone:MobileNumber,
+            }))
     }
 
     return(
@@ -40,19 +52,20 @@ export const BuyData=()=>{
                     <form onSubmit={handleSubmit(SubmitHandler)} className="xs:order-last xxs:order-last sm:order-last md:order-first lg:order-first xl:order-first">
                         {
                             [
-                                {
-                                    title:"Network",
-                                    labelName:"Network",
-                                    selectArrayOption:null,
-                                    type:"text",
-                                    error:errors.Network,
-                                    placeHold:"Network",
-                                    subTitle:null
-                                },{
+                                // {
+                                //     title:"Network",
+                                //     labelName: dataAirtimeTp,
+                                //     selectArrayOption:null,
+                                //     type:"select",
+                                //     error:errors.Network,
+                                //     placeHold:"Network",
+                                //     subTitle:null
+                                // },{
+                                    {
                                     title:"DataType",
                                     labelName:"Data Type",
-                                    selectArrayOption:["3G","2G","1G"],
-                                    type:"text",
+                                    selectArrayOption: dataAirtimeTp,
+                                    type:"select",
                                     error:errors.DataType,
                                     placeHold:"DataType",
                                     subTitle:null
@@ -72,14 +85,14 @@ export const BuyData=()=>{
                                     error:errors.Amount,
                                     placeHold:"Amount",
                                     subTitle:null
-                                },{
-                                    title:"bypass",
-                                    labelName:"Bypass number validator",
-                                    selectArrayOption:null,
-                                    type:"checkbox",
-                                    error:errors.bypass,
-                                    placeHold:"bypass",
-                                    subTitle:null
+                                // },{
+                                //     title:"bypass",
+                                //     labelName:"Bypass number validator",
+                                //     selectArrayOption:null,
+                                //     type:"checkbox",
+                                //     error:errors.bypass,
+                                //     placeHold:"bypass",
+                                //     subTitle:null
                                 }
                             ].map((prof,index)=>{
                                 const{
@@ -99,6 +112,7 @@ export const BuyData=()=>{
                                             name={title}
                                             subTitle={subTitle}
                                             placeHolder={placeHold}
+                                            selectArrayOption={selectArrayOption}
                                             type={type}
                                             labelTitle={labelName}
                                             labelStyle="text-sm font-medium text-start"
@@ -113,6 +127,7 @@ export const BuyData=()=>{
                          <Btn
                             style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
                             value="Proceed"
+                            loadingStatus={( purchaseDataStatus ==="pending" )?true:false}
                         />
                     </form>
                     <div className="p-4">

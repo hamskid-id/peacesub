@@ -3,8 +3,21 @@ import { DashboardLayout } from "../dashLayout"
 import { Text } from "../../elements/text";
 import { Btn } from "../../elements/btn";
 import { InputField } from "../../components/cutormFormField";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getairtimeNetwork, purchaseAirtime } from "../../store/airtimeSlice";
 
 export const BuyAirtime=()=>{
+    const dispatch = useDispatch();
+    const {
+        purchaseAirtimeStatus,
+        airtimeNetwork,
+        purchaseAirtimeRes
+    } = useSelector(state=>state.airtime);
+    useEffect(()=>{
+        dispatch(getairtimeNetwork());
+        console.log("hello")
+    },[dispatch,getairtimeNetwork])
 
     const { 
         register, 
@@ -14,15 +27,13 @@ export const BuyAirtime=()=>{
     const SubmitHandler =({
         Network,
         MobileNumber,
-        bypass,
         Amount
     })=>{
-            console.log(
-                Network,
-                MobileNumber,
-                bypass,
-                Amount
-            )
+            dispatch(purchaseAirtime({
+                service:Network,
+                amount:Amount,
+                phone:MobileNumber,
+            }))
     }
 
     return(
@@ -41,8 +52,8 @@ export const BuyAirtime=()=>{
                                 {
                                     title:"Network",
                                     labelName:"Network",
-                                    selectArrayOption:null,
-                                    type:"text",
+                                    selectArrayOption:airtimeNetwork,
+                                    type:"select",
                                     error:errors.Network,
                                     placeHold:"Network",
                                     subTitle:null
@@ -62,14 +73,14 @@ export const BuyAirtime=()=>{
                                     error:errors.Amount,
                                     placeHold:"Amount",
                                     subTitle:null
-                                },{
-                                    title:"bypass",
-                                    labelName:"Bypass number validator",
-                                    selectArrayOption:null,
-                                    type:"checkbox",
-                                    error:errors.bypass,
-                                    placeHold:"bypass",
-                                    subTitle:null
+                                // },{
+                                //     title:"bypass",
+                                //     labelName:"Bypass number validator",
+                                //     selectArrayOption:null,
+                                //     type:"checkbox",
+                                //     error:errors.bypass,
+                                //     placeHold:"bypass",
+                                //     subTitle:null
                                 }
                             ].map((prof,index)=>{
                                 const{
@@ -89,6 +100,7 @@ export const BuyAirtime=()=>{
                                             name={title}
                                             subTitle={subTitle}
                                             placeHolder={placeHold}
+                                            selectArrayOption={selectArrayOption}
                                             type={type}
                                             labelTitle={labelName}
                                             labelStyle="text-sm font-medium text-start"
@@ -103,6 +115,7 @@ export const BuyAirtime=()=>{
                          <Btn
                             style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
                             value="Proceed"
+                            loadingStatus={( purchaseAirtimeStatus ==="pending" )?true:false}
                         />
                     </form>
                 </div>

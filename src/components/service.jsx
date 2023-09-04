@@ -11,7 +11,7 @@ export const Services =()=>{
             </div>
             <RevealAnimation>
                 <Text
-                    style="text-start text-sm leading-6 c-brown font-normal lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full"
+                    style="text-start text-lg leading-6 c-brown font-normal lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full"
                     value="We Provide Awesome Services We use cutting-edge technology to run our services. Our data delivery and wallet funding is automated, airtime top-up and data purchase are automated and get delivered to you almost instantly. We offer instant recharge of Airtime, Databundle, CableTV (DStv, GOtv & Startimes), Electricity Bill Payment and Airtime to cash..."
                 />
             </RevealAnimation>

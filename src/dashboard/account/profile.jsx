@@ -5,6 +5,15 @@ import { DashboardLayout } from "../dashLayout";
 
 export const Profile =()=>{
     const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem('DataHubUserToken'));
+    const{
+      firstname,
+      email,
+      gender,
+      lastname,
+      phone,
+      dob
+    }=user?.user;
     return(
         <DashboardLayout>
         <div className="bg-white p-4 lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto shadow">
@@ -12,14 +21,29 @@ export const Profile =()=>{
                 {
                     [
                         {
-                            title:"Username",
-                            value:"Hamzat27"
+                            title:"First Name",
+                            value:firstname
+                        },{
+                            title:"Last Name",
+                            value:lastname
+                        },{
+                            title:"Gender",
+                            value:gender
+                        },{
+                            title:"Date of Birth",
+                            value:dob
                         },{
                             title:"Phone Number",
-                            value:"09018378291"
+                            value:phone
                         },{
                             title:"Email",
-                            value:"lawalhamzat27@gmail.com"
+                            value:email
+                        },{
+                            title:"BVN",
+                            value:"2343556717289"
+                        },{
+                            title:"Provider",
+                            value:"safehaven"
                         },{
                             title:"Bank Name",
                             value:"GTBANK"
@@ -69,7 +93,7 @@ export const Profile =()=>{
             <Btn
                 style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
                 value="Update profile"
-                clickFunc={()=>navigate("/Profile/update")}
+                clickFunc={()=>navigate("/account/Profile/update")}
             />
         </div>
         </DashboardLayout>

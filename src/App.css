@@ -1,6 +1,6 @@
 #root {
   margin: 0 auto;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 .logo {
@@ -141,7 +141,7 @@
   background-size: contain;
   padding: 5%;
   background-image: url("https://assets.website-files.com/63e4cc8d2ac61a3dee9bb0ee/649029187a627d3f20534626_Group%20175-p-500.webp");
-  background-color:darkred ;
+  background-color:bisque;
 }
 .footer{
   border-top: 16px dotted #ed4c4e;

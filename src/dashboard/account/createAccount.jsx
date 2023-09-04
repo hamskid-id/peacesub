@@ -6,7 +6,7 @@ import { DashboardLayout } from "../dashLayout";
 import { useForm } from "react-hook-form"
 import { createAccount } from "../../store/authSlice";
 
-export const UpdateProfile =()=>{
+export const CreateUserAccount =()=>{
      const dispatch = useDispatch();
     const {createAccountStatus} = useSelector(state=>state.auth);
     const { 
@@ -15,23 +15,27 @@ export const UpdateProfile =()=>{
         formState: { errors } 
     } = useForm();
     const SubmitHandler =({
-        bankname,
-        accName,
-        accNum,
-        password,
-        vendairtel,
-        vendglo,
-        vendmtn
+        firstname,
+        lastname,
+        bvn,
+        email,
+        phone,
+        address,
+        provider,
+        gender,
+        dob
     })=>{
-       console.log({
-        bankname,
-        accName,
-        accNum,
-        password,
-        vendairtel,
-        vendglo,
-        vendmtn
-     })
+        dispatch(createAccount({
+            firstname,
+            lastname,
+            bvn,
+            email,
+            phone,
+            address,
+            provider,
+            gender,
+            dob
+        }))
     }
 
     return(
@@ -49,62 +53,78 @@ export const UpdateProfile =()=>{
                 {
                     [
                         {
-                            title:"bankname",
-                            labelName:"Bank Name",
+                            title:"firstname",
+                            labelName:"First Name",
                             selectArrayOption:null,
                             type:"text",
-                            error:errors.bankname,
-                            placeHold:"bankname",
+                            error:errors.firstname,
+                            placeHold:"first name",
                             subTitle:null
                         },{
-                            title:"accName",
-                            labelName:"Account Name",
+                            title:"lastname",
+                            labelName:"Last Name",
                             selectArrayOption:null,
                             type:"text",
-                            error:errors.accName,
-                            placeHold:"enter acc name",
+                            error:errors.lastname,
+                            placeHold:"last name",
                             subTitle:null
                         },{
-                            title:"accNum",
-                            labelName:"Account Number",
+                            title:"email",
+                            labelName:"Email",
+                            selectArrayOption:null,
+                            type:"email",
+                            error:errors.email,
+                            placeHold:"email",
+                            subTitle:null
+                        },{
+                            title:"address",
+                            labelName:"Address",
+                            selectArrayOption:null,
+                            type:"text",
+                            error:errors.address,
+                            placeHold:"Address",
+                            subTitle:null
+                        },{
+                            title:"gender",
+                            labelName:"gender",
+                            selectArrayOption:null,
+                            type:"text",
+                            error:errors.gender,
+                            placeHold:"gender",
+                            subTitle:null
+                        },{
+                            title:"phone",
+                            labelName:"Phone Number",
+                            selectArrayOption:null,
+                            type:"tel",
+                            error:errors.phone,
+                            placeHold:"Phone",
+                            subTitle:null
+                        },{
+                            title:"provider",
+                            labelName:"Provider",
+                            selectArrayOption:null,
+                            type:"text",
+                            error:errors.provider,
+                            placeHold:"provider",
+                            subTitle:null
+                        },{
+                            title:"dob",
+                            labelName:"Date of Birth",
+                            selectArrayOption:null,
+                            type:"date",
+                            error:errors.dob,
+                            placeHold:"dob",
+                            subTitle:null
+                        },{
+                            title:"bvn",
+                            labelName:"BVN",
                             selectArrayOption:null,
                             type:"number",
-                            error:errors.accNum,
-                            placeHold:"enter acc num",
+                            error:errors.bvn,
+                            placeHold:"bvn",
                             subTitle:null
-                        },{
-                            title:"vendmtn",
-                            labelName:"VEND MTN SME FROM STOCK BALANCE?",
-                            selectArrayOption:null,
-                            type:"checkbox",
-                            error:errors.vendmtn,
-                            placeHold:"",
-                            subTitle:null
-                        },{
-                            title:"vendglo",
-                            labelName:"VEND GLO CG FROM STOCK BALANCE?",
-                            selectArrayOption:null,
-                            type:"checkbox",
-                            error:errors.vendglo,
-                            placeHold:"",
-                            subTitle:null
-                        },{
-                            title:"vendairtel",
-                            labelName:"VEND AIRTEL CG FROM STOCK BALANCE?",
-                            selectArrayOption:null,
-                            type:"checkbox",
-                            error:errors.vendairtel,
-                            placeHold:"",
-                            subTitle:null
-                        },{
-                            title:"password",
-                            labelName:"Password",
-                            selectArrayOption:null,
-                            type:"password",
-                            error:errors.password,
-                            placeHold:"enter password",
-                            subTitle:null
-                        },
+                        }
                     ].map((prof,index)=>{
                         const{
                             title,

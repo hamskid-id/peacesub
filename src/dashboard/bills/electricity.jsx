@@ -1,11 +1,24 @@
-import { useForm } from "react-hook-form"
-import { DashboardLayout } from "../dashLayout"
-import { Text } from "../../elements/text";
-import { Btn } from "../../elements/btn";
 import { InputField } from "../../components/cutormFormField";
+import { Btn } from "../../elements/btn";
+import { Text } from "../../elements/text";
+import { useForm } from "react-hook-form"
+import { DashboardLayout } from "../dashLayout";
+import { useDispatch, useSelector } from "react-redux";
+import { electricityPay, electricityvtpass, getElectricityBill } from "../../store/electricitySlice";
+import { useEffect } from "react";
 
-export const ElectricityBill=()=>{
-
+export const ElectricityBill =()=>{
+    const dispatch = useDispatch();
+    const {
+        elePayStatus,
+        vtpassStatus,
+        elePayRes,
+        EleBill
+    } = useSelector(state=>state.electricity);
+    useEffect(()=>{
+        dispatch(getElectricityBill());
+        console.log("hello")
+    },[dispatch,getcableName,getcableType])
     const { 
         register, 
         handleSubmit, 
@@ -13,113 +26,143 @@ export const ElectricityBill=()=>{
     } = useForm();
     const SubmitHandler =({
         disco,
-        meter,
-        Amount,
+        // meter,
         type,
-        phone
+        Amount,
+        phone,
+        action
     })=>{
-            console.log(
-                disco,
-                meter,
-                Amount,
-                phone,
-                type
-            )
+            switch(action){
+                case "Electricty Payment":
+                    dispatch( electricityPay({
+                        disco,
+                        // meter,
+                        type,
+                        amount:Amount,
+                        phone,
+                    }))
+                break;
+                case "Electricity vt pass" :
+                    dispatch(electricityvtpass({
+                        disco,
+                        // meter,
+                        type,
+                        amount:Amount,
+                        phone,
+                    }))
+                break;
+                default :
+                    dispatch(electricityPay({
+                        disco,
+                        // meter,
+                        type,
+                        amount:Amount,
+                        phone,
+                    }))
+            }
     }
 
     return(
         <DashboardLayout>
             <div className="bg-white shadow lg:w-1/2 xl:w-1/2 md:w-1/2 sm:w-full xs:w-full xxs:w-full m-auto">
-                <div className="bg-whitesmoke w-full p-6 mb-2">
+                <form  
+                    onSubmit={handleSubmit(SubmitHandler)} 
+                    className="flex flex-col shadow p-4 bg-white">
                     <Text   
-                        style="text-center font-medium text-xl"
+                        style="text-center font-medium text-2xl mb-4"
                         value="Electricity Bill Payment"
                     />
-                </div>
-                <div className="p-4">
-                    <form onSubmit={handleSubmit(SubmitHandler)} >
-                        {
-                            [
+                    {
+                        [
+                            {
+                                title:"action",
+                                labelName:"Kindly Select action",
+                                selectArrayOption:["Electricty Payment","Electricity vt pass"],
+                                type:"select",
+                                error:errors.action,
+                                placeHold:"",
+                                subTitle:null
+                            },{
+                                title:"disco",
+                                labelName:"Disco name",
+                                selectArrayOption:EleBill,
+                                type:"select",
+                                error:errors.disco,
+                                placeHold:"disco",
+                                subTitle:null
+                            },
+                            // },{
+                            //     title:"meter",
+                            //     labelName:"Meter number",
+                            //     selectArrayOption:null,
+                            //     type:"number",
+                            //     error:errors.meter,
+                            //     placeHold:"meter",
+                            //     subTitle:null
+                            // },{
                                 {
-                                    title:"disco",
-                                    labelName:"Disco name",
-                                    selectArrayOption:["Ikeja electricity","Eko electricity"],
-                                    type:"select",
-                                    error:errors.disco,
-                                    placeHold:"disco",
-                                    subTitle:null
-                                },{
-                                    title:"meter",
-                                    labelName:"Meter number",
-                                    selectArrayOption:null,
-                                    type:"number",
-                                    error:errors.meter,
-                                    placeHold:"meter",
-                                    subTitle:null
-                                },{
-                                    title:"type",
-                                    labelName:"Meter Type",
-                                    selectArrayOption:["Prepaid","Postpaid"],
-                                    type:"select",
-                                    error:errors.type,
-                                    placeHold:"type",
-                                    subTitle:null
-                                },{
-                                    title:"Amount",
-                                    labelName:"Amount",
-                                    selectArrayOption:null,
-                                    type:"number",
-                                    error:errors.Amount,
-                                    placeHold:"Amount",
-                                    subTitle:null
-                                },{
-                                    title:"phone",
-                                    labelName:"Customer Phone",
-                                    selectArrayOption:null,
-                                    type:"number",
-                                    error:errors.phone,
-                                    placeHold:"phone",
-                                    subTitle:null
-                                }
-                            ].map((prof,index)=>{
-                                const{
-                                    title,
-                                    labelName,
-                                    subTitle,
-                                    placeHold,
-                                    selectArrayOption,
-                                    type,
-                                    error
-                                }=prof;
-                                return(
-                                    <div 
-                                        key={index}
-                                        className="w-full">
-                                        <InputField
-                                            name={title}
-                                            subTitle={subTitle}
-                                            placeHolder={placeHold}
-                                            selectArrayOption={selectArrayOption}
-                                            type={type}
-                                            labelTitle={labelName}
-                                            labelStyle="text-sm font-medium text-start"
-                                            register={register}
-                                            errors={error}
-                                            style="text-start rounded-md p-4 border text-xs mb-4"
-                                        />
-                                    </div>
-                                )
-                            })
-                        }
-                        <div className="mb-3 p-3 border w-full">#20 Charge
-                        </div>
-                         <Btn
-                            style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
-                            value="validate"
-                        />
-                    </form>
-                </div>
+                                title:"type",
+                                labelName:"Meter Type",
+                                selectArrayOption:["prepaid","postpaid"],
+                                type:"select",
+                                error:errors.type,
+                                placeHold:"type",
+                                subTitle:null
+                            },{
+                                title:"Amount",
+                                labelName:"Amount*",
+                                selectArrayOption:null,
+                                type:"number",
+                                error:errors.Amount,
+                                placeHold:"",
+                                subTitle:null
+                            },{
+                                title:"phone",
+                                labelName:"Phone*",
+                                selectArrayOption:null,
+                                type:"tel",
+                                error:errors.phone,
+                                placeHold:"",
+                                subTitle:null
+                            }
+                        ].map((prof,index)=>{
+                            const{
+                                title,
+                                labelName,
+                                subTitle,
+                                placeHold,
+                                selectArrayOption,
+                                value,
+                                type,
+                                error
+                            }=prof;
+                            return(
+                                <div 
+                                    key={index}
+                                    className="w-full">
+                                    <InputField
+                                        name={title}
+                                        subTitle={subTitle}
+                                        selectArrayOption={selectArrayOption}
+                                        placeHolder={placeHold}
+                                        type={type}
+                                        labelTitle={labelName}
+                                        labelStyle="text-sm font-medium text-start"
+                                        register={register}
+                                        errors={error}
+                                        style="text-start rounded-md p-4 border text-xs mb-4"
+                                    />
+                                </div>
+                            )
+                        })
+                    }
+                    <Btn
+                        style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
+                        value="Validate"
+                        loadingStatus={( elePayStatus ==="pending" || vtpassStatus ==="pending")?true:false}
+                    />
+                </form>
             </div>
-        </DashboardLayout>
+         </DashboardLayout>
     )
 }

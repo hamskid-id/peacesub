@@ -6,6 +6,10 @@ import { useNavigate } from "react-router-dom"
 
 export const DashView=()=>{
     const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem('DataHubUserToken'));
+    const{
+        firstname
+    }=user?.user
     return(
         <DashboardLayout>
             <div className="py-4">
@@ -185,7 +189,7 @@ export const DashView=()=>{
                         </div>
                         <Text
                             style="text-start font-medium text-4xl mb-3"
-                            value="Welcome Hamzat27"
+                            value={`Welcome ${firstname}`}
                         />
                         <Text
                             style="text-start font-medium text-xl mb-4"
@@ -246,31 +250,42 @@ export const DashView=()=>{
                     {
                         [
                             {
+                                img:"https://peacesub.com.ng/static/styling/img/mtn.png",
                                 title:"MTN CG DATA BALANCE",
                                 amount:"0.0GB"
                             },{
+                                img:"https://peacesub.com.ng/static/styling/img/glo.png",
                                 title:"GLO CG DATA BALANCE",
                                 amount:"0.0GB"
                             },{
+                                img:"https://peacesub.com.ng/static/styling/img/airtel.png",
                                 title:"AIRTEL CG DATA BALANCE",
                                 amount:"0.0GB"
                             },
                         ].map((prod,index)=>{
                             const{
                                 title,
-                                amount
+                                amount,
+                                img
                             }=prod
                             return(
                                 <div 
                                     key={index}
-                                    className={`${index ===0?"bg-mtn":index==1?"bg-glo":"bg-airtel"} p-4 rounded shadow`}
+                                    className={` bg-white p-4 rounded shadow flex flex-col justify-content-center items-center`}
                                 >
+                                <div className="m-auto w-16 h-16 mb-2">
+                                        <img 
+                                            src={img}
+                                            alt="object not found"
+                                            className="w-full"
+                                        />
+                                </div>
                                     <Text
-                                        style="text-start font-light text-lg mb-3 text-white"
+                                        style="text-start font-light text-lg mb-3 "
                                         value={title}
                                     />
                                     <Text
-                                        style="text-start font-medium text-lg mb-3 text-white"
+                                        style="text-start font-medium text-lg mb-3"
                                         value={amount}
                                     />
                                 </div>
@@ -289,13 +304,13 @@ export const DashView=()=>{
                                 [
                                     {
                                         name:"Buy Data",
-                                        route:"/buy data"
+                                        route:"/purchase/data"
                                     },{
                                         name:"Buy Data Pin/Coupon",
-                                        route:"/buydatacoupon"
+                                        route:"/purchase/datacoupon"
                                     },{
                                         name:"Buy Airtime",
-                                        route:"/buy airtime"
+                                        route:"/purchase/airtime"
                                     },{
                                         name:"Airtime to Cash",
                                         route:"/"
@@ -307,13 +322,13 @@ export const DashView=()=>{
                                         route:"/electrcitybill"
                                     },{
                                         name:"Recharge Card Printing",
-                                        route:"/rechargeCardPin"
+                                        route:"/purchase/rechargeCardPin"
                                     },{
                                         name:"Education Pin",
-                                        route:"/resultChecker"
+                                        route:"/purchase/scratchcard"
                                     },{
                                         name:"Bulk Sim",
-                                        route:"/bulkSms"
+                                        route:"/purchase/bulkSms"
                                     }
                                 ].map((prod,index)=>{
                                     const{name,route}=prod

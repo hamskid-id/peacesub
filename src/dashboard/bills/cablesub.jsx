@@ -3,8 +3,24 @@ import { DashboardLayout } from "../dashLayout";
 import { Text } from "../../elements/text";
 import { Btn } from "../../elements/btn";
 import { InputField } from "../../components/cutormFormField";
+import { useDispatch,useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getcableName, getcableType, subscribeCable } from "../../store/cableSlice";
 
 export const CableSub=()=>{
+    const dispatch = useDispatch();
+    const {
+        subscribeCableStatus,
+        subCableRes,
+        cableTp,
+        cableName
+    } = useSelector(state=>state.cable);
+    useEffect(()=>{
+        dispatch(getcableType());
+        dispatch(getcableName());
+        console.log("hello")
+    },[dispatch,getcableName,getcableType])
+
 
     const { 
         register, 
@@ -13,14 +29,20 @@ export const CableSub=()=>{
     } = useForm();
     const SubmitHandler =({
         CableName,
-        CablePlan,
-        SmartcardNumber,
+        CableType,
+        Amount,
+        Phone,
+        // vcode,
+        Quantity,
+        // Service,
     })=>{
-            console.log(
-                CableName,
-                CablePlan,
-                SmartcardNumber,
-            )
+        dispatch(subscribeCable({
+            quantity:Quantity,
+            service:CableName,
+            type:CableType,
+            amount:Amount,
+            phone:Phone,
+        }))
     }
 
     return(
@@ -39,26 +61,59 @@ export const CableSub=()=>{
                                 {
                                     title:"CableName",
                                     labelName:"CableName",
-                                    selectArrayOption:["name1","name2"],
+                                    selectArrayOption:cableName,
                                     type:"select",
                                     error:errors.CableName,
                                     placeHold:"CableName",
                                     subTitle:null
                                 },{
-                                    title:"SmartcardNumber",
-                                    labelName:"SmartcardNumber*",
+                                    title:"CableType",
+                                    labelName:"Cable Type",
+                                    selectArrayOption:cableTp,
+                                    type:"select",
+                                    error:errors.CableType,
+                                    placeHold:"Cable Type",
+                                    subTitle:null
+                                // },{
+                                //     title:"Service",
+                                //     labelName:"Service*",
+                                //     selectArrayOption:null,
+                                //     type:"text",
+                                //     error:errors.Service,
+                                //     placeHold:"Service*",
+                                //     subTitle:null
+                                    },{
+                                // },{
+                                //     title:"vcode",
+                                //     labelName:"Variation Code",
+                                //     selectArrayOption:null,
+                                //     type:"text",
+                                //     error:errors.vcode,
+                                //     placeHold:"variation code",
+                                //     subTitle:null
+                                // },{
+                                    title:"Amount",
+                                    labelName:"Amount",
                                     selectArrayOption:null,
-                                    type:"text",
-                                    error:errors.SmartcardNumber,
-                                    placeHold:"SmartcardNumber*",
+                                    type:"number",
+                                    error:errors.Amount,
+                                    placeHold:"Amount",
                                     subTitle:null
                                 },{
-                                    title:"CablePlan",
-                                    labelName:"Cable Plan",
-                                    selectArrayOption:["plan1","plan2"],
-                                    type:"select",
-                                    error:errors.CablePlan,
-                                    placeHold:"Cable Plan",
+                                    title:"Phone",
+                                    labelName:"Phone Number",
+                                    selectArrayOption:null,
+                                    type:"tel",
+                                    error:errors.Phone,
+                                    placeHold:"Phone",
+                                    subTitle:null
+                                },{
+                                    title:"Quantity",
+                                    labelName:"Quantity",
+                                    selectArrayOption:null,
+                                    type:"tel",
+                                    error:errors.Quantity,
+                                    placeHold:"Quantity",
                                     subTitle:null
                                 }
                             ].map((prof,index)=>{
@@ -94,13 +149,14 @@ export const CableSub=()=>{
                         <div>
                             <Text
                                 value="Your account will be suspended, if you submit without transfer
-                                Please note that there is a charge of N50 if the CablePlan greater than N9,999."
+                                Please note that there is a charge of N50 if the CableType greater than N9,999."
                                 style="font-light text-start text-sm mb-4"
                             />
                         </div>
                          <Btn
                             style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
                             value="Validate"
+                            loadingStatus={( subscribeCableStatus ==="pending")?true:false}
                         />
                     </form>
                     <div className="px-4">

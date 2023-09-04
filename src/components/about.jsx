@@ -14,7 +14,7 @@ export const About =()=>{
              </RevealAnimation>
              <RevealAnimation>
                 <Text
-                    style="text-start text-sm leading-6 c-brown"
+                    style="text-start text-lg leading-8 c-brown"
                     value="This is a telecommunication industry playing a major role in distribution, selling affordable and most cheapest data, airtime, Dstv subscription, Gotv subscription, Startimes subscription, Convert Airtime to Cash and Electricity subscription.
                     Certain things are hard; making payments shouldn't be one of them. peacesub helps you make payments for services you enjoy right from the comfort of your home or office. The experience of total convenience,fast service delivery and easy payment is just at your fingertips.."
                 />
@@ -63,7 +63,7 @@ export const About =()=>{
                                 <RevealAnimation>
                                     <Text   
                                         value={title}
-                                        style={`${index==2 ? "text-white":" c-brown"} text-lg font-semibold mb-4`}
+                                        style={`${index==2 ? "text-white":" c-brown"} text-lg font-bold mb-4`}
                                     />
                                 </RevealAnimation>
                                 <RevealAnimation>

@@ -2,26 +2,27 @@ import { Text } from "../elements/text"
 import { AuthLayout } from "./authLayout"
 import { useForm } from "react-hook-form"
 import { InputField } from "./cutormFormField";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { Btn } from "../elements/btn";
+import { useDispatch, useSelector } from "react-redux";
+import { LogInUser } from "../store/authSlice";
 
 export const SignIn =()=>{
+    const dispatch = useDispatch();
+    const {LoginError,LoginStatus} = useSelector(state=>state.auth);
     const { 
         register, 
         handleSubmit, 
         formState: { errors } 
     } = useForm();
-    const navigate = useNavigate()
     const SubmitHandler =({
-        userName,
+        email,
         password
     })=>{
-            console.log(
-                userName,
-                password
-            )
-            navigate("/dashboard");
-            
+        dispatch(LogInUser({
+            email,
+            password
+        }))   
     }
 
     return(
@@ -38,11 +39,11 @@ export const SignIn =()=>{
                 {
                     [
                         {
-                            title:"userName",
-                            labelName:"userName",
-                            type:"text",
-                            error:errors.userName,
-                            placeHold:"Enter userName",
+                            title:"email",
+                            labelName:"Email",
+                            type:"email",
+                            error:errors.email,
+                            placeHold:"Enter email",
 
                         },{
                             title:"password",
@@ -80,9 +81,11 @@ export const SignIn =()=>{
                 })
             }
             <Link to="/reset">Forgot your password?</Link>
+            {LoginError && <Text style="text-danger text-xs" value={LoginError}/>}
             <Btn
                 value="Log In"
                 style="w-full p-3 text-center bg-light-blue text-white mt-3 mb-3"
+                loadingStatus={LoginStatus ==="pending"?true:false}
             />
             <div className="flex items-center m-auto w-fit">
                 <span className="me-1 text-sm font-medium">Dont have an account?</span>
