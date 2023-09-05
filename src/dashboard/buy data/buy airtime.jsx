@@ -39,7 +39,7 @@ export const BuyAirtime=()=>{
     }
 
     return(
-        <DashboardLayout>
+        <DashboardLayout  metaTitle="Peacesub - Purchase Airtime">
              {
                 getAirtimeNetworkStatus === "pending"?
                     <Spinner/>:

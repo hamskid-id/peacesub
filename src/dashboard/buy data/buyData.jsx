@@ -42,7 +42,7 @@ export const BuyData=()=>{
     }
 
     return(
-        <DashboardLayout>
+        <DashboardLayout  metaTitle="Peacesub - Purchase Data">
             {
                 getDataAirtimeTypeStatus === "pending"?
                     <Spinner/>:

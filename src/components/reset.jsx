@@ -21,7 +21,7 @@ export const Reset =()=>{
     }
 
     return(
-        <AuthLayout>
+        <AuthLayout  metaTitle="Peacesub -Password Reset">
             <Text
                 style="font-extrabold text-3xl mb-2"
                 value="Reset Password"

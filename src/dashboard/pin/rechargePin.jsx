@@ -28,12 +28,12 @@ export const RechargePin=()=>{
     }
 
     return(
-        <DashboardLayout>
+        <DashboardLayout metaTitle="Peacesub - Purchase recharge pin">
             <div className="bg-white shadow lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto">
                 <div className="bg-whitesmoke w-full p-6 mb-2">
                     <Text   
                         style="text-center font-medium text-xl"
-                        value="START YOUR OWN RECHARGE CARD PRINTING BUSINESS AND EARN YOUR WON EXTRA CASH"
+                        value="START YOUR OWN RECHARGE CARD PRINTING BUSINESS AND EARN YOUR OWN EXTRA CASH"
                     />
                 </div>
                 <div className="grid lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1 p-4">

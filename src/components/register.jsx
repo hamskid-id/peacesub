@@ -54,7 +54,7 @@ export const Register =()=>{
     } = useForm(formOptions);
 
     return(
-        <AuthLayout adjHeight={true}>
+        <AuthLayout adjHeight={true} metaTitle="Peacesub -Register">
             <Text
                 style="text-center text-lg "
                 value="Sign Up"

@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
-import { toast } from 'react-toastify';
-import { apiBaseUrl, setHeaders } from './apiBaseUrl';
+import { Toast, apiBaseUrl, setHeaders } from './apiBaseUrl';
 
 
 export const createAccount = createAsyncThunk(
@@ -110,12 +109,11 @@ const auth_Slice = createSlice({
         registerError:'',
        LoginStatus:'',
        LoginError:'',
-       userLoaded:false,
+       userLoaded:localStorage.getItem('DataHubUserToken')?true:false,
     },
     reducers:{
         LogOutUser(state, action){
             localStorage.removeItem('DataHubUserToken');
-            window.location.replace("/")
             return {
                 ...state,
                 userdata:{},
@@ -138,7 +136,6 @@ const auth_Slice = createSlice({
 
         });
         builder.addCase(createAccount.fulfilled,(state, action)=>{
-            console.log("hello",action.payload);
             const{
                 success,
                 status,
@@ -147,14 +144,20 @@ const auth_Slice = createSlice({
             }=action.payload;
             
             if(success){
-                toast(message);
+                Toast.fire({
+                icon: 'success',
+                title: message
+               })
                 return{
                     ...state,
                     createAccountStatus:'success',
                     accountData:data
                 }
             }else{
-                toast.error(message)
+                Toast.fire({
+                    icon: 'error',
+                    title: message
+                   })
                 return{
                     ...state,
                     createAccountStatus:'failed'
@@ -162,7 +165,10 @@ const auth_Slice = createSlice({
             }
         })
         builder.addCase(createAccount.rejected,(state, action)=>{
-            toast.error(action.payload)
+            Toast.fire({
+                icon: 'error',
+                title: action.payload
+               })
             return{
                 ...state,
                 createAccountStatus:'rejected'
@@ -184,15 +190,20 @@ const auth_Slice = createSlice({
                 message,
                 data
             }=action.payload;
-            console.log(action?.payload?.data)
             if( success){
-                toast(message);
-                window.location.replace("/login");
+                Toast.fire({
+                    icon: 'success',
+                    title: message
+                   })
                 return{
                     ...state,
                     registerStatus:'success'
                 }
             }else{
+                Toast.fire({
+                    icon: 'error',
+                    title: message
+                   })
                 return{
                     ...state,
                     registerStatus:'failed',
@@ -201,6 +212,10 @@ const auth_Slice = createSlice({
             }
         })
         builder.addCase(registerUser.rejected,(state, action)=>{
+            Toast.fire({
+                icon: 'error',
+                title: action?.payload
+               })
             return{
                 ...state,
                 registerStatus:'rejected',
@@ -222,7 +237,10 @@ const auth_Slice = createSlice({
                     message
                 }=action.payload;
                 if(status){
-                    toast("LogIn successfull");
+                    Toast.fire({
+                        icon: 'success',
+                        title: "Aulthentication successfull"
+                       })
                     localStorage.setItem(
                             'DataHubUserToken',
                             JSON.stringify(data)
@@ -233,14 +251,24 @@ const auth_Slice = createSlice({
                         userdata:data,
                         LoginStatus:'success'
                     }
-                }else return{
+                }else {
+                    Toast.fire({
+                    icon: 'error',
+                    title: message
+                   })
+                    return{
                 ...state,
                 LoginStatus:'failed',
                 LoginError:message
+                }
             }
 
         })
         builder.addCase(LogInUser.rejected,(state, action)=>{
+            Toast.fire({
+                icon: 'error',
+                title: action.payload
+               })
             return{
                 ...state,
                LoginStatus:'rejected',

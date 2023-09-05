@@ -36,7 +36,7 @@ export const KYC=()=>{
     }
 
     return(
-        <DashboardLayout>
+        <DashboardLayout  metaTitle="Peacesub - KYC">
             <div className="bg-white shadow lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto">
                 <div className="bg-whitesmoke w-full p-6 mb-2">
                     <Text   

@@ -39,7 +39,7 @@ export const CreateUserAccount =()=>{
     }
 
     return(
-        <DashboardLayout>
+        <DashboardLayout  metaTitle="Peacesub - Create an account to place your order">
         <form 
             onSubmit={handleSubmit(SubmitHandler)} className="bg-white p-4 lg:w-1/2 xl:w-1/2 md:w-1/2 sm:w-full xs:w-full xxs:w-full m-auto shadow">
             <div className="bg-whitesmoke w-full p-6 mb-2">

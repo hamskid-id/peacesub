@@ -3,7 +3,8 @@ import { RevealAnimation } from "./reveal";
 
 export const Footer =()=>{
     return(
-        <div className="py-16 px-10 bg-light-blue footer">
+        <div className="py-16 px-10 bg-light-blue footer grid lg:grid-cols-4 xl:grid-cols-4 md:grid-cols-4 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1 gap-8">
+            <div>
             <div className="w-20 h-20 mb-4">
                 <RevealAnimation side={true}>
                     <img 
@@ -19,6 +20,7 @@ export const Footer =()=>{
                     value="Here at peacesub., we offer you the most affordable and most cheapest data, airtime, Dstv, Gotv and Startimes subscription...."
                 />
             </RevealAnimation>
+            </div>
             <div className="mb-4">
                 <RevealAnimation>
                     <Text
@@ -32,7 +34,7 @@ export const Footer =()=>{
                             return(
                                 <li 
                                     key={index}
-                                    className="text-white font-normal text-sm mb-3 ms-8"
+                                    className="text-white font-normal text-sm mb-4 ms-8"
                                 >
                                     <RevealAnimation>
                                         {link}
@@ -59,7 +61,7 @@ export const Footer =()=>{
                             return(
                                 <div 
                                     key={index}
-                                    className=" mb-3"
+                                    className=" mb-4"
                                 >
                                     <RevealAnimation>
                                         <Text
@@ -79,6 +81,7 @@ export const Footer =()=>{
                     }
                 </div>
             </div>
+            <div>
             <RevealAnimation>
                 <Text
                     style="text-white mb-4 font-mediumn text-2xl"
@@ -91,6 +94,7 @@ export const Footer =()=>{
                     value="We offer fast and reliable data Bundles for all network, cable TV subscriptions, vtu for all network, phcn prepaid meter subscription. We are number one trusted vendor. Patronise us now and you won't regret it."
                 />
             </RevealAnimation>
+            </div>
         </div>
     )
 }

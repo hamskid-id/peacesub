@@ -135,124 +135,124 @@ const purchaseAirtime_Slice = createSlice({
                     html:`
                     <p>${message?.response_description}</p>
                     <div>
-                        <hr class="text-dark border mb-3"/>
+                        <hr class=" text-xs text-dark border mb-4"/>
                         <div
                             class="flex items-center justify-between mb-3"
                         >
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                             Quantity
                             </h6>
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                 ${quantity}
                             </h6>
                         </div>
                         <div
                             class="flex items-center justify-between mb-3"
                         >
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                 Amount
                             </h6>
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                 ${amount}
                             </h6>
                         </div>
                         <div
                             class="flex items-center justify-between mb-3"
                         >
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                 Email
                             </h6>
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                 ${email}
                             </h6>
                         </div>
                         <div
                             class="flex items-center justify-between mb-3"
                         >
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                 Phone Number
                             </h6>
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                 ${phone}
                             </h6>
                         </div>
                         <div
                             class="flex items-center justify-between mb-3"
                         >
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                 Product Name
                             </h6>
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                ${product_name}
                             </h6>
                         </div>
                         <div
                             class="flex items-center justify-between mb-3"
                         >
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                 Status
                             </h6>
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                ${status}
                             </h6>
                         </div>
                           <div
                             class="flex items-center justify-between mb-3"
                         >
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                  Method
                             </h6>
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                ${ method}
                             </h6>
                         </div>
                            <div
                             class="flex items-center justify-between mb-3"
                         >
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                 Convinience Fee
                             </h6>
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                ${convinience_fee}
                             </h6>
                         </div>
                         <div
                             class="flex items-center justify-between mb-3"
                         >
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                 Commission
                             </h6>
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                ${commission}
                             </h6>
                         </div>
                     <div
                             class="flex items-center justify-between mb-3"
                         >
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                             Transaction Id
                             </h6>
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                ${transactionId}
                             </h6>
                         </div>
                          <div
                             class="flex items-center justify-between mb-3"
                         >
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                 Type
                             </h6>
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                ${type}
                             </h6>
                         </div>
                         <div
                             class="flex items-center justify-between mb-3"
                         >
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                 Unit Price
                             </h6>
-                            <h6 class="h7 text-dark mb-3">
+                            <h6 class="text-xs text-dark mb-3">
                                ${unit_price}
                             </h6>
                         </div>

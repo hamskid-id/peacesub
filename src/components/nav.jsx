@@ -4,12 +4,12 @@ import { Text } from "../elements/text"
 import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { LogOutUser } from "../store/authSlice"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 export const Nav =()=>{
     const navRef = useRef(null);
     const navigate = useNavigate();
-    const user = JSON.parse(localStorage.getItem('DataHubUserToken'));
+    const {userLoaded} =useSelector((state)=>state.auth);
     const dispatch =useDispatch();
     return(
         <div className="flex justify-between lg:items-center xl:items-center md:items-center xs:items-start sm:items-start xxs:items-start lg:flex-row xl:flex-row md:flex-row sm:flex-col xs:flex-col xxs:flex-col">
@@ -59,15 +59,15 @@ export const Nav =()=>{
                     <div className="me-4 sm:mb-2 xs:mb-2 xxs:mb-2 xl:mb-0 lg:mb-0 md:mb-0">
                         <Btn
                             style="text-white bg-tick-blue py-3 px-6 text-sm"
-                            value={user?"Logout":"Login"}
-                            clickFunc={()=>user?dispatch(LogOutUser()):navigate("/login")}
+                            value={userLoaded?"Logout":"Login"}
+                            clickFunc={()=>userLoaded?dispatch(LogOutUser()):navigate("/login")}
                         />
                     </div>
                     <div>
                         <Btn
                             style="border-brown c-brown py-3 px-6 text-sm"
-                            value={user?"DashBoard":"Create Account"}
-                            clickFunc={()=>user?navigate("/dashboard"):navigate("/register")}
+                            value={userLoaded?"DashBoard":"Create Account"}
+                            clickFunc={()=>userLoaded?navigate("/dashboard"):navigate("/register")}
                         />
                     </div>
                 </div>

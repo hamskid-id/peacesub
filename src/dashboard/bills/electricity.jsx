@@ -63,7 +63,7 @@ export const ElectricityBill =()=>{
             }
     }
     return(
-        <DashboardLayout>
+        <DashboardLayout  metaTitle="Peacesub - Electricity subscription">
             {
                 getElectricityBillStatus === "pending"?
                     <Spinner/>:

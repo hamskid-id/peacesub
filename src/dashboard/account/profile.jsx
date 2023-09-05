@@ -15,7 +15,7 @@ export const Profile =()=>{
       dob
     }=user?.user;
     return(
-        <DashboardLayout>
+        <DashboardLayout  metaTitle="Peacesub - Profile">
         <div className="bg-white p-4 lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto shadow">
             <div className="flex flex-col">
                 {

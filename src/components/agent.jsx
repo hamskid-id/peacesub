@@ -14,7 +14,7 @@ export const Agent =()=>{
                 </RevealAnimation>
                 <RevealAnimation>
                     <Text
-                        style="leading-6 font-light c-brown text-lg text-start mb-4 w-full"
+                        style="leading-6 font-light c-brown text-sm text-start mb-4 w-full"
                         value="Join our network of outstanding entrepreneurs patnering with network.com Bring the Network.com 'easy-payments' experience closer to your network and earn a commission for every transaction you perform for your customers... We offer our Referrers the best referral program incentives to encourage entrepreneurial and managerial skill acquisition; enhance growth and development and general empowerment among our students on campuses of higher learning and youths in diaspora. Finally, to promote technology via the use of ICT tools in our society..."
                     />
                 </RevealAnimation>

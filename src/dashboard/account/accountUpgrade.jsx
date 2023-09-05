@@ -5,7 +5,7 @@ import { DashboardLayout } from "../dashLayout"
 
 export const AccountUpgrade =()=>{
     return(
-        <DashboardLayout>
+        <DashboardLayout metaTitle="Peacesub - Account Upgrade">
             <div className="bg-white shadow lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto">
                 <div className="flex flex-wrap justify-between p-4 bg-whitesmoke items-center">
                     <div>

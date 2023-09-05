@@ -38,7 +38,7 @@ export const ChangePassword =()=>{
     }
 
     return(
-        <DashboardLayout>
+        <DashboardLayout  metaTitle="Peacesub - manage password">
         <form 
             onSubmit={handleSubmit(SubmitHandler)}
             className="bg-white p-4 lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto shadow">

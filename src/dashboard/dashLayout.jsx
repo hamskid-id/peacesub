@@ -8,8 +8,9 @@ import {
   } from "tw-elements";
 import { LogOutUser } from "../store/authSlice";
 import { useDispatch } from "react-redux";
+import {Helmet} from "react-helmet";
 
-export const DashboardLayout=({children})=>{
+export const DashboardLayout=({children,metaTitle})=>{
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const user = JSON.parse(localStorage.getItem('DataHubUserToken'));
@@ -22,6 +23,13 @@ export const DashboardLayout=({children})=>{
     });
     return(
         <div className="bg-light-pink">
+          {
+          metaTitle &&(
+          <Helmet>
+                <title>Peacesub - {metaTitle}</title>
+            </Helmet>
+          )
+          }
             <nav
         id="full-screen-example"
         className="bg-white fixed left-0 top-0 z-[1035] h-screen w-60 -translate-x-full overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='false']:translate-x-0 dark:bg-zinc-800"
@@ -302,7 +310,14 @@ export const DashboardLayout=({children})=>{
         </li>
         <li 
           className="relative"
-          onClick={()=>dispatch(LogOutUser())}
+          onClick={()=>{
+            dispatch(LogOutUser());
+            if(!localStorage.getItem('DataHubUserToken')){
+              console.log(localStorage.getItem('DataHubUserToken'))
+              navigate("/");
+            }
+          }
+          }
           >
           <a
             className="group flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-700 outline-none transition duration-300 ease-linear hover:bg-primary-400/10 hover:text-primary-600 hover:outline-none focus:bg-primary-400/10 focus:text-primary-600 focus:outline-none active:bg-primary-400/10 active:text-primary-600 active:outline-none data-[te-sidenav-state-active]:text-primary-600 data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"

@@ -40,7 +40,7 @@ export const ResultChecker =()=>{
     }
 
     return(
-        <DashboardLayout>
+        <DashboardLayout  metaTitle="Peacesub - Purchase scartch card">
              {
                 getCardStatus ==="pending"?
                     <Spinner/>:

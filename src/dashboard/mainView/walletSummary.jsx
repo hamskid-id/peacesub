@@ -3,7 +3,7 @@ import { DashboardLayout } from "../dashLayout"
 
 export const WalletSummary=()=>{
     return(
-        <DashboardLayout>
+        <DashboardLayout metaTitle="Peacesub - Wallet Summary">
             <div className="m-auto bg-white shadow lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full">
                 <div className="bg-whitesmoke w-full p-6 mb-2">
                     <Text

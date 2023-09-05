@@ -26,7 +26,7 @@ export const SignIn =()=>{
     }
 
     return(
-        <AuthLayout>
+        <AuthLayout  metaTitle="Peacesub -Sign in to your account">
             <Text
                 style="text-center text-lg "
                 value="Login"

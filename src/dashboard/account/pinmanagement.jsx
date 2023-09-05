@@ -40,7 +40,7 @@ export const PinManagemnet =()=>{
     }
 
     return(
-        <DashboardLayout>
+        <DashboardLayout  metaTitle="Peacesub - Manage your pin">
             <div className=" mt-4 lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto grid lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 xxs:grid-cols-1 gap-8">
                 <form  
                     onSubmit={handleSubmit(SubmitHandler)} 

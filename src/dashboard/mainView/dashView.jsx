@@ -11,7 +11,7 @@ export const DashView=()=>{
         firstname
     }=user?.user
     return(
-        <DashboardLayout>
+        <DashboardLayout metaTitle="Peacesub - Dashboard">
             <div className="py-4">
                 <ul
                     className="flex list-none flex-col flex-wrap pl-0 md:flex-row"

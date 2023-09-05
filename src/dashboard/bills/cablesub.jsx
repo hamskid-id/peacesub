@@ -49,7 +49,7 @@ export const CableSub=()=>{
     }
 
     return(
-        <DashboardLayout>
+        <DashboardLayout  metaTitle="Peacesub - cable subscription">
             {
                 getcableNameStatus ==="pending" || getcableTypeStatus ==="pending"?
                     <Spinner/>:
