@@ -106,7 +106,7 @@ export const Register =()=>{
                             labelName:"Gender",
                             type:"text",
                             error:errors.gender,
-                            placeHold:"Enter lastname",
+                            placeHold:"Enter your gender",
 
                         },,{
                             title:"dob",

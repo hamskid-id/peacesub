@@ -6,10 +6,14 @@ import { Api } from "../components/api"
 import { Data } from "../components/data"
 import { Agent } from "../components/agent"
 import { Footer } from "../components/footer"
+import { Helmet } from "react-helmet"
 
 export const HomePage =()=>{
     return(
         <div className="bg-light-pink">
+             <Helmet>
+                <title>Peacesub - Perform data transmission services with ease</title>
+            </Helmet>
             <div className="pt-4  px-10 sm:px-4 xxs:px-4 xs:px-4 md:px-10 lg:px-10 xl:px-10 bg-light-pink relative">
                 
                  <Nav/>

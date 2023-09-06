@@ -5,7 +5,7 @@ import { Btn } from "../../elements/btn";
 import { InputField } from "../../components/cutormFormField";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getDataAirtimeType, purchaseData } from "../../store/dataSlice";
+import { getDataAirtimeType, getDataList, purchaseData } from "../../store/dataSlice";
 import Spinner from "../../spinners/spinner";
 
 export const BuyData=()=>{
@@ -14,13 +14,15 @@ export const BuyData=()=>{
     const {
         purchaseDataStatus,
         dataAirtimeTp,
-        purchaseDataRes,
+        dataList,
+        dataListStatus,
         getDataAirtimeTypeStatus
     } = useSelector(state=>state.data);
     useEffect(()=>{
         dispatch(getDataAirtimeType());
+        dispatch(getDataList())
         console.log("hello")
-    },[dispatch,getDataAirtimeType])
+    },[dispatch,getDataAirtimeType,getDataList])
 
     const { 
         register, 
@@ -28,23 +30,20 @@ export const BuyData=()=>{
         formState: { errors } 
     } = useForm();
     const SubmitHandler =({
-        // Network,
+        Network,
         MobileNumber,
-        DataType,
-        // bypass,
-        Amount
     })=>{
             dispatch(purchaseData({
-                service:DataType,
-                amount:Amount,
+                Network:Network,
                 phone:MobileNumber,
             }))
     }
+    console.log(dataList,  dataAirtimeTp)
 
     return(
         <DashboardLayout  metaTitle="Peacesub - Purchase Data">
             {
-                getDataAirtimeTypeStatus === "pending"?
+                getDataAirtimeTypeStatus === "pending" || dataListStatus ==="prending"?
                     <Spinner/>:
             <div className="bg-white shadow lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto">
                 <div className="bg-whitesmoke w-full p-6 mb-2">
@@ -55,26 +54,63 @@ export const BuyData=()=>{
                 </div>
                 <div className="grid lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1 p-4">
                     <form onSubmit={handleSubmit(SubmitHandler)} className="xs:order-last xxs:order-last sm:order-last md:order-first lg:order-first xl:order-first">
+                        <div className="flex flex-col mb-3">
+                            <label
+                                className={`mb-2 text-sm font-medium text-start`}
+                                htmlFor="Network">
+                                Network
+                            </label>
+                            <select
+                                className="text-start rounded-md p-4 border text-xs mb-4"
+                                name="Network"
+                                {...register(
+                                    `Network`, 
+                                    {
+                                        required:`Network field is invalid`
+                                    }
+                                )
+                            }
+                            >
+                            { 
+                                dataList?.map((option,index)=>{
+                                    return(
+                                        <option value={option.id} key={index}>{option.name}{"  "}Amount-{option.amount}naira</option>
+                                    )
+                                })
+                            }
+                            </select>
+                            {errors.Network && (<p className="text-danger text-sm text-start">{errors.message}</p>)}
+                        </div>
+                        <div className="flex flex-col mb-3">
+                            <label
+                                className={`mb-2 text-sm font-medium text-start`}
+                                htmlFor="Category">
+                                Category
+                            </label>
+                            <select
+                                className="text-start rounded-md p-4 border text-xs mb-4"
+                                name="Category"
+                                {...register(
+                                    `Category`, 
+                                    {
+                                        required:`Category field is invalid`
+                                    }
+                                )
+                            }
+                            >
+                            { 
+                                dataAirtimeTp?.map((option,index)=>{
+                                    return(
+                                        <option value={option.category} key={index}>{option.category}</option>
+                                    )
+                                })
+                            }
+                            </select>
+                            {errors.Category && (<p className="text-danger text-sm text-start">{errors.message}</p>)}
+                        </div>
                         {
                             [
-                                // {
-                                //     title:"Network",
-                                //     labelName: dataAirtimeTp,
-                                //     selectArrayOption:null,
-                                //     type:"select",
-                                //     error:errors.Network,
-                                //     placeHold:"Network",
-                                //     subTitle:null
-                                // },{
-                                    {
-                                    title:"DataType",
-                                    labelName:"Data Type",
-                                    selectArrayOption: dataAirtimeTp,
-                                    type:"select",
-                                    error:errors.DataType,
-                                    placeHold:"DataType",
-                                    subTitle:null
-                                },{
+                                {
                                     title:"MobileNumber",
                                     labelName:"Mobile Number",
                                     selectArrayOption:null,
@@ -82,22 +118,6 @@ export const BuyData=()=>{
                                     error:errors.MobileNumber,
                                     placeHold:"MobileNumber",
                                     subTitle:null
-                                },{
-                                    title:"Amount",
-                                    labelName:"Amount",
-                                    selectArrayOption:null,
-                                    type:"text",
-                                    error:errors.Amount,
-                                    placeHold:"Amount",
-                                    subTitle:null
-                                // },{
-                                //     title:"bypass",
-                                //     labelName:"Bypass number validator",
-                                //     selectArrayOption:null,
-                                //     type:"checkbox",
-                                //     error:errors.bypass,
-                                //     placeHold:"bypass",
-                                //     subTitle:null
                                 }
                             ].map((prof,index)=>{
                                 const{

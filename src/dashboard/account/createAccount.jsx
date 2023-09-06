@@ -103,8 +103,8 @@ export const CreateUserAccount =()=>{
                         },{
                             title:"provider",
                             labelName:"Provider",
-                            selectArrayOption:null,
-                            type:"text",
+                            selectArrayOption:["safehaven"],
+                            type:"select",
                             error:errors.provider,
                             placeHold:"provider",
                             subTitle:null
@@ -142,6 +142,7 @@ export const CreateUserAccount =()=>{
                                 <InputField
                                     name={title}
                                     subTitle={subTitle}
+                                    selectArrayOption={selectArrayOption}
                                     placeHolder={placeHold}
                                     type={type}
                                     labelTitle={labelName}

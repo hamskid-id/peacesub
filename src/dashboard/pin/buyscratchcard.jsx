@@ -1,10 +1,9 @@
-import { InputField } from "../../components/cutormFormField";
 import { Btn } from "../../elements/btn";
 import { Text } from "../../elements/text";
 import { useForm } from "react-hook-form"
 import { DashboardLayout } from "../dashLayout";
 import { useDispatch, useSelector } from "react-redux";
-import { buyscratchcard, getCard, scratchcardvtpass } from "../../store/eduSlice";
+import { buyscratchcard, getCard} from "../../store/eduSlice";
 import { useEffect } from "react";
 import Spinner from "../../spinners/spinner";
 
@@ -12,9 +11,7 @@ export const ResultChecker =()=>{
     const dispatch = useDispatch();
     const {
         buyCardStatus,
-        vtpassStatus,
         getCardStatus,
-        buyCardRes,
         card
     } = useSelector(state=>state.edu);
     useEffect(()=>{
@@ -26,16 +23,10 @@ export const ResultChecker =()=>{
         formState: { errors } 
     } = useForm();
     const SubmitHandler =({
-        quantity,
-        Amount,
-        examName,
-        phone
+       Network
     })=>{
         dispatch(buyscratchcard({
-            amount:Amount,
-            examName,
-            phone:phone,
-            quantity:quantity
+            Network
         }))
     }
 
@@ -52,76 +43,37 @@ export const ResultChecker =()=>{
                         style="text-center font-medium text-2xl mb-4"
                         value="RESULT CHECKER PIN"
                     />
-                    {
-                        [
-                            {
-                                title:"examName",
-                                labelName:"Exam name",
-                                selectArrayOption:card,
-                                type:"select",
-                                error:errors.examName,
-                                placeHold:"exam name",
-                                subTitle:null
-                            },{
-                                title:"quantity",
-                                labelName:"Quantity*",
-                                selectArrayOption:null,
-                                type:"number",
-                                error:errors.quantity,
-                                placeHold:"quantity",
-                                subTitle:null
-                            },{
-                                title:"Amount",
-                                labelName:"Amount*",
-                                selectArrayOption:null,
-                                type:"number",
-                                error:errors.Amount,
-                                placeHold:"",
-                                subTitle:null
-                            },{
-                                title:"phone",
-                                labelName:"Phone*",
-                                selectArrayOption:null,
-                                type:"tel",
-                                error:errors.phone,
-                                placeHold:"",
-                                subTitle:null
-                            }
-                        ].map((prof,index)=>{
-                            const{
-                                title,
-                                labelName,
-                                subTitle,
-                                placeHold,
-                                selectArrayOption,
-                                value,
-                                type,
-                                error
-                            }=prof;
-                            return(
-                                <div 
-                                    key={index}
-                                    className="w-full">
-                                    <InputField
-                                        name={title}
-                                        subTitle={subTitle}
-                                        selectArrayOption={selectArrayOption}
-                                        placeHolder={placeHold}
-                                        type={type}
-                                        labelTitle={labelName}
-                                        labelStyle="text-sm font-medium text-start"
-                                        register={register}
-                                        errors={error}
-                                        style="text-start rounded-md p-4 border text-xs mb-4"
-                                    />
-                                </div>
+                    <div className="flex flex-col mb-3">
+                        <label
+                            className={`mb-2 text-sm font-medium text-start`}
+                            htmlFor="Network">
+                            Network
+                        </label>
+                        <select
+                            className="text-start rounded-md p-4 border text-xs mb-4"
+                            name="Network"
+                            {...register(
+                                `Network`, 
+                                {
+                                    required:`Network field is invalid`
+                                }
                             )
-                        })
-                    }
+                        }
+                        >
+                        { 
+                            card?.map((option,index)=>{
+                                return(
+                                    <option value={option.id} key={index}>{option.name} {"  "} Amount-{option.price}naira</option>
+                                )
+                            })
+                        }
+                        </select>
+                        {errors.Network && (<p className="text-danger text-sm text-start">{errors.message}</p>)}
+                    </div>
                     <Btn
                         style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
                         value="Generate"
-                        loadingStatus={( buyCardStatus ==="pending" || vtpassStatus ==="pending")?true:false}
+                        loadingStatus={( buyCardStatus ==="pending")?true:false}
                     />
                 </form>
             </div>

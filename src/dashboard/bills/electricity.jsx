@@ -4,7 +4,7 @@ import { Text } from "../../elements/text";
 import { useForm } from "react-hook-form"
 import { DashboardLayout } from "../dashLayout";
 import { useDispatch, useSelector } from "react-redux";
-import { electricityPay, electricityvtpass, getElectricityBill } from "../../store/electricitySlice";
+import { electricityPay, getElectricityBill } from "../../store/electricitySlice";
 import { useEffect } from "react";
 import Spinner from "../../spinners/spinner";
 
@@ -13,8 +13,6 @@ export const ElectricityBill =()=>{
     const {
         elePayStatus,
         getElectricityBillStatus,
-        vtpassStatus,
-        elePayRes,
         EleBill
     } = useSelector(state=>state.electricity);
     useEffect(()=>{
@@ -26,42 +24,17 @@ export const ElectricityBill =()=>{
         formState: { errors } 
     } = useForm();
     const SubmitHandler =({
-        disco,
-        // meter,
+        Network,
         type,
-        Amount,
         phone,
-        action
     })=>{
-            switch(action){
-                case "Electricty Payment":
-                    dispatch( electricityPay({
-                        disco,
-                        // meter,
-                        type,
-                        amount:Amount,
-                        phone,
-                    }))
-                break;
-                case "Electricity vt pass" :
-                    dispatch(electricityvtpass({
-                        disco,
-                        // meter,
-                        type,
-                        amount:Amount,
-                        phone,
-                    }))
-                break;
-                default :
-                    dispatch(electricityPay({
-                        disco,
-                        // meter,
-                        type,
-                        amount:Amount,
-                        phone,
-                    }))
-            }
-    }
+            dispatch(electricityPay({
+                type,
+                Network,
+                phone,
+            }))
+        }
+        console.log(EleBill);
     return(
         <DashboardLayout  metaTitle="Peacesub - Electricity subscription">
             {
@@ -75,94 +48,67 @@ export const ElectricityBill =()=>{
                         style="text-center font-medium text-2xl mb-4"
                         value="Electricity Bill Payment"
                     />
-                    {
-                        [
-                            {
-                                title:"action",
-                                labelName:"Kindly Select action",
-                                selectArrayOption:["Electricty Payment","Electricity vt pass"],
-                                type:"select",
-                                error:errors.action,
-                                placeHold:"",
-                                subTitle:null
-                            },{
-                                title:"disco",
-                                labelName:"Disco name",
-                                selectArrayOption:EleBill,
-                                type:"select",
-                                error:errors.disco,
-                                placeHold:"disco",
-                                subTitle:null
-                            },
-                            // },{
-                            //     title:"meter",
-                            //     labelName:"Meter number",
-                            //     selectArrayOption:null,
-                            //     type:"number",
-                            //     error:errors.meter,
-                            //     placeHold:"meter",
-                            //     subTitle:null
-                            // },{
-                                {
-                                title:"type",
-                                labelName:"Meter Type",
-                                selectArrayOption:["prepaid","postpaid"],
-                                type:"select",
-                                error:errors.type,
-                                placeHold:"type",
-                                subTitle:null
-                            },{
-                                title:"Amount",
-                                labelName:"Amount*",
-                                selectArrayOption:null,
-                                type:"number",
-                                error:errors.Amount,
-                                placeHold:"",
-                                subTitle:null
-                            },{
-                                title:"phone",
-                                labelName:"Phone*",
-                                selectArrayOption:null,
-                                type:"tel",
-                                error:errors.phone,
-                                placeHold:"",
-                                subTitle:null
+                    <div className="flex flex-col mb-3">
+                            <label
+                                className={`mb-2 text-sm font-medium text-start`}
+                                htmlFor="Network">
+                                Network
+                            </label>
+                            <select
+                                className="text-start rounded-md p-4 border text-xs mb-4"
+                                name="Network"
+                                {...register(
+                                    `Network`, 
+                                    {
+                                        required:`Network field is invalid`
+                                    }
+                                )
                             }
-                        ].map((prof,index)=>{
-                            const{
-                                title,
-                                labelName,
-                                subTitle,
-                                placeHold,
-                                selectArrayOption,
-                                value,
-                                type,
-                                error
-                            }=prof;
-                            return(
-                                <div 
-                                    key={index}
-                                    className="w-full">
-                                    <InputField
-                                        name={title}
-                                        subTitle={subTitle}
-                                        selectArrayOption={selectArrayOption}
-                                        placeHolder={placeHold}
-                                        type={type}
-                                        labelTitle={labelName}
-                                        labelStyle="text-sm font-medium text-start"
-                                        register={register}
-                                        errors={error}
-                                        style="text-start rounded-md p-4 border text-xs mb-4"
-                                    />
-                                </div>
-                            )
-                        })
-                    }
+                            >
+                            { 
+                                EleBill?.map((option,index)=>{
+                                    return(
+                                        <option value={option.id} key={index}>{option.code} ({option.name}) {"  "} Discount-{option.discount}</option>
+                                    )
+                                })
+                            }
+                            </select>
+                            {errors.Network && (<p className="text-danger text-sm text-start">{errors.message}</p>)}
+                        </div>
+                        <div
+                            className="w-full">
+                            <InputField
+                                name="type"
+                                subTitle={null}
+                                selectArrayOption={["prepaid","postpaid"]}
+                                placeHolder=""
+                                type="select"
+                                labelTitle="Type"
+                                labelStyle="text-sm font-medium text-start"
+                                register={register}
+                                errors={errors.type}
+                                style="text-start rounded-md p-4 border text-xs mb-4"
+                            />
+                        </div>
+                        <div
+                            className="w-full">
+                            <InputField
+                                name="phone"
+                                subTitle={null}
+                                selectArrayOption={null}
+                                placeHolder="Enter your mobile number"
+                                type="tel"
+                                labelTitle="Phone Number"
+                                labelStyle="text-sm font-medium text-start"
+                                register={register}
+                                errors={errors.phone}
+                                style="text-start rounded-md p-4 border text-xs mb-4"
+                            />
+                        </div>
                     <Btn
                         style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
                         value="Validate"
-                        loadingStatus={( elePayStatus ==="pending" || vtpassStatus ==="pending")?true:false}
+                        loadingStatus={elePayStatus ==="pending"?true:false}
                     />
                 </form>
             </div>

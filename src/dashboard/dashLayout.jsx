@@ -26,7 +26,7 @@ export const DashboardLayout=({children,metaTitle})=>{
           {
           metaTitle &&(
           <Helmet>
-                <title>Peacesub - {metaTitle}</title>
+                <title>{metaTitle}</title>
             </Helmet>
           )
           }

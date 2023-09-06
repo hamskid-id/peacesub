@@ -32,11 +32,13 @@ export const BuyAirtime=()=>{
         Amount
     })=>{
             dispatch(purchaseAirtime({
-                service:Network,
+                Network:Network,
                 amount:Amount,
                 phone:MobileNumber,
             }))
     }
+
+    console.log(airtimeNetwork)
 
     return(
         <DashboardLayout  metaTitle="Peacesub - Purchase Airtime">
@@ -52,17 +54,36 @@ export const BuyAirtime=()=>{
                 </div>
                 <div className="p-4">
                     <form onSubmit={handleSubmit(SubmitHandler)} >
+                        <div className="flex flex-col mb-3">
+                            <label
+                                className={`mb-2 text-sm font-medium text-start`}
+                                htmlFor="Network">
+                                Network
+                            </label>
+                            <select
+                                className="text-start rounded-md p-4 border text-xs mb-4"
+                                name="Network"
+                                {...register(
+                                    `Network`, 
+                                    {
+                                        required:`Network field is invalid`
+                                    }
+                                )
+                            }
+                            >
+                            { 
+                                airtimeNetwork?.map((option,index)=>{
+                                    return(
+                                        <option value={option.id} key={index}>{option.network.toUpperCase()} {"  "} Discount-{option.discount}naira</option>
+                                    )
+                                })
+                            }
+                            </select>
+                            {errors.Network && (<p className="text-danger text-sm text-start">{errors.message}</p>)}
+                        </div>
                         {
                             [
                                 {
-                                    title:"Network",
-                                    labelName:"Network",
-                                    selectArrayOption:airtimeNetwork,
-                                    type:"select",
-                                    error:errors.Network,
-                                    placeHold:"Network",
-                                    subTitle:null
-                                },{
                                     title:"MobileNumber",
                                     labelName:"Mobile Number",
                                     selectArrayOption:null,

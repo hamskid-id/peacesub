@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
 import { Toast, apiBaseUrl, setHeaders } from './apiBaseUrl';
+import Swal from 'sweetalert2';
 
 
 export const createAccount = createAsyncThunk(
@@ -129,6 +130,11 @@ const auth_Slice = createSlice({
 
     extraReducers:(builder)=>{
         builder.addCase(createAccount.pending,(state, action)=>{
+            Swal.fire({
+                text:'Please wait...while your request is being process',
+                icon:'info',
+                allowOutsideClick: false
+            })
             return {
                 ...state,
                 createAccountStatus:'pending'
@@ -144,20 +150,71 @@ const auth_Slice = createSlice({
             }=action.payload;
             
             if(success){
-                Toast.fire({
-                icon: 'success',
-                title: message
-               })
+               Swal.fire({
+                text:message,
+                allowOutsideClick: false,
+                icon:'success',
+                html:`
+                <p>${message}</p>
+                <div>
+                    <hr class=" text-xs text-dark border mb-4"/>
+                    <div
+                        class="flex items-center justify-between mb-3"
+                    >
+                        <h6 class="text-xs text-dark mb-3">
+                       Account Name
+                        </h6>
+                        <h6 class="text-xs text-dark mb-3">
+                            ${data?.account_name}
+                        </h6>
+                    </div>
+                    <div
+                        class="flex items-center justify-between mb-3"
+                    >
+                        <h6 class="text-xs text-dark mb-3">
+                            Account Number
+                        </h6>
+                        <h6 class="text-xs text-dark mb-3">
+                            ${data?.account_number}
+                        </h6>
+                    </div>
+                    <div
+                        class="flex items-center justify-between mb-3"
+                    >
+                        <h6 class="text-xs text-dark mb-3">
+                            Provider
+                        </h6>
+                        <h6 class="text-xs text-dark mb-3">
+                            ${data?.provider}
+                        </h6>
+                    </div>
+                    <div
+                        class="flex items-center justify-between mb-3"
+                    >
+                        <h6 class="text-xs text-dark mb-3">
+                            Status
+                        </h6>
+                        <h6 class="text-xs text-dark mb-3">
+                            ${data?.status}
+                        </h6>
+                    </div>
+                </div>`,
+                showCloseButton: true,
+            }).then(function() {
+                window.location.replace("/dashboard");
+            });
                 return{
                     ...state,
                     createAccountStatus:'success',
                     accountData:data
                 }
             }else{
-                Toast.fire({
-                    icon: 'error',
-                    title: message
-                   })
+                Swal.fire({
+                    text:message,
+                    icon:'error',
+                    allowOutsideClick: false,
+                    showCloseButton: true,
+                })
                 return{
                     ...state,
                     createAccountStatus:'failed'
@@ -165,10 +222,12 @@ const auth_Slice = createSlice({
             }
         })
         builder.addCase(createAccount.rejected,(state, action)=>{
-            Toast.fire({
-                icon: 'error',
-                title: action.payload
-               })
+            Swal.fire({
+                text:action.payload,
+                icon:'error',
+                allowOutsideClick: false,
+                showCloseButton: true,
+            })
             return{
                 ...state,
                 createAccountStatus:'rejected'
@@ -183,18 +242,16 @@ const auth_Slice = createSlice({
 
         });
         builder.addCase(registerUser.fulfilled,(state, action)=>{
-            console.log("hello",action.payload);
             const{
-                success,
                 status,
                 message,
-                data
             }=action.payload;
-            if( success){
+            if(status){
                 Toast.fire({
                     icon: 'success',
                     title: message
                    })
+                window.location.replace("/login")
                 return{
                     ...state,
                     registerStatus:'success'

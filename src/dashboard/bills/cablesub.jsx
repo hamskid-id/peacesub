@@ -5,7 +5,7 @@ import { Btn } from "../../elements/btn";
 import { InputField } from "../../components/cutormFormField";
 import { useDispatch,useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getcableName, getcableType, subscribeCable } from "../../store/cableSlice";
+import {getcableType, subscribeCable } from "../../store/cableSlice";
 import Spinner from "../../spinners/spinner";
 
 export const CableSub=()=>{
@@ -13,16 +13,11 @@ export const CableSub=()=>{
     const {
         subscribeCableStatus,
         getcableTypeStatus,
-        getcableNameStatus,
-        subCableRes,
         cableTp,
-        cableName
     } = useSelector(state=>state.cable);
     useEffect(()=>{
         dispatch(getcableType());
-        dispatch(getcableName());
-        console.log("hello")
-    },[dispatch,getcableName,getcableType])
+    },[dispatch,getcableType])
 
 
     const { 
@@ -31,19 +26,11 @@ export const CableSub=()=>{
         formState: { errors } 
     } = useForm();
     const SubmitHandler =({
-        CableName,
-        CableType,
-        Amount,
+        Network,
         Phone,
-        // vcode,
-        Quantity,
-        // Service,
     })=>{
         dispatch(subscribeCable({
-            quantity:Quantity,
-            service:CableName,
-            type:CableType,
-            amount:Amount,
+            Network,
             phone:Phone,
         }))
     }
@@ -51,108 +38,60 @@ export const CableSub=()=>{
     return(
         <DashboardLayout  metaTitle="Peacesub - cable subscription">
             {
-                getcableNameStatus ==="pending" || getcableTypeStatus ==="pending"?
+                getcableTypeStatus ==="pending"?
                     <Spinner/>:
             
             <div className="bg-white shadow lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto">
                 <div className="bg-whitesmoke w-full p-6 mb-2">
                     <Text   
                         style="text-center font-medium text-xl"
-                        value="CabelSub"
+                        value="Purchase Cabel Tv"
                     />
                 </div>
                 <div className="grid lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1 p-4">
                     <form onSubmit={handleSubmit(SubmitHandler)} className="xs:order-last xxs:order-last sm:order-last md:order-first lg:order-first xl:order-first">
-                        {
-                            [
-                                {
-                                    title:"CableName",
-                                    labelName:"CableName",
-                                    selectArrayOption:cableName,
-                                    type:"select",
-                                    error:errors.CableName,
-                                    placeHold:"CableName",
-                                    subTitle:null
-                                },{
-                                    title:"CableType",
-                                    labelName:"Cable Type",
-                                    selectArrayOption:cableTp,
-                                    type:"select",
-                                    error:errors.CableType,
-                                    placeHold:"Cable Type",
-                                    subTitle:null
-                                // },{
-                                //     title:"Service",
-                                //     labelName:"Service*",
-                                //     selectArrayOption:null,
-                                //     type:"text",
-                                //     error:errors.Service,
-                                //     placeHold:"Service*",
-                                //     subTitle:null
-                                    },{
-                                // },{
-                                //     title:"vcode",
-                                //     labelName:"Variation Code",
-                                //     selectArrayOption:null,
-                                //     type:"text",
-                                //     error:errors.vcode,
-                                //     placeHold:"variation code",
-                                //     subTitle:null
-                                // },{
-                                    title:"Amount",
-                                    labelName:"Amount",
-                                    selectArrayOption:null,
-                                    type:"number",
-                                    error:errors.Amount,
-                                    placeHold:"Amount",
-                                    subTitle:null
-                                },{
-                                    title:"Phone",
-                                    labelName:"Phone Number",
-                                    selectArrayOption:null,
-                                    type:"tel",
-                                    error:errors.Phone,
-                                    placeHold:"Phone",
-                                    subTitle:null
-                                },{
-                                    title:"Quantity",
-                                    labelName:"Quantity",
-                                    selectArrayOption:null,
-                                    type:"tel",
-                                    error:errors.Quantity,
-                                    placeHold:"Quantity",
-                                    subTitle:null
-                                }
-                            ].map((prof,index)=>{
-                                const{
-                                    title,
-                                    labelName,
-                                    subTitle,
-                                    placeHold,
-                                    selectArrayOption,
-                                    type,
-                                    error
-                                }=prof;
-                                return(
-                                    <div 
-                                        key={index}
-                                        className="w-full">
-                                        <InputField
-                                            name={title}
-                                            subTitle={subTitle}
-                                            selectArrayOption={selectArrayOption}
-                                            placeHolder={placeHold}
-                                            type={type}
-                                            labelTitle={labelName}
-                                            labelStyle="text-sm font-medium text-start"
-                                            register={register}
-                                            errors={error}
-                                            style="text-start rounded-md p-4 border text-xs mb-4"
-                                        />
-                                    </div>
+                        <div className="flex flex-col mb-3">
+                            <label
+                                className={`mb-2 text-sm font-medium text-start`}
+                                htmlFor="Network">
+                                Network
+                            </label>
+                            <select
+                                className="text-start rounded-md p-4 border text-xs mb-4"
+                                name="Network"
+                                {...register(
+                                    `Network`, 
+                                    {
+                                        required:`Network field is invalid`
+                                    }
                                 )
-                            })
-                        }
+                            }
+                            >
+                            { 
+                                cableTp?.map((option,index)=>{
+                                    return(
+                                        <option value={option.id} key={index}>{option.name} {"  "} Discount-{option.discount}</option>
+                                    )
+                                })
+                            }
+                            </select>
+                            {errors.Network && (<p className="text-danger text-sm text-start">{errors.message}</p>)}
+                        </div>
+                        <div
+                            className="w-full">
+                            <InputField
+                                name="Phone"
+                                subTitle={null}
+                                selectArrayOption={null}
+                                placeHolder="Enter your mobile number"
+                                type="tel"
+                                labelTitle="Phone Number"
+                                labelStyle="text-sm font-medium text-start"
+                                register={register}
+                                errors={errors.Phone}
+                                style="text-start rounded-md p-4 border text-xs mb-4"
+                            />
+                        </div>
                         <div>
                             <Text
                                 value="Your account will be suspended, if you submit without transfer

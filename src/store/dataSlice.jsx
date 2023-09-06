@@ -1,66 +1,22 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
 import { toast } from 'react-toastify';
-import { apiBaseUrl, setHeaders } from './apiBaseUrl';
+import { Toast, apiBaseUrl, setHeaders } from './apiBaseUrl';
 import Swal from 'sweetalert2'
 
 const user = JSON.parse(localStorage.getItem('DataHubUserToken'));
 export const purchaseData = createAsyncThunk(
     'data/purchaseData', 
     async ({
-        service,
-        amount,
-        phone,
-        // code,
+        Network,
+        phone
     }, {rejectWithValue}) =>{
     try{
         const response = await axios.post(
             `${apiBaseUrl}/purchasedata`,{
-                "amount":amount,
-                "phone":"08011111111",
-                "serviceID": "airtel-data",
-                "billersCode": "08011111111",
-                "variation_code" : "airt-50",
-
-            },{
-                headers: {
-                    "Authorization":`Bearer Bearer ${user?.access_token}`
-                }
-            }
-        );
-        return response?.data
-    } catch(err){
-        return rejectWithValue(
-            err.response?.data?.message
-        )
-        }
-    }
-)
-
-export const vtpassData = createAsyncThunk(
-    'data/vtpassData', 
-    async ({
-        service,
-        amount,
-        requestId,
-        phone,
-        // code,
-    }, {rejectWithValue}) =>{
-    try{
-        const response = await axios.post(
-            `https://sandbox.vtpass.com/api/pay`,{
-                "request_id" : requestId,
-                "amount":amount,
-                "phone":phone,
-                "serviceID":"airtel-data",
-                "billersCode": "1212121212",
-                "variation_code" :"airt-50",
-
-            },{
-                headers: {
-                    "Authorization":`Bearer Bearer ${user?.access_token}`
-                }
-            }
+                "networkID":Network,
+                "phone":phone
+            },setHeaders()
         );
         return response?.data
     } catch(err){
@@ -75,7 +31,21 @@ export const getDataAirtimeType = createAsyncThunk(
     'data/getDataAirtimeType', 
     async () =>{
         try{
-            const response = await axios.get(`${apiBaseUrl}/datatypes`,setHeaders());
+            const response = await axios.get(`${apiBaseUrl}/types-data/MTN`,setHeaders());
+            return response?.data
+        } catch(err){
+            return (
+                err.response?.data?.message
+            )
+        }
+    }
+)
+
+export const getDataList = createAsyncThunk(
+    'data/getDataList ', 
+    async () =>{
+        try{
+            const response = await axios.get(`${apiBaseUrl}/list-data/MTN/SME`,setHeaders());
             return response?.data
         } catch(err){
             return (
@@ -89,11 +59,11 @@ const purchaseData_Slice = createSlice({
     name:"data",
     initialState: {
         purchaseDataStatus:'',
-        vtRes:{},
-       vtpassStatus:'',
        getDataAirtimeTypeStatus:'',
        purchaseDataRes:{},
        dataAirtimeTp:[],
+       dataListStatus:'',
+       dataList:[],
     },
     reducers:{
     },
@@ -117,151 +87,12 @@ const purchaseData_Slice = createSlice({
                 message
             }=action.payload;
             
-            if(message?.code =="000"){
-                const{
-                    amount,
-                    commission,
-                    convinience_fee,
-                    email,
-                    method,
-                    phone,
-                    product_name,
-                    quantity,
-                    status,
-                    transactionId,
-                    type,
-                    unit_price
-                }=message?.content?.transactions
+            if(status){
 
                 Swal.fire({
-                    text:message?.response_description,
+                    text:message,
                     allowOutsideClick: false,
                     icon:'success',
-                    html:`
-                    <p>${message?.response_description}</p>
-                    <div>
-                        <hr class="text-xs text-dark border mb-4"/>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class=" text-xs text-dark mb-3">
-                            Quantity
-                            </h6>
-                            <h6 class=" text-xs text-dark mb-3">
-                                ${quantity}
-                            </h6>
-                        </div>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class=" text-xs text-dark mb-3">
-                                Amount
-                            </h6>
-                            <h6 class=" text-xs text-dark mb-3">
-                                ${amount}
-                            </h6>
-                        </div>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class=" text-xs text-dark mb-3">
-                                Email
-                            </h6>
-                            <h6 class=" text-xs text-dark mb-3">
-                                ${email}
-                            </h6>
-                        </div>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class=" text-xs text-dark mb-3">
-                                Phone Number
-                            </h6>
-                            <h6 class=" text-xs text-dark mb-3">
-                                ${phone}
-                            </h6>
-                        </div>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class=" text-xs text-dark mb-3">
-                                Product Name
-                            </h6>
-                            <h6 class=" text-xs text-dark mb-3">
-                               ${product_name}
-                            </h6>
-                        </div>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class=" text-xs text-dark mb-3">
-                                Status
-                            </h6>
-                            <h6 class=" text-xs text-dark mb-3">
-                               ${status}
-                            </h6>
-                        </div>
-                          <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class=" text-xs text-dark mb-3">
-                                 Method
-                            </h6>
-                            <h6 class=" text-xs text-dark mb-3">
-                               ${ method}
-                            </h6>
-                        </div>
-                           <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class=" text-xs text-dark mb-3">
-                                Convinience Fee
-                            </h6>
-                            <h6 class=" text-xs text-dark mb-3">
-                               ${convinience_fee}
-                            </h6>
-                        </div>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class=" text-xs text-dark mb-3">
-                                Commission
-                            </h6>
-                            <h6 class=" text-xs text-dark mb-3">
-                               ${commission}
-                            </h6>
-                        </div>
-                    <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class=" text-xs text-dark mb-3">
-                            Transaction Id
-                            </h6>
-                            <h6 class=" text-xs text-dark mb-3">
-                               ${transactionId}
-                            </h6>
-                        </div>
-                         <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class=" text-xs text-dark mb-3">
-                                Type
-                            </h6>
-                            <h6 class=" text-xs text-dark mb-3">
-                               ${type}
-                            </h6>
-                        </div>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class=" text-xs text-dark mb-3">
-                                Unit Price
-                            </h6>
-                            <h6 class=" text-xs text-dark mb-3">
-                               ${unit_price}
-                            </h6>
-                        </div>
-                    </div>`,
                     showCloseButton: true,
                 })
                 return{
@@ -270,9 +101,9 @@ const purchaseData_Slice = createSlice({
                     purchaseDataRes:message
                 }
             }else{
-                toast.error(message?.response_description)
+                toast.error(message)
                 Swal.fire({
-                    text:message?.response_description,
+                    text:message,
                     icon:'error',
                     allowOutsideClick: false,
                     showCloseButton: true,
@@ -285,7 +116,7 @@ const purchaseData_Slice = createSlice({
         })
         builder.addCase(purchaseData.rejected,(state, action)=>{
             Swal.fire({
-                text:action?.payload?.response_description,
+                text:action?.payload,
                 icon:'error',
                 allowOutsideClick: false,
                 showCloseButton: true,
@@ -293,42 +124,6 @@ const purchaseData_Slice = createSlice({
             return{
                 ...state,
                 purchaseDataStatus:'rejected'
-            }
-        })
-
-        builder.addCase(vtpassData.pending,(state, action)=>{
-            return {
-                ...state,
-                vtpassStatus:'pending'
-             }
-        });
-
-        builder.addCase(vtpassData.fulfilled,(state, action)=>{
-                const{
-                    code,
-                    response_description
-                }=action.payload;
-                if(code === "000"){
-                    toast(response_description);
-                    return{
-                        ...state,
-                        vtpassStatus:'success',
-                        vtRes:action.payload
-                    }
-                }else{
-                    toast.error(response_description)
-                    return{
-                        ...state,
-                        vtpassStatus:'failed',
-                    }
-            }
-
-        })
-        builder.addCase(vtpassData.rejected,(state, action)=>{
-            toast.error(action?.payload?.response_description)
-            return{
-                ...state,
-               vtpassStatus:'rejected'
             }
         })
 
@@ -342,15 +137,20 @@ const purchaseData_Slice = createSlice({
         builder.addCase(getDataAirtimeType.fulfilled,(state, action)=>{
                 const{
                     status,
+                    data,
                     message
                 }=action.payload;
                 if(status){
                     return{
                         ...state,
                         getDataAirtimeTypeStatus:'success',
-                        dataAirtimeTp:message
+                        dataAirtimeTp:data
                     }
                 }else{
+                    Toast.fire({
+                        icon: 'error',
+                        title: message
+                    })
                     return{
                         ...state,
                         getDataAirtimeTypeStatus:'failed',
@@ -359,11 +159,55 @@ const purchaseData_Slice = createSlice({
 
         })
         builder.addCase(getDataAirtimeType.rejected,(state, action)=>{
-            toast.error(action.payload)
-            console.log(action.payload)
+            Toast.fire({
+                icon: 'error',
+                title: message
+            })
             return{
                 ...state,
                 getDataAirtimeTypeStatus:'rejected'
+            }
+        })
+
+        builder.addCase(getDataList.pending,(state, action)=>{
+            return {
+                ...state,
+                dataListStatus:'pending'
+             }
+        });
+
+        builder.addCase(getDataList.fulfilled,(state, action)=>{
+                const{
+                    status,
+                    data,
+                    message
+                }=action.payload;
+                if(status){
+                    return{
+                        ...state,
+                        dataListStatus:'success',
+                        dataList:data
+                    }
+                }else{
+                    Toast.fire({
+                        icon: 'error',
+                        title:message
+                    })
+                    return{
+                        ...state,
+                        dataListStatus:'failed',
+                    }
+            }
+
+        })
+        builder.addCase(getDataList.rejected,(state, action)=>{
+            Toast.fire({
+                icon: 'error',
+                title:action?.payload
+            })
+            return{
+                ...state,
+                dataListStatus:'rejected'
             }
         })
     }
