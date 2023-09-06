@@ -108,7 +108,7 @@ export const Register =()=>{
                             error:errors.gender,
                             placeHold:"Enter your gender",
 
-                        },,{
+                        },{
                             title:"dob",
                             labelName:"Date of Birth",
                             type:"date",
