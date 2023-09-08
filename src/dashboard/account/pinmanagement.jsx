@@ -6,9 +6,14 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { Reset } from "./reset";
+import { useDispatch, useSelector } from "react-redux";
+import { changePin } from "../../store/profileSlice";
 
 export const PinManagemnet =()=>{
-
+    const dispatch = useDispatch();
+    const {
+        changePinStatus
+    } = useSelector(state=>state.data);
     const validationSchema = Yup.object().shape({
         newpass: Yup.string()
             .required('Password is required')
@@ -28,15 +33,12 @@ export const PinManagemnet =()=>{
     } = useForm(formOptions);
     const SubmitHandler =({
         oldpass,
-        newpass,
-        cpass
-        
+        newpass
     })=>{
-            console.log(
-                oldpass,
-                newpass,
-                cpass
-            )
+        dispatch(changePin({
+            current:oldpass,
+            newPin:newpass
+        }))
     }
 
     return(
@@ -108,6 +110,7 @@ export const PinManagemnet =()=>{
                     <Btn
                         style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
                         value="Proceed"
+                         loadingStatus={ changePinStatus ==="pending" ?true:false}
                     />
                 </form>
                 <Reset/>

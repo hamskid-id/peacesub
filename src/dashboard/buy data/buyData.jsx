@@ -21,7 +21,6 @@ export const BuyData=()=>{
     useEffect(()=>{
         dispatch(getDataAirtimeType());
         dispatch(getDataList())
-        console.log("hello")
     },[dispatch,getDataAirtimeType,getDataList])
 
     const { 
@@ -152,7 +151,7 @@ export const BuyData=()=>{
                          <Btn
                             style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
                             value="Proceed"
-                            loadingStatus={( purchaseDataStatus ==="pending" )?true:false}
+                            loadingStatus={ purchaseDataStatus ==="pending" ?true:false}
                         />
                     </form>
                     <div className="p-4">

@@ -1,10 +1,32 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
-import { toast } from 'react-toastify';
 import { Toast, apiBaseUrl, setHeaders } from './apiBaseUrl';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
-const user = JSON.parse(localStorage.getItem('DataHubUserToken'));
+export const bulkSms = createAsyncThunk(
+    'data/bulkSms', 
+    async ({
+        From,
+        Message,
+        To
+    }, {rejectWithValue}) =>{
+    try{
+        const response = await axios.post(
+            `${apiBaseUrl}/bulk-sms-send`,{
+                "sender_name": From,
+                "recipients": To,
+                "message": Message
+            },setHeaders()
+        );
+        return response?.data
+    } catch(err){
+        return rejectWithValue(
+            err.response?.data?.message
+        )
+        }
+    }
+)
+
 export const purchaseData = createAsyncThunk(
     'data/purchaseData', 
     async ({
@@ -41,6 +63,21 @@ export const getDataAirtimeType = createAsyncThunk(
     }
 )
 
+export const getAtm = createAsyncThunk(
+    'data/getAtm', 
+    async () =>{
+        try{
+            const response = await axios.get(`${apiBaseUrl}/fund-wallet-atm`,setHeaders());
+            return response?.data
+        } catch(err){
+            return (
+                err.response?.data?.message
+            )
+        }
+    }
+)
+
+
 export const getDataList = createAsyncThunk(
     'data/getDataList ', 
     async () =>{
@@ -59,8 +96,11 @@ const purchaseData_Slice = createSlice({
     name:"data",
     initialState: {
         purchaseDataStatus:'',
+        bulkStatus:'',
        getDataAirtimeTypeStatus:'',
        purchaseDataRes:{},
+       atm:[],
+       atmStatus:'',
        dataAirtimeTp:[],
        dataListStatus:'',
        dataList:[],
@@ -101,7 +141,6 @@ const purchaseData_Slice = createSlice({
                     purchaseDataRes:message
                 }
             }else{
-                toast.error(message)
                 Swal.fire({
                     text:message,
                     icon:'error',
@@ -126,6 +165,63 @@ const purchaseData_Slice = createSlice({
                 purchaseDataStatus:'rejected'
             }
         })
+
+        builder.addCase(bulkSms.pending,(state, action)=>{
+            Swal.fire({
+                text:'Please wait...while your request is being process',
+                icon:'info',
+                allowOutsideClick: false
+            })
+            return {
+                ...state,
+                bulkStatus:'pending'
+            }
+
+        });
+        builder.addCase(bulkSms.fulfilled,(state, action)=>{
+            const{
+                status,
+                message
+            }=action.payload;
+            
+            if(status){
+
+                Swal.fire({
+                    text:message,
+                    allowOutsideClick: false,
+                    icon:'success',
+                    showCloseButton: true,
+                })
+                return{
+                    ...state,
+                    bulkStatus:'success'
+                }
+            }else{
+                Swal.fire({
+                    text:message,
+                    icon:'error',
+                    allowOutsideClick: false,
+                    showCloseButton: true,
+                })
+                return{
+                    ...state,
+                   bulkStatus:'failed'
+                }
+            }
+        })
+        builder.addCase(bulkSms.rejected,(state, action)=>{
+            Swal.fire({
+                text:action?.payload,
+                icon:'error',
+                allowOutsideClick: false,
+                showCloseButton: true,
+            })
+            return{
+                ...state,
+                bulkStatus:'rejected'
+            }
+        })
+
 
         builder.addCase(getDataAirtimeType.pending,(state, action)=>{
             return {
@@ -208,6 +304,48 @@ const purchaseData_Slice = createSlice({
             return{
                 ...state,
                 dataListStatus:'rejected'
+            }
+        })
+
+        builder.addCase(getAtm.pending,(state, action)=>{
+            return {
+                ...state,
+                atmStatus:'pending'
+             }
+        });
+
+        builder.addCase(getAtm.fulfilled,(state, action)=>{
+                const{
+                    status,
+                    data,
+                    message
+                }=action.payload;
+                if(status){
+                    return{
+                        ...state,
+                        atmStatus:'success',
+                        atm:data
+                    }
+                }else{
+                    Toast.fire({
+                        icon: 'error',
+                        title:message
+                    })
+                    return{
+                        ...state,
+                        atmStatus:'failed',
+                    }
+            }
+
+        })
+        builder.addCase(getAtm.rejected,(state, action)=>{
+            Toast.fire({
+                icon: 'error',
+                title:action?.payload
+            })
+            return{
+                ...state,
+                atmStatus:'rejected'
             }
         })
     }

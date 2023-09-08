@@ -2,20 +2,37 @@ import { Link, useNavigate } from "react-router-dom";
 import { Btn } from "../../elements/btn";
 import { Text } from "../../elements/text";
 import { DashboardLayout } from "../dashLayout";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { profileInfo } from "../../store/profileSlice";
+import Spinner from "../../spinners/spinner";
 
 export const Profile =()=>{
     const navigate = useNavigate();
-    const user = JSON.parse(localStorage.getItem('DataHubUserToken'));
+    const dispatch = useDispatch();
+    const {
+        profileRes,
+        profileInfoStatus
+    } = useSelector(state=>state.profile);
     const{
-      firstname,
-      email,
-      gender,
-      lastname,
-      phone,
-      dob
-    }=user?.user;
+        firstname,
+        lastname,
+        address,
+        phone,
+        gender,
+        dob,
+        email,
+        email_verified_at,
+        pin,
+    }=profileRes;
+    useEffect(()=>{
+        dispatch(profileInfo())
+    },[dispatch,profileInfo])
     return(
         <DashboardLayout  metaTitle="Peacesub - Profile">
+            {
+                profileInfoStatus === "pending"?
+                    <Spinner/>:
         <div className="bg-white p-4 lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto shadow">
             <div className="flex flex-col">
                 {
@@ -38,6 +55,18 @@ export const Profile =()=>{
                         },{
                             title:"Email",
                             value:email
+                        },{
+                            title:"Pin",
+                            value:pin
+                        },{
+                            title:"Address",
+                            value:address
+                        },{
+                            title:"Package",
+                            value:profileRes?.package
+                        },{
+                            title:"Email verified At",
+                            value:email_verified_at
                         },{
                             title:"BVN",
                             value:"2343556717289"
@@ -88,7 +117,7 @@ export const Profile =()=>{
                 }
             </div>
             <div className="text-sm text-start font-medium w-fit me-auto mb-2">
-                <Link to="/password/update" className="text-sm text-start font-medium w-fit me-auto">Change Password?</Link>
+                <Link to="/account/password/update" className="text-sm text-start font-medium w-fit me-auto">Change Password?</Link>
             </div>
             <Btn
                 style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
@@ -96,6 +125,7 @@ export const Profile =()=>{
                 clickFunc={()=>navigate("/account/Profile/update")}
             />
         </div>
+        }
         </DashboardLayout>
     )
 }

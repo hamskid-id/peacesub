@@ -3,24 +3,25 @@ import { DashboardLayout } from "../dashLayout"
 import { Text } from "../../elements/text";
 import { Btn } from "../../elements/btn";
 import { InputField } from "../../components/cutormFormField";
+import { useDispatch, useSelector } from "react-redux";
+import { bulkSms } from "../../store/dataSlice";
 
 export const BulkSmS=()=>{
-
-    const { 
+    const dispatch = useDispatch();
+    const {
         register, 
         handleSubmit, 
         formState: { errors } 
     } = useForm();
+    const {bulkStatus} = useSelector(state=>state.data);
     const SubmitHandler =({
         From,
         Message,
         To
     })=>{
-            console.log(
-                From,
-                Message,
-                To
-            )
+            dispatch(bulkSms({
+                From,Message,To
+            }))
     }
 
     return(
@@ -93,6 +94,7 @@ export const BulkSmS=()=>{
                          <Btn
                             style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
                             value="Send"
+                            loadingStatus={ bulkStatus ==="pending" ?true:false}
                         />
                     </form>
                     <div className="p-4">

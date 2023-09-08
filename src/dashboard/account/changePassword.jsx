@@ -5,8 +5,15 @@ import { DashboardLayout } from "../dashLayout";
 import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from "react-redux";
+import { changePassword } from "../../store/profileSlice";
 
 export const ChangePassword =()=>{
+    
+    const dispatch = useDispatch();
+    const {
+        changePassStatus
+    } = useSelector(state=>state.data);
     const validationSchema = Yup.object().shape({
         newpass: Yup.string()
             .required('Password is required')
@@ -26,15 +33,12 @@ export const ChangePassword =()=>{
     } = useForm(formOptions);
     const SubmitHandler =({
         oldpass,
-        newpass,
-        cpass,
-        
+        newpass
     })=>{
-            console.log(
-                oldpass,
-                newpass,
-                cpass,
-            )
+            dispatch(changePassword({
+                current:oldpass,
+                newPass:newpass
+            }))
     }
 
     return(
@@ -109,6 +113,7 @@ export const ChangePassword =()=>{
             <Btn
                 style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
                 value="Proceed"
+                loadingStatus={changePassStatus==="pending" ?true:false}
             />
         </form>
         </DashboardLayout>

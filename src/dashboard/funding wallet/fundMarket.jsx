@@ -3,9 +3,21 @@ import { DashboardLayout } from "../dashLayout"
 import { Text } from "../../elements/text"
 import { useNavigate } from "react-router-dom"
 import { Btn } from "../../elements/btn"
+import { useDispatch, useSelector } from "react-redux"
+import { getAtm } from "../../store/dataSlice"
+import { useEffect } from "react"
 
 export const WalletFunding =()=>{
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {
+        atm
+    } = useSelector(state=>state.data);
+    useEffect(()=>{
+        dispatch(getAtm())
+        console.log("hello")
+    },[dispatch,getAtm])
+    console.log(atm)
     return(
         <DashboardLayout metaTitle="Peacesub - Fund Market">
             <div className="bg-white shadow lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto">
