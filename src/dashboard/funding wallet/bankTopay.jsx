@@ -111,7 +111,7 @@ export const FundDetails=()=>{
                 <div className="bg-whitesmoke w-full p-6 mb-2">
                     <Text   
                         style="text-center font-medium text-xl"
-                        value="BankPayment (minimum amount is ₦3000)"
+                        value="Payment Details"
                     />
                 </div>
                 <div className="grid lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1 p-4">
@@ -216,20 +216,6 @@ export const FundDetails=()=>{
                             value="Proceed"
                         />
                     </form>
-                    <div className="px-4">
-                        <div className="mb-2">
-                            <Text
-                                style="font-medium text-start text-xl mb-3"
-                                value="Guarantee Trust Bank (GT bank)
-                                        AZEEZ OLAIDE SHOBAMIKE
-                                        0623169129"
-                                />
-                            <Text
-                                style="font-light text-start text-sm mb-3 leading-6"
-                                value="You can deposit or transfer fund into our account stated above. Use your registered username as depositor's name, naration or remarks Your account will be funded as soon as your payment is confirmed."
-                            />
-                        </div>
-                    </div>
                 </div>
             </div>
         </DashboardLayout>
