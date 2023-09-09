@@ -6,18 +6,18 @@ import { Btn } from "../../elements/btn"
 import { useDispatch, useSelector } from "react-redux"
 import { getAtm } from "../../store/dataSlice"
 import { useEffect } from "react"
+import { useState } from "react"
 
 export const WalletFunding =()=>{
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [selectedMethod, setSelectedMethod] = useState('');
     const {
         atm
     } = useSelector(state=>state.data);
     useEffect(()=>{
         dispatch(getAtm())
-        console.log("hello")
     },[dispatch,getAtm])
-    console.log(atm)
     return(
         <DashboardLayout metaTitle="Peacesub - Fund Market">
             <div className="bg-white shadow lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto">
@@ -49,20 +49,30 @@ export const WalletFunding =()=>{
                             >
                             <select
                                 class="form-select relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
-                                id="inputGroupSelect01">
-                                <option selected>Choose...</option>
-                                <option value="1">---SELECT PAYMENT MEDIUM</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                id="inputGroupSelect01"
+                                onChange={(e)=>setSelectedMethod(e.target.value)}
+                            >
+                                <option selected disabled>Choose...</option>
+                                    {
+                                        atm?.map((opt)=>{
+                                            const{
+                                                id,name
+                                            }=opt;
+                                            return(
+                                                <option key={id} value={id}>{name}</option>
+                                            )
+                                        })
+                                    }
                             </select>
                         </div>
                     </div>
                     <div className="w-fit ms-auto">
-                        <Btn
+                        {selectedMethod && <Btn
                             style="bg-primary py-3 px-8 rounded-sm text-white"
                             value="Proceed"
-                            clickFunc={()=>navigate("/bankpayment")}
-                        />
+                            clickFunc={()=>navigate(`/bankpayment/${selectedMethod}`)}
+                        />}
+                        
                     </div>
                 </div>
             </div>

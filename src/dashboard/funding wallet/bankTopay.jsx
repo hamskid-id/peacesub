@@ -3,8 +3,68 @@ import { DashboardLayout } from "../dashLayout";
 import { Text } from "../../elements/text";
 import { Btn } from "../../elements/btn";
 import { InputField } from "../../components/cutormFormField";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { Toast } from "../../store/apiBaseUrl";
+import { useFlutterwave} from 'flutterwave-react-v3';
+import { PayWithPayStack } from "./paystack";
+import { payWithMonnify } from "./monnify";
+import { FlutterSwal } from "./flutter";
 
-export const BankToPay=()=>{
+export const FundDetails=()=>{
+    const{
+        selectedMethod
+    } = useParams();
+
+    const {
+        atm
+    } = useSelector(state=>state.data);
+    const [methodInfo, setMethodInfo]=useState({});
+
+    const [flutterMethodInfo, setFlutterMethodInfo]=useState({
+        public_key: '',
+        tx_ref: Date.now(),
+        amount: '',
+        currency: 'NGN',
+        payment_options: 'card,mobilemoney,ussd',
+        customer: {
+          email: '',
+           phone_number: '',
+          name:'',
+        },
+        customizations: {
+          title: '',
+          description: '',
+          logo: '',
+        }
+    });
+    
+    const handleFlutterPayment = useFlutterwave(flutterMethodInfo);
+    
+    const payWithFlutterWave =()=>{
+          handleFlutterPayment({
+            callback: (response) => {
+               console.log(response);
+               const{
+                    data,
+                    event
+               }=response;
+               FlutterSwal(data?.tx_ref,data?.amount,data?.charged_amount,data?.status,data?.payment_type,data?.customer?.name,data?.customer?.phone_number,data?.customer?.email,data?.card?.type,event);
+            },
+            onClose: () => {
+                Toast.fire({
+                    icon: 'info',
+                    title:"Popup Closed"
+                })
+            },
+          });
+    }
+
+    useEffect(()=>{
+        const FilteredMethod = atm?.find((opt)=>opt.id ==selectedMethod);
+        setMethodInfo(FilteredMethod);
+    },[atm])
 
     const { 
         register, 
@@ -12,15 +72,37 @@ export const BankToPay=()=>{
         formState: { errors } 
     } = useForm();
     const SubmitHandler =({
-        BankToPay,
+        phone,
         Amount,
-        Reference,
+        Age,
+        Title,
+        Description,
+        Name,
+        Email
     })=>{
-            console.log(
-                BankToPay,
-                Amount,
-                Reference,
-            )
+        setFlutterMethodInfo((prevState)=>{
+                return{
+                    ...prevState,
+                    public_key: methodInfo?.ppkey,
+                    title: Title,
+                    description: Description,
+                    amount: Amount,
+                    customer: {
+                        email: Email,
+                        phone_number: phone,
+                        name:Name,
+                    }
+                }
+            });
+            switch(selectedMethod){
+                case '1':PayWithPayStack(methodInfo?.ppkey,Email,Amount);
+                break;
+                case '2':payWithFlutterWave();
+                break;
+                case '3':payWithMonnify(methodInfo?.ppkey,Email,Amount,Description,Name,Age);
+                break;
+                default: PayWithPayStack(methodInfo?.ppkey,Email,Amount);
+            }
     }
 
     return(
@@ -37,20 +119,52 @@ export const BankToPay=()=>{
                         {
                             [
                                 {
-                                    title:"BankToPay",
-                                    labelName:"Bank paid to",
+                                    title:"Email",
+                                    labelName:"Email",
+                                    selectArrayOption:null,
+                                    type:"email",
+                                    error:errors.Email,
+                                    placeHold:"kindly provide your email",
+                                    subTitle:null
+                                },{
+                                    title:"Name",
+                                    labelName:"Name",
                                     selectArrayOption:null,
                                     type:"text",
-                                    error:errors.BankToPay,
+                                    error:errors.Name,
+                                    placeHold:"enter your name",
+                                    subTitle:null
+                                },{
+                                    title:"phone",
+                                    labelName:"Phone Number",
+                                    selectArrayOption:null,
+                                    type:"text",
+                                    error:errors.phone,
                                     placeHold:"Bank paid to",
                                     subTitle:null
                                 },{
-                                    title:"Reference",
-                                    labelName:"Reference or Narration*",
+                                    title:"Title",
+                                    labelName:"Title*",
                                     selectArrayOption:null,
                                     type:"text",
-                                    error:errors.Reference,
-                                    placeHold:"Reference or Narration*",
+                                    error:errors.Title,
+                                    placeHold:"Title",
+                                    subTitle:null
+                                },{
+                                    title:"Age",
+                                    labelName:"Age*",
+                                    selectArrayOption:null,
+                                    type:"number",
+                                    error:errors.Age,
+                                    placeHold:"Age",
+                                    subTitle:null
+                                },{
+                                    title:"Description",
+                                    labelName:"Description*",
+                                    selectArrayOption:null,
+                                    type:"text",
+                                    error:errors.Description,
+                                    placeHold:"Description",
                                     subTitle:null
                                 },{
                                     title:"Amount",
@@ -58,7 +172,7 @@ export const BankToPay=()=>{
                                     selectArrayOption:null,
                                     type:"text",
                                     error:errors.Amount,
-                                    placeHold:"Amount",
+                                    placeHold:"Amount NGN",
                                     subTitle:null
                                 }
                             ].map((prof,index)=>{

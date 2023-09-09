@@ -11,7 +11,7 @@ import { ChangePassword } from './dashboard/account/changePassword';
 import { AccountUpgrade } from './dashboard/account/accountUpgrade';
 import { KYC } from './dashboard/account/kyc';
 import { PinManagemnet } from './dashboard/account/pinmanagement';
-import { BankToPay } from './dashboard/funding wallet/bankTopay';
+import { FundDetails } from './dashboard/funding wallet/bankTopay';
 import { WalletFunding } from './dashboard/funding wallet/fundMarket';
 import { BuyData } from './dashboard/buy data/buyData';
 import { BuyAirtime } from './dashboard/buy data/buy airtime';
@@ -64,7 +64,7 @@ function App() {
                 <Route exact path="/account/Kyc" element={<KYC/>}/>
                 <Route exact path="/account/pin" element={<PinManagemnet/>}/>
                 </Route>
-                <Route exact path="/bankpayment" element={<BankToPay/>}/>
+                <Route exact path="/bankpayment/:selectedMethod" element={< FundDetails/>}/>
                 <Route exact path="/fundwallet" element={<WalletFunding/>}/>
                 <Route exact path="/purchase">
                 <Route exact path="/purchase/data" element={<BuyData/>}/>

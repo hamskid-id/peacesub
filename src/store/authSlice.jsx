@@ -250,8 +250,9 @@ const auth_Slice = createSlice({
                 Toast.fire({
                     icon: 'success',
                     title: message
-                   })
-                window.location.replace("/login")
+                   }).then(function() {
+                    window.location.replace("/login")
+                });
                 return{
                     ...state,
                     registerStatus:'success'
