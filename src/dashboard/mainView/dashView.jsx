@@ -185,6 +185,7 @@ export const DashView=()=>{
                             <Btn
                                 style="px-6 py-2 w-fit ms-auto border-black "
                                 value="Fund wallet"
+                                clickFunc={()=>navigate('/fundwallet')}
                             />
                         </div>
                         <Text

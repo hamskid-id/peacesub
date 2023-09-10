@@ -7,19 +7,23 @@ import { useDispatch, useSelector } from "react-redux"
 import { getAtm } from "../../store/dataSlice"
 import { useEffect } from "react"
 import { useState } from "react"
+import Spinner from "../../spinners/spinner"
 
 export const WalletFunding =()=>{
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [selectedMethod, setSelectedMethod] = useState('');
     const {
-        atm
+        atm,atmStatus
     } = useSelector(state=>state.data);
     useEffect(()=>{
         dispatch(getAtm())
     },[dispatch,getAtm])
     return(
         <DashboardLayout metaTitle="Peacesub - Fund Market">
+            {
+                atmStatus ==="pending"?
+                    <Spinner/>:
             <div className="bg-white shadow lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto">
                 <div className="flex flex-wrap justify-between p-4 bg-whitesmoke items-center">
                     <div>
@@ -76,6 +80,7 @@ export const WalletFunding =()=>{
                     </div>
                 </div>
             </div>
+            }
         </DashboardLayout>
     )
 }

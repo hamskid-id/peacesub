@@ -36,132 +36,134 @@ export const payWithMonnify=(key,email,amount,desc,name,age)=> {
             console.log("SDK is UP");
         },
         onComplete: function(response) {
-            const{
-                authorizedAmount,
-                message,
-                paidOn,
-                paymentReference,
-                redirectUrl,
-                status,
-                transactionReference
-            }=response
-            //Implement what happens when the transaction is completed.
-            console.log(response);
-            Swal.fire({
-                text:message,
-                allowOutsideClick: false,
-                icon:'success',
-                html:`<p>${message}</p>
-                    <div>
-                        <hr class=" text-xs text-dark border mb-4"/>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class="text-xs text-dark mb-3">
-                            Status
-                            </h6>
-                            <h6 class="text-xs text-dark mb-3">
-                                ${status}
-                            </h6>
-                        </div>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class="text-xs text-dark mb-3">
-                                Transaction Reference
-                            </h6>
-                            <h6 class="text-xs text-dark mb-3">
-                                ${transactionReference}
-                            </h6>
-                        </div>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class="text-xs text-dark mb-3">
-                                Authorized Amount
-                            </h6>
-                            <h6 class="text-xs text-dark mb-3">
-                                ${authorizedAmount}
-                            </h6>
-                        </div>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class="text-xs text-dark mb-3">
-                                Paid On
-                            </h6>
-                            <h6 class="text-xs text-dark mb-3">
-                                ${paidOn}
-                            </h6>
-                        </div>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class="text-xs text-dark mb-3">
-                                Payment Reference
-                            </h6>
-                            <h6 class="text-xs text-dark mb-3">
-                                ${paymentReference}
-                            </h6>
-                        </div>
-                    </div>`,
-                showCloseButton: true,
-            }).then(function() {
-                window.location.replace("/fundwallet")
-            })
+            window.location.replace("/fundwallet")
+            // const{
+            //     authorizedAmount,
+            //     message,
+            //     paidOn,
+            //     paymentReference,
+            //     redirectUrl,
+            //     status,
+            //     transactionReference
+            // }=response
+            // //Implement what happens when the transaction is completed.
+            // console.log(response);
+            // Swal.fire({
+            //     text:message,
+            //     allowOutsideClick: false,
+            //     icon:'success',
+            //     html:`<p>${message}</p>
+            //         <div>
+            //             <hr class=" text-xs text-dark border mb-4"/>
+            //             <div
+            //                 class="flex items-center justify-between mb-3"
+            //             >
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                 Status
+            //                 </h6>
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                     ${status}
+            //                 </h6>
+            //             </div>
+            //             <div
+            //                 class="flex items-center justify-between mb-3"
+            //             >
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                     Transaction Reference
+            //                 </h6>
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                     ${transactionReference}
+            //                 </h6>
+            //             </div>
+            //             <div
+            //                 class="flex items-center justify-between mb-3"
+            //             >
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                     Authorized Amount
+            //                 </h6>
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                     ${authorizedAmount}
+            //                 </h6>
+            //             </div>
+            //             <div
+            //                 class="flex items-center justify-between mb-3"
+            //             >
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                     Paid On
+            //                 </h6>
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                     ${paidOn}
+            //                 </h6>
+            //             </div>
+            //             <div
+            //                 class="flex items-center justify-between mb-3"
+            //             >
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                     Payment Reference
+            //                 </h6>
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                     ${paymentReference}
+            //                 </h6>
+            //             </div>
+            //         </div>`,
+            //     showCloseButton: true,
+            // }).then(function() {
+            //     window.location.replace("/fundwallet")
+            // })
         },
         onClose: function(data) {
             //Implement what should happen when the modal is closed here
-            console.log(data);
-            const{
-                authorizedAmount,
-                paymentStatus,
-                redirectUrl,
-                responseCode,
-                responseMessage
-            }=data;
-            Swal.fire({
-                text:responseMessage,
-                allowOutsideClick: false,
-                icon:'info',
-                html:`<p>${responseMessage}</p>
-                    <div>
-                        <hr class=" text-xs text-dark border mb-4"/>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class="text-xs text-dark mb-3">
-                           Payment Status
-                            </h6>
-                            <h6 class="text-xs text-dark mb-3">
-                                ${paymentStatus}
-                            </h6>
-                        </div>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class="text-xs text-dark mb-3">
-                                Authorized amount
-                            </h6>
-                            <h6 class="text-xs text-dark mb-3">
-                                ${authorizedAmount}
-                            </h6>
-                        </div>
-                        <div
-                            class="flex items-center justify-between mb-3"
-                        >
-                            <h6 class="text-xs text-dark mb-3">
-                                Response Code
-                            </h6>
-                            <h6 class="text-xs text-dark mb-3">
-                                ${ responseCode}
-                            </h6>
-                        </div>
-                    </div>`,
-                showCloseButton: true,
-            }).then(function() {
-                window.location.replace("/fundwallet")
-            })
+            window.location.replace("/fundwallet")
+            // console.log(data);
+            // const{
+            //     authorizedAmount,
+            //     paymentStatus,
+            //     redirectUrl,
+            //     responseCode,
+            //     responseMessage
+            // }=data;
+            // Swal.fire({
+            //     text:responseMessage,
+            //     allowOutsideClick: false,
+            //     icon:'info',
+            //     html:`<p>${responseMessage}</p>
+            //         <div>
+            //             <hr class=" text-xs text-dark border mb-4"/>
+            //             <div
+            //                 class="flex items-center justify-between mb-3"
+            //             >
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                Payment Status
+            //                 </h6>
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                     ${paymentStatus}
+            //                 </h6>
+            //             </div>
+            //             <div
+            //                 class="flex items-center justify-between mb-3"
+            //             >
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                     Authorized amount
+            //                 </h6>
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                     ${authorizedAmount}
+            //                 </h6>
+            //             </div>
+            //             <div
+            //                 class="flex items-center justify-between mb-3"
+            //             >
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                     Response Code
+            //                 </h6>
+            //                 <h6 class="text-xs text-dark mb-3">
+            //                     ${ responseCode}
+            //                 </h6>
+            //             </div>
+            //         </div>`,
+            //     showCloseButton: true,
+            // }).then(function() {
+            //     window.location.replace("/fundwallet")
+            // })
         }
     });
 }

@@ -46,11 +46,13 @@ export const FundDetails=()=>{
           handleFlutterPayment({
             callback: (response) => {
                console.log(response);
-               const{
-                    data,
-                    event
-               }=response;
-               FlutterSwal(data?.tx_ref,data?.amount,data?.charged_amount,data?.status,data?.payment_type,data?.customer?.name,data?.customer?.phone_number,data?.customer?.email,data?.card?.type,event);
+               window.location.replace("/fundwallet")
+            //    const{
+            //         data,
+            //         event
+            //    }=response;
+            //    FlutterSwal(data?.tx_ref,data?.amount,data?.charged_amount,data?.status,data?.payment_type,data?.customer?.name,data?.customer?.phone_number,data?.customer?.email,data?.card?.type,event);
+
             },
             onClose: () => {
                 Toast.fire({
@@ -111,11 +113,15 @@ export const FundDetails=()=>{
                 <div className="bg-whitesmoke w-full p-6 mb-2">
                     <Text   
                         style="text-center font-medium text-xl"
-                        value="Payment Details"
+                        value={methodInfo?.name}
                     />
                 </div>
-                <div className="grid lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1 p-4">
-                    <form onSubmit={handleSubmit(SubmitHandler)} className="xs:order-last xxs:order-last sm:order-last md:order-first lg:order-first xl:order-first" >
+                <Text   
+                    style="text-center font-medium text-lg my-4"
+                    value={methodInfo?.description}
+                />
+                <div className="m-auto p-4">
+                    <form onSubmit={handleSubmit(SubmitHandler)} className="grid lg:grid-cols-2 xl:grid-cols-2 gap-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1" >
                         {
                             [
                                 {
@@ -206,8 +212,8 @@ export const FundDetails=()=>{
                         }
                         <div>
                             <Text
-                                value="Your account will be suspended, if you submit without transfer
-                                Please note that there is a charge of N50 if the amount greater than N9,999."
+                                value={`Charges:${methodInfo?.charges}Naira${" "}.Your account will be suspended, if you submit without transfer
+                                Please note that there is a charge of N50 if the amount greater than N9,999."`}
                                 style="font-light text-start text-sm mb-4"
                             />
                         </div>
