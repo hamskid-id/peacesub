@@ -4,23 +4,30 @@ import { Text } from "../../elements/text";
 import { Btn } from "../../elements/btn";
 import { InputField } from "../../components/cutormFormField";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Toast } from "../../store/apiBaseUrl";
 import { useFlutterwave} from 'flutterwave-react-v3';
 import { PayWithPayStack } from "./paystack";
 import { payWithMonnify } from "./monnify";
 import { FlutterSwal } from "./flutter";
+import { getAtm } from "../../store/dataSlice";
 
 export const FundDetails=()=>{
     const{
         selectedMethod
     } = useParams();
 
+    const dispatch = useDispatch();
     const {
         atm
     } = useSelector(state=>state.data);
     const [methodInfo, setMethodInfo]=useState({});
+    useEffect(()=>{
+        if(atm ==[]){
+            dispatch(getAtm())
+        }
+    },[dispatch,getAtm,atm])
 
     const [flutterMethodInfo, setFlutterMethodInfo]=useState({
         public_key: '',

@@ -1,10 +1,27 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Text } from "../../elements/text"
 import { DashboardLayout } from "../dashLayout"
+import { useEffect } from "react";
+import { getAllTransactionsHistory, getTotalFund, getTotalSpent } from "../../store/historySlice";
+import Spinner from "../../spinners/spinner";
+import { Translayout } from "../transactionLayoute";
 
 export const WalletSummary=()=>{
+    const dispatch = useDispatch();
+    const {
+        getAllTranStatus,
+        allTrans,
+        totalSpent,
+        totalFund
+    } = useSelector(state=>state.history);
+    useEffect(()=>{
+        dispatch(getAllTransactionsHistory())
+        dispatch(getTotalFund())
+        dispatch(getTotalSpent())
+    },[dispatch,getAllTransactionsHistory])
     return(
         <DashboardLayout metaTitle="Peacesub - Wallet Summary">
-            <div className="m-auto bg-white shadow lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full">
+            <div className="m-auto bg-white shadow w-full">
                 <div className="bg-whitesmoke w-full p-6 mb-2">
                     <Text
                         style="text-center font-medium text-xl"
@@ -16,13 +33,13 @@ export const WalletSummary=()=>{
                         [
                             {
                                 title:"WALLET BALANCE",
-                                amount:"0.0₦"
+                                amount:`0.00₦`
                             },{
                                 title:"TOTAL FUNDING",
-                                amount:"0.0₦"
+                                amount:`${totalFund}₦`
                             },{
                                 title:"TOTAL SPENT",
-                                amount:"0.0₦"
+                                amount:`${totalSpent}₦`
                             },
                         ].map((prod,index)=>{
                             const{
@@ -47,18 +64,13 @@ export const WalletSummary=()=>{
                         })
                     }
                 </div>
-                <div className="p-4">
-                    <Text
-                        style="text-lg text-center font-medium mb-3"
-                        value="No Records / Hamzat27 Has Not Perform Any Transaction"
+                {
+                    getAllTranStatus ==="pending"?
+                    <Spinner/>:
+                    <Translayout
+                        data={allTrans}
                     />
-                    <div className="w-44 m-auto">
-                        <img 
-                            src="https://cdn3.iconfinder.com/data/icons/shopping-and-ecommerce-29/90/empty_cart-512.png"
-                            alt="object not found"
-                        />
-                    </div>
-                </div>
+                }
             </div>
         </DashboardLayout>
     )

@@ -26,6 +26,39 @@ export const subscribeCable = createAsyncThunk(
     }
 )
 
+export const validateCable = createAsyncThunk(
+    'cable/validateCable', 
+    async ({
+        NetworkName,
+        phone,
+        Network
+    }, {rejectWithValue, dispatch}) =>{
+    try{
+        const response = await axios.post(
+            `${apiBaseUrl}/validate-tv`,{
+                "networkID":NetworkName,
+                "phone":phone
+            },setHeaders()
+        );
+        const{
+            status
+        }=response?.data;
+        if(status){
+            dispatch(subscribeCable({
+                Network,
+                phone
+            }))
+        }
+        return response?.data;
+    } catch(err){
+        return rejectWithValue(
+            err.response?.data?.message
+        )
+        }
+    }
+)
+
+
 export const getcableType = createAsyncThunk(
     'cable/getcableType', 
     async () =>{
@@ -46,6 +79,7 @@ const cable_Slice = createSlice({
         subscribeCableStatus:'',
        getcableTypeStatus:'',
        subCableRes:{},
+       validateCableStatus:'',
        cableTp:[],
     },
     reducers:{
@@ -64,6 +98,7 @@ const cable_Slice = createSlice({
             }
 
         });
+
         builder.addCase(subscribeCable.fulfilled,(state, action)=>{
             const{
                 status,
@@ -107,6 +142,63 @@ const cable_Slice = createSlice({
                 subscribeCableStatus:'rejected'
             }
         })
+
+        builder.addCase(validateCable.pending,(state, action)=>{
+            Swal.fire({
+                text:'Please wait...while your request is being process',
+                icon:'info',
+                allowOutsideClick: false
+            })
+            return {
+                ...state,
+                validateCableStatus:'pending'
+            }
+
+        });
+        
+        builder.addCase(validateCable.fulfilled,(state, action)=>{
+            const{
+                status,
+                message
+            }=action.payload;
+            
+            if(status){
+                Swal.fire({
+                    text:message,
+                    allowOutsideClick: false,
+                    icon:'success',
+                    showCloseButton: true,
+                })
+                return{
+                    ...state,
+                    validateCableStatus:'success',
+                }
+            }else{
+                Swal.fire({
+                    text:message,
+                    icon:'error',
+                    allowOutsideClick: false,
+                    showCloseButton: true,
+                })
+                return{
+                    ...state,
+                    validateCableStatus:'failed'
+                }
+            }
+        })
+        builder.addCase(validateCable.rejected,(state, action)=>{
+            Swal.fire({
+                text:action?.payload,
+                icon:'error',
+                allowOutsideClick: false,
+                showCloseButton: true,
+            })
+            return{
+                ...state,
+                validateCableStatus:'rejected'
+            }
+        })
+
 
         builder.addCase(getcableType.pending,(state, action)=>{
             return {

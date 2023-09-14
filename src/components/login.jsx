@@ -82,11 +82,13 @@ export const SignIn =()=>{
             }
             <Link to="/reset">Forgot your password?</Link>
             {LoginError && <Text style="text-danger text-xs" value={LoginError}/>}
-            <Btn
-                value="Log In"
-                style="w-full p-3 text-center bg-tick-blue text-white mt-3 mb-3"
-                loadingStatus={LoginStatus ==="pending"?true:false}
-            />
+            <div>
+                <Btn
+                    value="Log In"
+                    style="w-full p-3 text-center bg-tick-blue text-white mt-3 mb-3"
+                    loadingStatus={LoginStatus ==="pending"?true:false}
+                />
+            </div>
             <div className="flex items-center m-auto w-fit">
                 <span className="me-1 text-sm font-medium">Dont have an account?</span>
                 <Link to="/register" className="text-sm">Sigup here?</Link>

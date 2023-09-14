@@ -1,22 +1,37 @@
 
-import { Text } from "../../elements/text"
+import { useDispatch, useSelector } from "react-redux";
 import { DashboardLayout } from "../dashLayout"
+import { Translayout } from "../transactionLayoute"
+import { useEffect } from "react";
+import Spinner from "../../spinners/spinner";
+import { getAllDataHistory } from "../../store/historySlice";
+import { Text } from "../../elements/text";
 
 export const DataTransaction =()=>{
+    const dispatch = useDispatch();
+    const {
+        getDataTranStatus,
+        allDataTrans
+    } = useSelector(state=>state.history);
+    useEffect(()=>{
+        dispatch(getAllDataHistory());
+    },[dispatch,getAllDataHistory])
     return(
         <DashboardLayout metaTitle="Peacesub - Data Transaction">
-            <div className="bg-white shadow lg:w-1/2 xl:w-1/2 md:w-1/2 sm:w-full xs:w-full xxs:w-full m-auto p-4">
+            <div className="bg-white shadow w-full m-auto p-4">
+                <Text
+                    style="text-center font-semibold text-xl"
+                    value="Data Transaction History"
+                />
                 <div>
-                    <Text
-                        style="text-2xl text-center font-medium mb-3"
-                        value="No Records / Hamzat27 Has Not Perform Any Transaction"
-                    />
-                    <div className="w-44 m-auto">
-                        <img 
-                            src="https://cdn3.iconfinder.com/data/icons/shopping-and-ecommerce-29/90/empty_cart-512.png"
-                            alt="object not found"
+                    {
+                        getDataTranStatus ==="pending"?
+                        <Spinner/>:
+                        <Translayout   
+                            title="Transaction history"
+                            data={allDataTrans}
                         />
-                    </div>
+                    }
                 </div>
             </div>
         </DashboardLayout>

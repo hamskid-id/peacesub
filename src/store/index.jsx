@@ -6,6 +6,7 @@ import cable_Slice from "./cableSlice";
 import purchaseAirtime_Slice from "./airtimeSlice";
 import purchaseData_Slice from "./dataSlice";
 import profileInfo_Slice from "./profileSlice";
+import history_Slice from "./historySlice";
 
 const store = configureStore({
     reducer:{
@@ -15,7 +16,8 @@ const store = configureStore({
         cable:cable_Slice.reducer,
         data: purchaseData_Slice.reducer,
         airtime:purchaseAirtime_Slice.reducer,
-        profile:profileInfo_Slice.reducer
+        profile:profileInfo_Slice.reducer,
+        history:history_Slice.reducer
     }
 });
 

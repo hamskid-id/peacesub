@@ -5,13 +5,14 @@ import { Btn } from "../../elements/btn";
 import { InputField } from "../../components/cutormFormField";
 import { useDispatch,useSelector } from "react-redux";
 import { useEffect } from "react";
-import {getcableType, subscribeCable } from "../../store/cableSlice";
+import {getcableType, validateCable } from "../../store/cableSlice";
 import Spinner from "../../spinners/spinner";
 
 export const CableSub=()=>{
     const dispatch = useDispatch();
     const {
         subscribeCableStatus,
+        validateCableStatus,
         getcableTypeStatus,
         cableTp,
     } = useSelector(state=>state.cable);
@@ -29,9 +30,15 @@ export const CableSub=()=>{
         Network,
         Phone,
     })=>{
-        dispatch(subscribeCable({
-            Network,
+        var NetworkInfo = Network.split('|');
+        var NetworkId = NetworkInfo[1];
+        var NetworkName = NetworkInfo[0];
+        console.log(cableTp)
+        console.log(NetworkInfo, NetworkId, NetworkName )
+        dispatch(validateCable({
+            Network:NetworkId,
             phone:Phone,
+            NetworkName
         }))
     }
 
@@ -70,7 +77,7 @@ export const CableSub=()=>{
                             { 
                                 cableTp?.map((option,index)=>{
                                     return(
-                                        <option value={option.id} key={index}>{option.name} {"  "} Discount-{option.discount}</option>
+                                        <option value={`${option.type}|${option.id}`} key={index}>{option.name} {"  "} Discount-{option.discount}</option>
                                     )
                                 })
                             }
@@ -102,7 +109,7 @@ export const CableSub=()=>{
                          <Btn
                             style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
                             value="Validate"
-                            loadingStatus={( subscribeCableStatus ==="pending")?true:false}
+                            loadingStatus={( subscribeCableStatus ==="pending" || validateCableStatus ==="pending")?true:false}
                         />
                     </form>
                     <div className="px-4">
