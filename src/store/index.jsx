@@ -7,6 +7,9 @@ import purchaseAirtime_Slice from "./airtimeSlice";
 import purchaseData_Slice from "./dataSlice";
 import profileInfo_Slice from "./profileSlice";
 import history_Slice from "./historySlice";
+import kyc_Slice from "./kycSlice";
+import upgrade_Slice from "./upgradeAccount";
+import wallet_Slice from "./wallet";
 
 const store = configureStore({
     reducer:{
@@ -17,7 +20,10 @@ const store = configureStore({
         data: purchaseData_Slice.reducer,
         airtime:purchaseAirtime_Slice.reducer,
         profile:profileInfo_Slice.reducer,
-        history:history_Slice.reducer
+        history:history_Slice.reducer,
+        kyc:kyc_Slice.reducer,
+        upgrade:upgrade_Slice.reducer,
+        wallet:wallet_Slice.reducer
     }
 });
 

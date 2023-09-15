@@ -41,6 +41,10 @@
 .bg-grey{
   background-color: lightgray;
 }
+.dashViewHistory{
+  height: 40rem;
+  overflow-y: auto;
+}
 .bg-whitesmoke{
   background-color: whitesmoke;
 }

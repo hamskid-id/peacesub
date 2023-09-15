@@ -3,10 +3,23 @@ import { Btn } from "../../elements/btn"
 import { Text } from "../../elements/text"
 import { DashboardLayout } from "../dashLayout"
 import { useNavigate } from "react-router-dom"
+import { Translayout } from "../transactionLayoute"
+import Spinner from "../../spinners/spinner"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { getAllTransactionsHistory } from "../../store/historySlice"
 
 export const DashView=()=>{
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('DataHubUserToken'));
+    const dispatch = useDispatch();
+    const {
+        getAllTranStatus,
+        allTrans
+    } = useSelector(state=>state.history);
+    useEffect(()=>{
+        dispatch(getAllTransactionsHistory())
+    },[dispatch,getAllTransactionsHistory])
     const{
         firstname
     }=user?.user
@@ -351,17 +364,14 @@ export const DashView=()=>{
                         </div>
                     </div>
                     <div className="col-span-2 bg-white p-4 flex flex-col justify-center items-center shadow">
-                        <div>
-                            <Text
-                                style="text-xl text-center font-medium mb-3"
-                                value="You have not performed any transactions"
+                        <div className="w-overflow w-full  dashViewHistory">
+                            {
+                            getAllTranStatus ==="pending"?
+                            <Spinner/>:
+                            <Translayout
+                                data={allTrans}
                             />
-                            <div className="w-44 m-auto">
-                                <img 
-                                    src="https://cdn3.iconfinder.com/data/icons/shopping-and-ecommerce-29/90/empty_cart-512.png"
-                                    alt="object not found"
-                                />
-                            </div>
+                        }
                         </div>
                     </div>
                 </div>

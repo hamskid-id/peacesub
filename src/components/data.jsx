@@ -3,10 +3,10 @@ import { Btn } from "../elements/btn"
 import { Text } from "../elements/text"
 import { RevealAnimation } from "./reveal";
 
-export const Data=()=>{
+export const Data=({pricingref})=>{
     const navigate = useNavigate();
     return(
-        <div  className="lg:px-16 md:px-16 xl:px-16 py-20 sm:px-4 xxs:px-4 xs:px-4">
+        <div  className="lg:px-16 md:px-16 xl:px-16 py-20 sm:px-4 xxs:px-4 xs:px-4" ref={pricingref}>
             <RevealAnimation side={true}>
                 <Text
                     style="font-medium text-5xl text-center c-brown mb-6"

@@ -7,8 +7,15 @@ import { Data } from "../components/data"
 import { Agent } from "../components/agent"
 import { Footer } from "../components/footer"
 import { Helmet } from "react-helmet"
+import { Faq } from "../components/faq"
+import { useRef } from "react"
 
 export const HomePage =()=>{
+    const homeref = useRef(null)
+    const aboutref =  useRef(null)
+    const serviceref =  useRef(null)
+    const pricingref=  useRef(null)
+    const faqref=  useRef(null)
     return(
         <div className="bg-light-pink">
              <Helmet>
@@ -16,8 +23,14 @@ export const HomePage =()=>{
             </Helmet>
             <div className="pt-4  px-10 sm:px-4 xxs:px-4 xs:px-4 md:px-10 lg:px-10 xl:px-10 bg-light-pink relative">
                 
-                 <Nav/>
-                <WelcomeSection/>
+                <Nav
+                    homeref={homeref}
+                    aboutref={aboutref}
+                    pricingref={pricingref}
+                    faqref={faqref}
+                    serviceref={serviceref}
+                />
+                <WelcomeSection homeref={homeref}/>
                 <div className="custom-shape-divider-bottom-1692639668">
                     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                         <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
@@ -26,11 +39,12 @@ export const HomePage =()=>{
                     </svg>
                 </div>
             </div>
-            <About/>
-            <Services/>
+            <About aboutref={aboutref}/>
+            <Services serviceref={serviceref}/>
             <Api/>
-            <Data/>
+            <Data pricingref={pricingref}/>
             <Agent/>
+            <Faq faqref={faqref}/>
             <Footer/>
         </div>
     )

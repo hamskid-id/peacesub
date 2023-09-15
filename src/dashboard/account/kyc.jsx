@@ -3,36 +3,37 @@ import { Text } from "../../elements/text";
 import { useForm } from "react-hook-form"
 import { DashboardLayout } from "../dashLayout"
 import { InputField } from "../../components/cutormFormField";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { FetchBankList, performKyc } from "../../store/kycSlice";
+import Spinner from "../../spinners/spinner";
 
 export const KYC=()=>{
 
+    const dispatch = useDispatch();
+    const {
+        kycStatus,
+        fetchBankListStatus,
+        bankList
+    } = useSelector(state=>state.kyc);
+    useEffect(()=>{
+        dispatch(FetchBankList())
+    },[dispatch, FetchBankList])
     const { 
         register, 
         handleSubmit, 
         formState: { errors } 
     } = useForm();
     const SubmitHandler =({
-        FirstName,
-        LastName,
-        MiddleName,
         BVN,
-        file,
-        StateOfOrigin,
-        lg,
-        Gender,
-        DOB
+        acc,
+        bank
     })=>{
-            console.log(
-                FirstName,
-                LastName,
-                MiddleName,
-                BVN,
-                file,
-                StateOfOrigin,
-                lg,
-                Gender,
-                DOB
-            )
+            dispatch(performKyc({
+                bvn:BVN,
+                account_number:acc,
+                bank_code:bank
+            }))
     }
 
     return(
@@ -45,116 +46,94 @@ export const KYC=()=>{
                     />
                 </div>
                 <div className="grid lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1 p-4">
-                    <form onSubmit={handleSubmit(SubmitHandler)} className="xs:order-last xxs:order-last sm:order-last md:order-first lg:order-first xl:order-first">
-                        {
-                            [
-                                {
-                                    title:"FirstName",
-                                    labelName:"FirstName",
-                                    selectArrayOption:null,
-                                    type:"text",
-                                    error:errors.FirstName,
-                                    placeHold:"FirstName",
-                                    subTitle:null
-                                },{
-                                    title:"MiddleName",
-                                    labelName:"MiddleName",
-                                    selectArrayOption:null,
-                                    type:"text",
-                                    error:errors.MiddleName,
-                                    placeHold:"MiddleName",
-                                    subTitle:null
-                                },{
-                                    title:"LastName",
-                                    labelName:"LastName",
-                                    selectArrayOption:null,
-                                    type:"text",
-                                    error:errors.LastName,
-                                    placeHold:"LastName",
-                                    subTitle:null
-                                },{
-                                    title:"DOB",
-                                    labelName:"DOB",
-                                    selectArrayOption:null,
-                                    type:"date",
-                                    error:errors.DOB,
-                                    placeHold:"DOB",
-                                    subTitle:null
-                                },{
-                                    title:"Gender",
-                                    labelName:"Gender",
-                                    selectArrayOption:null,
-                                    type:"text",
-                                    error:errors.Gender,
-                                    placeHold:"Gender",
-                                    subTitle:null
-                                },{
-                                    title:"StateOfOrigin",
-                                    labelName:"State Of Origin",
-                                    selectArrayOption:null,
-                                    type:"text",
-                                    error:errors.StateOfOrigin,
-                                    placeHold:"bStateOfOrigin",
-                                    subTitle:null
-                                },{
-                                    title:"lg",
-                                    labelName:"Local gov of origin*",
-                                    selectArrayOption:null,
-                                    type:"text",
-                                    error:errors.lg,
-                                    placeHold:"Local gov of origin*",
-                                    subTitle:null
-                                },{
-                                    title:"BVN",
-                                    labelName:"BVN*",
-                                    selectArrayOption:null,
-                                    type:"text",
-                                    error:errors.BVN,
-                                    placeHold:"BVN*",
-                                    subTitle:null
-                                },{
-                                    title:"file",
-                                    labelName:"Passport File*",
-                                    selectArrayOption:null,
-                                    type:"file",
-                                    error:errors.file,
-                                    placeHold:"file",
-                                    subTitle:null
+                {
+                    fetchBankListStatus === "pending"?
+                    <Spinner/>:
+                        <form onSubmit={handleSubmit(SubmitHandler)} className="xs:order-last xxs:order-last sm:order-last md:order-first lg:order-first xl:order-first">
+                            <div className="flex flex-col mb-3">
+                                <label
+                                    className={`mb-2 text-sm font-medium text-start`}
+                                    htmlFor="bank">
+                                    Bank
+                                </label>
+                                <select
+                                    className="text-start rounded-md p-4 border text-xs mb-4"
+                                    name="bank"
+                                    {...register(
+                                        `bank`, 
+                                        {
+                                            required:`bank field is invalid`
+                                        }
+                                    )
                                 }
-                            ].map((prof,index)=>{
-                                const{
-                                    title,
-                                    labelName,
-                                    subTitle,
-                                    placeHold,
-                                    selectArrayOption,
-                                    type,
-                                    error
-                                }=prof;
-                                return(
-                                    <div 
-                                        key={index}
-                                        className="w-full">
-                                        <InputField
-                                            name={title}
-                                            subTitle={subTitle}
-                                            placeHolder={placeHold}
-                                            type={type}
-                                            labelTitle={labelName}
-                                            labelStyle="text-sm font-medium text-start"
-                                            register={register}
-                                            errors={error}
-                                            style="text-start rounded-md p-4 border text-sm mb-4"
-                                        />
-                                    </div>
-                                )
-                            })
-                        }
-                         <Btn
-                            style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
-                            value="Proceed"
-                        />
-                    </form>
+                                >
+                                { 
+                                bankList?.map((option,index)=>{
+                                        return(
+                                            <option value={option.code} key={index}>{option.name.toUpperCase()}</option>
+                                        )
+                                    })
+                                }
+                                </select>
+                                {errors.bank && (<p className="text-danger text-sm text-start">{errors.message}</p>)}
+                            </div>
+                            {
+                                [
+                                    {
+                                        title:"BVN",
+                                        labelName:"BVN*",
+                                        selectArrayOption:null,
+                                        type:"text",
+                                        error:errors.BVN,
+                                        placeHold:"BVN*",
+                                        subTitle:null
+                                    },{
+                                        title:"acc",
+                                        labelName:"Account Number*",
+                                        selectArrayOption:null,
+                                        type:"acc",
+                                        error:errors.acc,
+                                        placeHold:"acc",
+                                        subTitle:null
+                                    }
+                                ].map((prof,index)=>{
+                                    const{
+                                        title,
+                                        labelName,
+                                        subTitle,
+                                        placeHold,
+                                        selectArrayOption,
+                                        type,
+                                        error
+                                    }=prof;
+                                    return(
+                                        <div 
+                                            key={index}
+                                            className="w-full">
+                                            <InputField
+                                                name={title}
+                                                subTitle={subTitle}
+                                                placeHolder={placeHold}
+                                                type={type}
+                                                labelTitle={labelName}
+                                                labelStyle="text-sm font-medium text-start"
+                                                register={register}
+                                                errors={error}
+                                                style="text-start rounded-md p-4 border text-sm mb-4"
+                                            />
+                                        </div>
+                                    )
+                                })
+                            }
+                            <div>
+                                <Btn
+                                    style="bg-primary w-full p-3 text-white mt-4 rounded-sm"
+                                    value="Proceed"
+                                    loadingStatus={kycStatus==="pending" ?true:false}
+                                />
+                            </div>
+                        </form>
+                    }
                     <div className="px-4 py-4">
                         <div className="mb-2">
                             <Text

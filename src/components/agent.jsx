@@ -125,7 +125,7 @@ export const Agent =()=>{
                             text
                         }=card;
                         return(
-                            <div className="w-2/6 sm:w-full xs:w-full xxs:w-full my-4 rounded-lg bg-white flex flex-col justify-between md:m-4 lg:m-4 xl:m-4 sm:mx-auto xs:mx-auto xxs:mx-auto">
+                            <div key={index} className="w-2/6 sm:w-full xs:w-full xxs:w-full my-4 rounded-lg bg-white flex flex-col justify-between md:m-4 lg:m-4 xl:m-4 sm:mx-auto xs:mx-auto xxs:mx-auto">
                                 <div className="w-full">
                                     <RevealAnimation>
                                         <img 

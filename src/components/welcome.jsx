@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { RevealAnimation } from "./reveal";
 import { LogOutUser } from "../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-export const WelcomeSection =()=>{
+export const WelcomeSection =({homeref})=>{
     const navigate = useNavigate();
     const dispatch =useDispatch()
     const {userLoaded} =useSelector((state)=>state.auth);
     return(
 
-        <div className="flex justify-between lg:flex-row xl:flex-row md:flex-row sm:flex-col xs:flex-col  xxs:flex-col sm:flex-col-reverse xxs:flex-col-reverse xs:flex-col-reverse">
+        <div ref={homeref} className="flex justify-between lg:flex-row xl:flex-row md:flex-row sm:flex-col xs:flex-col  xxs:flex-col sm:flex-col-reverse xxs:flex-col-reverse xs:flex-col-reverse">
             <div className="lg:w-5/12 xl:w-5/12 md:w-5/12 sm:w-full xs:w-full xxs:w-full">
                 <RevealAnimation side={true}>
                     <img

@@ -3,9 +3,9 @@ import { AiOutlineAntDesign, AiOutlineBlock, AiOutlineRadarChart, } from "react-
 import { RevealAnimation } from "./reveal";
 
 
-export const About =()=>{
+export const About =({aboutref})=>{
     return(
-        <div className="py-10 pt-40 px-10 bg-light">
+        <div className="py-10 pt-40 px-10 bg-light" ref={aboutref}>
              <RevealAnimation side={true}>
                 <Text
                     style="text-center font-medium text-5xl mb-4 mt-10 c-brown"

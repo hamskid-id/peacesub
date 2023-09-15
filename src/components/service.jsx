@@ -2,9 +2,9 @@ import { Text } from "../elements/text"
 import { AiOutlineDeliveredProcedure, AiOutlineControl, AiOutlineAudit,AiOutlineMacCommand, AiOutlineRadarChart } from "react-icons/ai";
 import { RevealAnimation } from "./reveal";
 
-export const Services =()=>{
+export const Services =({serviceref})=>{
     return(
-        <div className="pb-10 py-10 px-10">
+        <div className="pb-10 py-10 px-10"ref={serviceref}>
             <div className="mb-4 mt-6 w-fit ">
                 <RevealAnimation side={true}><div className="text-xl c-brown">Service We</div></RevealAnimation>
                 <RevealAnimation side={true}><div className="service c-blue text-7xl break-normal">Provide</div></RevealAnimation>

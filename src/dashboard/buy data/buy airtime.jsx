@@ -42,7 +42,7 @@ export const BuyAirtime=()=>{
 
     return(
         <DashboardLayout  metaTitle="Peacesub - Purchase Airtime">
-             {
+            {
                 getAirtimeNetworkStatus === "pending"?
                     <Spinner/>:
             <div className="bg-white shadow lg:w-1/2 xl:w-1/2 md:w-1/2 sm:w-full xs:w-full xxs:w-full m-auto">
@@ -99,14 +99,6 @@ export const BuyAirtime=()=>{
                                     error:errors.Amount,
                                     placeHold:"Amount",
                                     subTitle:null
-                                // },{
-                                //     title:"bypass",
-                                //     labelName:"Bypass number validator",
-                                //     selectArrayOption:null,
-                                //     type:"checkbox",
-                                //     error:errors.bypass,
-                                //     placeHold:"bypass",
-                                //     subTitle:null
                                 }
                             ].map((prof,index)=>{
                                 const{

@@ -4,16 +4,16 @@ export const Translayout =({title,data})=>{
     const headStyle = "px-6 py-4"
     const bodyStyle ="whitespace-nowrap  px-6 py-4 font-medium"
     return(
-        <div>
+        <div className="px-4">
            { title && (
                 <Text 
                     style="text-start font-light text-lg my-2"
                     value={title}
                 />
            )} 
-            <div className="flex flex-wrap justify-between">
-                <div className="flex items-center mb-1 me-1">
-                    <label htmlFor="sort" className="w-24">Sort By:</label>
+            <div className="flex flex-wrap justify-between mb-2">
+                <div className="flex items-center mb-1">
+                    <label htmlFor="sort" className="w-48 me-1">Sort By:</label>
                     <select 
                         name="sort"
                         className="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
@@ -47,14 +47,14 @@ export const Translayout =({title,data})=>{
                                                 "Token",
                                                 "Server Response",
                                                 "Server",
-                                                "New Balance",
-                                                "Prev Balance",
+                                                "New Balance(₦)",
+                                                "Prev Balance(₦)",
                                                 "Type",
                                                 "Status",
                                                 "Recipient",
-                                                "Amount",
+                                                "Amount(₦)",
                                                 "Commission",
-                                                "Charges",
+                                                "Charges(₦)",
                                                 "Reference",
                                                 "Created At",
                                                 "Updated At",
