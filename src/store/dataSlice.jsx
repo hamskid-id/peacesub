@@ -35,7 +35,7 @@ export const purchaseData = createAsyncThunk(
     }, {rejectWithValue}) =>{
     try{
         const response = await axios.post(
-            `${apiBaseUrl}/purchasedata`,{
+            `${apiBaseUrl}/purchase-data`,{
                 "networkID":Network,
                 "phone":phone
             },setHeaders()
