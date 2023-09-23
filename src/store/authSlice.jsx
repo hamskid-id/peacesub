@@ -101,6 +101,26 @@ export const LogInUser = createAsyncThunk(
     }
 )
 
+export const ForgetPassword = createAsyncThunk(
+    'auth/ForgetPassword', 
+    async ({
+        email
+    },{rejectWithValue}) =>{
+        try{
+            const response = await axios.post(
+                `${apiBaseUrl}/reset-password-request`,{
+                    email
+                }
+            );
+            return response?.data
+        }catch(err){
+            return rejectWithValue(
+                err.response?.data?.message
+            )
+        }
+    }
+)
+
 const auth_Slice = createSlice({
     name:"auth",
     initialState: {
@@ -117,6 +137,7 @@ const auth_Slice = createSlice({
             localStorage.removeItem('DataHubUserToken');
             return {
                 ...state,
+                forgetStatus:'',
                 userdata:{},
                 registerStatus:'',
                 registerError:'',
@@ -278,6 +299,49 @@ const auth_Slice = createSlice({
                 ...state,
                 registerStatus:'rejected',
                 registerError:action.payload
+            }
+        })
+
+        builder.addCase(ForgetPassword.pending,(state, action)=>{
+            return {
+                ...state,
+               forgetStatus:'pending'
+            }
+
+        });
+        builder.addCase(ForgetPassword.fulfilled,(state, action)=>{
+            const{
+                status,
+                message
+            }=action.payload;
+            if(status){
+                Toast.fire({
+                    icon: 'success',
+                    title: message
+                   })
+                return{
+                    ...state,
+                    forgetStatus:'success'
+                }
+            }else{
+                Toast.fire({
+                    icon: 'error',
+                    title: message
+                   })
+                return{
+                    ...state,
+                    forgetStatus:'failed'
+                }
+            }
+        })
+        builder.addCase(ForgetPassword.rejected,(state, action)=>{
+            Toast.fire({
+                icon: 'error',
+                title: action?.payload
+               })
+            return{
+                ...state,
+                forgetStatus:'rejected'
             }
         })
 

@@ -2,8 +2,9 @@ import { Text } from "../elements/text"
 import { AuthLayout } from "./authLayout"
 import { useForm } from "react-hook-form"
 import { InputField } from "./cutormFormField";
-import { Link } from "react-router-dom";
 import { Btn } from "../elements/btn";
+import {useDispatch, useSelector} from "react-redux";
+import { ForgetPassword } from "../store/authSlice";
 
 export const Reset =()=>{
     const { 
@@ -11,13 +12,14 @@ export const Reset =()=>{
         handleSubmit, 
         formState: { errors } 
     } = useForm();
-
+    const dispatch = useDispatch();
+    const {forgetStatus} = useSelector(state=>state.auth);
     const SubmitHandler =({
         email
     })=>{
-            console.log(
+            dispatch(ForgetPassword({
                 email
-            )
+            }))
     }
 
     return(
@@ -71,6 +73,7 @@ export const Reset =()=>{
             <Btn
                 value="send"
                 style="w-full p-3 text-center bg-tick-blue text-white mt-3 mb-3"
+                loadingStatus={forgetStatus ==="pending"?true:false}
             />
             </form>
         </AuthLayout>
