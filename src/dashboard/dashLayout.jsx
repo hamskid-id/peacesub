@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect} from "react";
 import { useNavigate } from "react-router-dom"
 import {
     Sidenav,
@@ -7,7 +7,7 @@ import {
     initTE,
   } from "tw-elements";
 import { LogOutUser } from "../store/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {Helmet} from "react-helmet";
 
 export const DashboardLayout=({children,metaTitle})=>{
@@ -18,6 +18,9 @@ export const DashboardLayout=({children,metaTitle})=>{
       firstname,
       email
     }=user?.user;
+    const {
+      walletList
+  } = useSelector(state=>state.wallet);
     useEffect(() => {
         initTE({ Sidenav, Ripple,Tab });
     });
@@ -194,7 +197,7 @@ export const DashboardLayout=({children,metaTitle})=>{
             <span>Data Transacation</span>
           </a>
         </li>
-        <li className="relative">
+        {/* <li className="relative">
           <a
             className="group flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-700 outline-none transition duration-300 ease-linear hover:bg-primary-400/10 hover:text-primary-600 hover:outline-none focus:bg-primary-400/10 focus:text-primary-600 focus:outline-none active:bg-primary-400/10 active:text-primary-600 active:outline-none data-[te-sidenav-state-active]:text-primary-600 data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
             href="#!"
@@ -209,7 +212,7 @@ export const DashboardLayout=({children,metaTitle})=>{
             </span>
             <span>Data Wallet Summary</span>
           </a>
-        </li>
+        </li> */}
         <li className="relative">
           <a
             className="group flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-700 outline-none transition duration-300 ease-linear hover:bg-primary-400/10 hover:text-primary-600 hover:outline-none focus:bg-primary-400/10 focus:text-primary-600 focus:outline-none active:bg-primary-400/10 active:text-primary-600 active:outline-none data-[te-sidenav-state-active]:text-primary-600 data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
@@ -313,8 +316,7 @@ export const DashboardLayout=({children,metaTitle})=>{
           onClick={()=>{
             dispatch(LogOutUser());
             if(!localStorage.getItem('DataHubUserToken')){
-              console.log(localStorage.getItem('DataHubUserToken'))
-              navigate("/");
+              window.location.replace("/");
             }
           }
           }
@@ -367,7 +369,7 @@ export const DashboardLayout=({children,metaTitle})=>{
             </div>
             <div className="flex items-center">
                 <div className="me-2 text-white">
-                    Balc :#25
+                    Balc :{walletList[1]?.balance}
                 </div>
                 <div className="w-10">
                     <img 

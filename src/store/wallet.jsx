@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
-import { Toast, apiBaseUrl, setHeaders } from './apiBaseUrl';
+import { ToastOption, apiBaseUrl, setHeaders } from './apiBaseUrl';
 import Swal from 'sweetalert2';
 
 export const FetchWallet = createAsyncThunk(
@@ -64,7 +64,7 @@ const wallet_Slice = createSlice({
                         walletList:data
                     }
                 }else{
-                    Toast.fire({
+                    Swal.mixin(ToastOption).fire({
                         icon: 'error',
                         title: message
                     })
@@ -76,7 +76,7 @@ const wallet_Slice = createSlice({
 
         })
         builder.addCase(FetchWallet.rejected,(state, action)=>{
-            Toast.fire({
+            Swal.mixin(ToastOption).fire({
                 icon: 'error',
                 title:action?.payload
             })
@@ -106,7 +106,7 @@ const wallet_Slice = createSlice({
                        faq:data
                     }
                 }else{
-                    Toast.fire({
+                    Swal.mixin(ToastOption).fire({
                         icon: 'error',
                         title: message
                     })
@@ -118,7 +118,7 @@ const wallet_Slice = createSlice({
 
         })
         builder.addCase(FetchFaq.rejected,(state, action)=>{
-            Toast.fire({
+            Swal.mixin(ToastOption).fire({
                 icon: 'error',
                 title:action?.payload
             })

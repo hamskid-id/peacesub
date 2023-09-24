@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
-import { Toast, apiBaseUrl, setHeaders } from './apiBaseUrl';
+import { ToastOption, apiBaseUrl, setHeaders } from './apiBaseUrl';
 import Swal from 'sweetalert2';
 
 
@@ -268,7 +268,7 @@ const auth_Slice = createSlice({
                 message,
             }=action.payload;
             if(status){
-                Toast.fire({
+                Swal.mixin(ToastOption).fire({
                     icon: 'success',
                     title: message
                    }).then(function() {
@@ -279,7 +279,7 @@ const auth_Slice = createSlice({
                     registerStatus:'success'
                 }
             }else{
-                Toast.fire({
+                Swal.mixin(ToastOption).fire({
                     icon: 'error',
                     title: message
                    })
@@ -291,7 +291,7 @@ const auth_Slice = createSlice({
             }
         })
         builder.addCase(registerUser.rejected,(state, action)=>{
-            Toast.fire({
+            Swal.mixin(ToastOption).fire({
                 icon: 'error',
                 title: action?.payload
                })
@@ -315,7 +315,7 @@ const auth_Slice = createSlice({
                 message
             }=action.payload;
             if(status){
-                Toast.fire({
+                Swal.mixin(ToastOption).fire({
                     icon: 'success',
                     title: message
                    })
@@ -324,7 +324,7 @@ const auth_Slice = createSlice({
                     forgetStatus:'success'
                 }
             }else{
-                Toast.fire({
+                Swal.mixin(ToastOption).fire({
                     icon: 'error',
                     title: message
                    })
@@ -335,7 +335,7 @@ const auth_Slice = createSlice({
             }
         })
         builder.addCase(ForgetPassword.rejected,(state, action)=>{
-            Toast.fire({
+            Swal.mixin(ToastOption).fire({
                 icon: 'error',
                 title: action?.payload
                })
@@ -359,7 +359,7 @@ const auth_Slice = createSlice({
                     message
                 }=action.payload;
                 if(status){
-                    Toast.fire({
+                    Swal.mixin(ToastOption).fire({
                         icon: 'success',
                         title: "Aulthentication successfull"
                        })
@@ -374,7 +374,7 @@ const auth_Slice = createSlice({
                         LoginStatus:'success'
                     }
                 }else {
-                    Toast.fire({
+                    Swal.mixin(ToastOption).fire({
                     icon: 'error',
                     title: message
                    })
@@ -387,7 +387,7 @@ const auth_Slice = createSlice({
 
         })
         builder.addCase(LogInUser.rejected,(state, action)=>{
-            Toast.fire({
+            Swal.mixin(ToastOption).fire({
                 icon: 'error',
                 title: action.payload
                })

@@ -9,6 +9,9 @@ import { Translayout } from "../transactionLayoute";
 export const WalletSummary=()=>{
     const dispatch = useDispatch();
     const {
+        walletList
+    } = useSelector(state=>state.wallet);
+    const {
         getAllTranStatus,
         allTrans,
         totalSpent,
@@ -33,7 +36,7 @@ export const WalletSummary=()=>{
                         [
                             {
                                 title:"WALLET BALANCE",
-                                amount:`0.00₦`
+                                amount:walletList[1]?`${walletList[1]?.balance}₦`:''
                             },{
                                 title:"TOTAL FUNDING",
                                 amount:`${totalFund}₦`

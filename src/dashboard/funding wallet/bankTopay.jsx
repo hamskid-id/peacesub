@@ -6,12 +6,13 @@ import { InputField } from "../../components/cutormFormField";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Toast } from "../../store/apiBaseUrl";
+import { ToastOption } from "../../store/apiBaseUrl";
 import { useFlutterwave} from 'flutterwave-react-v3';
 import { PayWithPayStack } from "./paystack";
 import { payWithMonnify } from "./monnify";
 import { FlutterSwal } from "./flutter";
 import { getAtm } from "../../store/dataSlice";
+import Swal from "sweetalert2";
 
 export const FundDetails=()=>{
     const{
@@ -62,7 +63,7 @@ export const FundDetails=()=>{
 
             },
             onClose: () => {
-                Toast.fire({
+                Swal.mixin(ToastOption).fire({
                     icon: 'info',
                     title:"Popup Closed"
                 })
