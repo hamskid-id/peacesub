@@ -2,7 +2,7 @@ import { Text } from "../elements/text"
 import {AiFillQuestionCircle} from "react-icons/ai";
 import { RevealAnimation } from "./reveal";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchFaq, FetchWallet } from "../store/wallet";
+import { FetchFaq} from "../store/wallet";
 import { useEffect } from "react";
 import Spinner from "../spinners/spinner";
 
@@ -10,20 +10,13 @@ import Spinner from "../spinners/spinner";
 export const Faq =({faqref})=>{
     const dispatch = useDispatch();
     const {
-        faqStatus
-    } = useSelector(state=>state.wallet);
-
-    const {
-        // walletList,
-        faq
+        faqStatus, faq
     } = useSelector(state=>state.wallet);
 
     useEffect(()=>{
         dispatch(FetchFaq())
-        //   dispatch(FetchWallet())
     },[dispatch,FetchFaq])
 
-    // console.log(faq,walletList)
     return(
         <div className="p-10 bg-light" ref={faqref}>
              <RevealAnimation side={true}>
