@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
-import { Toast, apiBaseUrl, setHeaders } from './apiBaseUrl';
+import { ToastOption, apiBaseUrl, setHeaders } from './apiBaseUrl';
 import Swal from 'sweetalert2'
 
 export const electricityPay = createAsyncThunk(
@@ -129,7 +129,7 @@ const electricity_Slice = createSlice({
                         getElectricityBillStatus:'success'
                     }
                 }else{
-                    Toast.fire({
+                    Swal.mixin(ToastOption).fire({
                         icon: 'error',
                         title:message
                     })
@@ -141,7 +141,7 @@ const electricity_Slice = createSlice({
 
         })
         builder.addCase(getElectricityBill.rejected,(state, action)=>{
-            Toast.fire({
+            Swal.mixin(ToastOption).fire({
                 icon: 'error',
                 title:action?.payload
             })

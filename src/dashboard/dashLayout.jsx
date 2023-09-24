@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useNavigate } from "react-router-dom"
 import {
     Sidenav,
@@ -316,7 +316,7 @@ export const DashboardLayout=({children,metaTitle})=>{
           onClick={()=>{
             dispatch(LogOutUser());
             if(!localStorage.getItem('DataHubUserToken')){
-              navigate("/");
+              window.location.replace("/");
             }
           }
           }

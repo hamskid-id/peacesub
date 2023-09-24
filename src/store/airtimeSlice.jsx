@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
-import { Toast, apiBaseUrl, setHeaders } from './apiBaseUrl';
+import { ToastOption, apiBaseUrl, setHeaders } from './apiBaseUrl';
 import Swal from 'sweetalert2';
 export const purchaseAirtime = createAsyncThunk(
     'airtime/purchaseAirtime', 
@@ -130,7 +130,7 @@ const purchaseAirtime_Slice = createSlice({
                         airtimeNetwork:data
                     }
                 }else{
-                    Toast.fire({
+                    Swal.mixin(ToastOption).fire({
                         icon: 'error',
                         title: message
                     })
@@ -142,7 +142,7 @@ const purchaseAirtime_Slice = createSlice({
 
         })
         builder.addCase(getairtimeNetwork.rejected,(state, action)=>{
-            Toast.fire({
+            Swal.mixin(ToastOption).fire({
                 icon: 'error',
                 title:action?.payload
             })

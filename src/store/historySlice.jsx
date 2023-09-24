@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
-import { Toast, apiBaseUrl, setHeaders } from './apiBaseUrl';
+import { ToastOption, apiBaseUrl, setHeaders } from './apiBaseUrl';
 
 export const getAllTransactionsHistory = createAsyncThunk(
     'airtime/getAllTransactionsHistory', 
@@ -95,7 +95,7 @@ const history_Slice = createSlice({
                         allTrans:data
                     }
                 }else{
-                    Toast.fire({
+                    Swal.mixin(ToastOption).fire({
                         icon: 'error',
                         title: message
                     })
@@ -107,7 +107,7 @@ const history_Slice = createSlice({
 
         })
         builder.addCase(getAllTransactionsHistory.rejected,(state, action)=>{
-            Toast.fire({
+            Swal.mixin(ToastOption).fire({
                 icon: 'error',
                 title:action?.payload
             })
@@ -137,7 +137,7 @@ const history_Slice = createSlice({
                         allDataTrans:data
                     }
                 }else{
-                    Toast.fire({
+                    Swal.mixin(ToastOption).fire({
                         icon: 'error',
                         title: message
                     })
@@ -149,7 +149,7 @@ const history_Slice = createSlice({
 
         })
         builder.addCase(getAllDataHistory.rejected,(state, action)=>{
-            Toast.fire({
+            Swal.mixin(ToastOption).fire({
                 icon: 'error',
                 title:action?.payload
             })
@@ -179,7 +179,7 @@ const history_Slice = createSlice({
                         totalSpent:data
                     }
                 }else{
-                    Toast.fire({
+                    Swal.mixin(ToastOption).fire({
                         icon: 'error',
                         title: message
                     })
@@ -191,7 +191,7 @@ const history_Slice = createSlice({
 
         })
         builder.addCase(getTotalSpent.rejected,(state, action)=>{
-            Toast.fire({
+            Swal.mixin(ToastOption).fire({
                 icon: 'error',
                 title:action?.payload
             })
@@ -221,7 +221,7 @@ const history_Slice = createSlice({
                         totalFund:data
                     }
                 }else{
-                    Toast.fire({
+                    Swal.mixin(ToastOption).fire({
                         icon: 'error',
                         title: message
                     })
@@ -233,7 +233,7 @@ const history_Slice = createSlice({
 
         })
         builder.addCase(getTotalFund.rejected,(state, action)=>{
-            Toast.fire({
+            Swal.mixin(ToastOption).fire({
                 icon: 'error',
                 title:action?.payload
             })

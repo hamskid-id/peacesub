@@ -11,7 +11,7 @@ export const setHeaders = ()=>{
     }
     return headers
 }
-export const Toast = Swal.mixin({
+export const ToastOption ={
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
@@ -21,4 +21,4 @@ export const Toast = Swal.mixin({
       toast.addEventListener('mouseenter', Swal.stopTimer)
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
-  })
+  }

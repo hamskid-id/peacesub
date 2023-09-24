@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
-import { Toast, apiBaseUrl, setHeaders } from './apiBaseUrl';
+import { ToastOption, apiBaseUrl, setHeaders } from './apiBaseUrl';
 import Swal from 'sweetalert2';
 export const changePackage = createAsyncThunk(
     'upgrade/changePackage', 
@@ -143,7 +143,7 @@ const upgrade_Slice = createSlice({
                         cpackageList:data
                     }
                 }else{
-                    Toast.fire({
+                    Swal.mixin(ToastOption).fire({
                         icon: 'error',
                         title: message
                     })
@@ -155,7 +155,7 @@ const upgrade_Slice = createSlice({
 
         })
         builder.addCase(FetchCurrentPackage.rejected,(state, action)=>{
-            Toast.fire({
+            Swal.mixin(ToastOption).fire({
                 icon: 'error',
                 title:action?.payload
             })
@@ -185,7 +185,7 @@ const upgrade_Slice = createSlice({
                        allAccList:data
                     }
                 }else{
-                    Toast.fire({
+                    Swal.mixin(ToastOption).fire({
                         icon: 'error',
                         title: message
                     })
@@ -197,7 +197,7 @@ const upgrade_Slice = createSlice({
 
         })
         builder.addCase(FetchAllAcount.rejected,(state, action)=>{
-            Toast.fire({
+            Swal.mixin(ToastOption).fire({
                 icon: 'error',
                 title:action?.payload
             })

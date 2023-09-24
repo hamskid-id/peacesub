@@ -1,5 +1,5 @@
-import { Toast } from "../../store/apiBaseUrl";
-import Swal from "sweetalert2";
+// import { Toast } from "../../store/apiBaseUrl";
+// import Swal from "sweetalert2";
 
 export const payWithMonnify=(key,email,amount,desc,name,age)=> {
     var fields = key.split('|');
