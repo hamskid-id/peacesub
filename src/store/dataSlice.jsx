@@ -51,9 +51,21 @@ export const purchaseData = createAsyncThunk(
 
 export const getDataAirtimeType = createAsyncThunk(
     'data/getDataAirtimeType', 
-    async () =>{
+    async ({
+        network
+    },{dispatch}) =>{
         try{
-            const response = await axios.get(`${apiBaseUrl}/types-data/MTN`,setHeaders());
+            const response = await axios.get(`${apiBaseUrl}/types-data/${network}`,setHeaders());
+            const{
+                status,
+                data
+            }=response?.data;
+            if(status){
+                dispatch(getDataList({
+                    network,
+                    type:data[0]?.category
+                }))
+            }
             return response?.data
         } catch(err){
             return (
@@ -80,9 +92,11 @@ export const getAtm = createAsyncThunk(
 
 export const getDataList = createAsyncThunk(
     'data/getDataList ', 
-    async () =>{
+    async ({
+        network,type
+    }) =>{
         try{
-            const response = await axios.get(`${apiBaseUrl}/list-data/MTN/SME`,setHeaders());
+            const response = await axios.get(`${apiBaseUrl}/list-data/${network}/${type}`,setHeaders());
             return response?.data
         } catch(err){
             return (

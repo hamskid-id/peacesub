@@ -369,7 +369,7 @@ export const DashboardLayout=({children,metaTitle})=>{
             </div>
             <div className="flex items-center">
                 <div className="me-2 text-white">
-                    Balc :{walletList[1]?.balance}
+                    Balc :{walletList[0]?.balance}
                 </div>
                 <div className="w-10">
                     <img 

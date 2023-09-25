@@ -32,6 +32,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { CreateUserAccount } from './dashboard/account/createAccount';
 import { ProtectedRoute } from './protectedRoute';
 import { ProtectedAuthRoute } from './protectedAuthRoute';
+import { Error } from './components/error';
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
                 <Route exact path="/datatransaction" element={<DataTransaction/>}/>
                 <Route exact path="/dataWalletSum" element={<DataWalletSummary/>}/>
                 <Route exact path="/walletSum" element={<WalletSummary/>}/>
+                <Route exact path="*" element={<Error/>}/>
                 </Route>
               </Routes>
         </Router>

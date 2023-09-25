@@ -148,7 +148,7 @@ export const DashView=()=>{
                         />
                         <Text
                             style="text-start font-medium text-2xl mb-3"
-                            value="₦ 0.00"
+                            value={`₦ ${walletList[0]?.balance}`}
                         />
                         <Text
                             style="text-start font-lmedium text-xl mb-3"

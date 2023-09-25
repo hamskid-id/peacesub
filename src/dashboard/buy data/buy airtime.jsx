@@ -18,7 +18,6 @@ export const BuyAirtime=()=>{
     } = useSelector(state=>state.airtime);
     useEffect(()=>{
         dispatch(getairtimeNetwork());
-        console.log("hello")
     },[dispatch,getairtimeNetwork])
 
     const { 
@@ -37,8 +36,6 @@ export const BuyAirtime=()=>{
                 phone:MobileNumber,
             }))
     }
-
-    console.log(airtimeNetwork)
 
     return(
         <DashboardLayout  metaTitle="Peacesub - Purchase Airtime">

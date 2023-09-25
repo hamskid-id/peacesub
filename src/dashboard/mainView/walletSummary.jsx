@@ -36,7 +36,7 @@ export const WalletSummary=()=>{
                         [
                             {
                                 title:"WALLET BALANCE",
-                                amount:walletList[1]?`${walletList[1]?.balance}₦`:''
+                                amount:walletList[0]?`${walletList[1]?.balance}₦`:''
                             },{
                                 title:"TOTAL FUNDING",
                                 amount:`${totalFund}₦`

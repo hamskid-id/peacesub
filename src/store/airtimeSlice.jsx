@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
 import { ToastOption, apiBaseUrl, setHeaders } from './apiBaseUrl';
 import Swal from 'sweetalert2';
+import { getDataAirtimeType } from './dataSlice';
 export const purchaseAirtime = createAsyncThunk(
     'airtime/purchaseAirtime', 
     async ({
@@ -28,9 +29,18 @@ export const purchaseAirtime = createAsyncThunk(
 
 export const getairtimeNetwork = createAsyncThunk(
     'airtime/getairtimeNetwork', 
-    async () =>{
+    async (_,{dispatch}) =>{
         try{
             const response = await axios.get(`${apiBaseUrl}/list-airtime`,setHeaders());
+            const{
+                status,
+                data
+            }= response?.data
+            if(status){
+                dispatch(getDataAirtimeType({
+                    network:data[0]?.network.toUpperCase()
+                }))
+            }
             return response?.data
         } catch(err){
             return(
