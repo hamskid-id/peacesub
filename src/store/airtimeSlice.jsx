@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
-import { ToastOption, apiBaseUrl, setHeaders } from './apiBaseUrl';
+import { apiBaseUrl, setHeaders } from './apiBaseUrl';
 import Swal from 'sweetalert2';
 import { getDataAirtimeType } from './dataSlice';
+import { toast } from 'react-toastify';
 export const purchaseAirtime = createAsyncThunk(
     'airtime/purchaseAirtime', 
     async ({
@@ -95,12 +96,7 @@ const purchaseAirtime_Slice = createSlice({
                     purchaseAirtimeRes:message
                 }
             }else{
-                Swal.fire({
-                    text:message,
-                    icon:'error',
-                    allowOutsideClick: false,
-                    showCloseButton: true,
-                })
+               toast.error(message)
                 return{
                     ...state,
                     purchaseAirtimeStatus:'failed'
@@ -108,12 +104,7 @@ const purchaseAirtime_Slice = createSlice({
             }
         })
         builder.addCase(purchaseAirtime.rejected,(state, action)=>{
-            Swal.fire({
-                text:action?.payload,
-                icon:'error',
-                allowOutsideClick: false,
-                showCloseButton: true,
-            })
+            toast.error(action?.payload)
             return{
                 ...state,
                 purchaseAirtimeStatus:'rejected'
@@ -140,10 +131,7 @@ const purchaseAirtime_Slice = createSlice({
                         airtimeNetwork:data
                     }
                 }else{
-                    Swal.mixin(ToastOption).fire({
-                        icon: 'error',
-                        title: message
-                    })
+                    toast.error(message)
                     return{
                         ...state,
                         getAirtimeNetworkStatus:'failed',
@@ -152,10 +140,7 @@ const purchaseAirtime_Slice = createSlice({
 
         })
         builder.addCase(getairtimeNetwork.rejected,(state, action)=>{
-            Swal.mixin(ToastOption).fire({
-                icon: 'error',
-                title:action?.payload
-            })
+            toast.error(action?.payload)
             return{
                 ...state,
                 getAirtimeNetworkStatus:'rejected'

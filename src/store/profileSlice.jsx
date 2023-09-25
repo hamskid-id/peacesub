@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
-import { ToastOption, apiBaseUrl, setHeaders } from './apiBaseUrl';
+import {apiBaseUrl, setHeaders } from './apiBaseUrl';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 export const changePassword = createAsyncThunk(
     'profile/changePassword', 
@@ -207,10 +208,7 @@ const profileInfo_Slice = createSlice({
                         profileRes:data
                     }
                 }else{
-                    Swal.mixin(ToastOption).fire({
-                        icon: 'error',
-                        title: message
-                    })
+                    toast.error(message)
                     return{
                         ...state,
                         profileInfoStatus:'failed',
@@ -219,10 +217,7 @@ const profileInfo_Slice = createSlice({
 
         })
         builder.addCase(profileInfo.rejected,(state, action)=>{
-            Swal.mixin(ToastOption).fire({
-                icon: 'error',
-                title:action?.payload
-            })
+            toast.error(action?.payload)
             return{
                 ...state,
                 profileInfoStatus:'rejected'

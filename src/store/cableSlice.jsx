@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
 import { toast } from 'react-toastify';
-import { ToastOption, apiBaseUrl, setHeaders } from './apiBaseUrl';
+import { apiBaseUrl, setHeaders } from './apiBaseUrl';
 import Swal from 'sweetalert2';
 
 export const subscribeCable = createAsyncThunk(
@@ -220,11 +220,7 @@ const cable_Slice = createSlice({
                         cableTp:data
                     }
                 }else{
-                    console.log(message)
-                    Swal.mixin(ToastOption).fire({
-                        icon: 'error',
-                        title:message
-                    })
+                    toast.error(message)
                     return{
                         ...state,
                         getcableTypeStatus:'failed',
@@ -234,10 +230,7 @@ const cable_Slice = createSlice({
         })
 
         builder.addCase(getcableType.rejected,(state, action)=>{
-            Swal.mixin(ToastOption).fire({
-                icon: 'error',
-                title:action?.payload
-            })
+            toast.error(action?.payload)
             return{
                 ...state,
                 getcableTypeStatus:'rejected'

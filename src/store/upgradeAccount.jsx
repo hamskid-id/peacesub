@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
-import { ToastOption, apiBaseUrl, setHeaders } from './apiBaseUrl';
+import { apiBaseUrl, setHeaders } from './apiBaseUrl';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 export const changePackage = createAsyncThunk(
     'upgrade/changePackage', 
     async ({
@@ -143,10 +144,7 @@ const upgrade_Slice = createSlice({
                         cpackageList:data
                     }
                 }else{
-                    Swal.mixin(ToastOption).fire({
-                        icon: 'error',
-                        title: message
-                    })
+                    toast.error(message)
                     return{
                         ...state,
                         currentPackageStatus:'failed',
@@ -155,10 +153,7 @@ const upgrade_Slice = createSlice({
 
         })
         builder.addCase(FetchCurrentPackage.rejected,(state, action)=>{
-            Swal.mixin(ToastOption).fire({
-                icon: 'error',
-                title:action?.payload
-            })
+            toast.error(action?.payload)
             return{
                 ...state,
                 currentPackageStatus:'rejected'
@@ -185,10 +180,7 @@ const upgrade_Slice = createSlice({
                        allAccList:data
                     }
                 }else{
-                    Swal.mixin(ToastOption).fire({
-                        icon: 'error',
-                        title: message
-                    })
+                    toast.error(message)
                     return{
                         ...state,
                         allAccStatus:'failed',
@@ -197,10 +189,7 @@ const upgrade_Slice = createSlice({
 
         })
         builder.addCase(FetchAllAcount.rejected,(state, action)=>{
-            Swal.mixin(ToastOption).fire({
-                icon: 'error',
-                title:action?.payload
-            })
+            toast.error(action?.payload)
             return{
                 ...state,
                 allAccStatus:'rejected'

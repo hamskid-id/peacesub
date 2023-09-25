@@ -1,6 +1,5 @@
-import { ToastOption } from "../../store/apiBaseUrl";
 import PaystackPop from '@paystack/inline-js';
-import Swal from "sweetalert2";
+import { toast } from 'react-toastify';
 
 export const PayWithPayStack=(key,email,amount)=>{
     const paystack = new PaystackPop();
@@ -85,10 +84,7 @@ export const PayWithPayStack=(key,email,amount)=>{
           },
           onCancel: () => {
             // user closed popup
-            Swal.mixin(ToastOption).fire({
-                icon: 'info',
-                title:"Popup Closed"
-            }).then(function() {
+            toast("Popup Closed").then(function() {
                 window.location.replace("/fundwallet")
             })
           }

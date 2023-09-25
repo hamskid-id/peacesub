@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
-import { ToastOption, apiBaseUrl, setHeaders } from './apiBaseUrl';
+import { apiBaseUrl, setHeaders } from './apiBaseUrl';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 export const bulkSms = createAsyncThunk(
     'data/bulkSms', 
@@ -155,12 +156,7 @@ const purchaseData_Slice = createSlice({
                     purchaseDataRes:message
                 }
             }else{
-                Swal.fire({
-                    text:message,
-                    icon:'error',
-                    allowOutsideClick: false,
-                    showCloseButton: true,
-                })
+                toast
                 return{
                     ...state,
                     purchaseDataStatus:'failed'
@@ -168,12 +164,7 @@ const purchaseData_Slice = createSlice({
             }
         })
         builder.addCase(purchaseData.rejected,(state, action)=>{
-            Swal.fire({
-                text:action?.payload,
-                icon:'error',
-                allowOutsideClick: false,
-                showCloseButton: true,
-            })
+            toast.error(action?.payload)
             return{
                 ...state,
                 purchaseDataStatus:'rejected'
@@ -211,12 +202,7 @@ const purchaseData_Slice = createSlice({
                     bulkStatus:'success'
                 }
             }else{
-                Swal.fire({
-                    text:message,
-                    icon:'error',
-                    allowOutsideClick: false,
-                    showCloseButton: true,
-                })
+                toast
                 return{
                     ...state,
                    bulkStatus:'failed'
@@ -224,12 +210,7 @@ const purchaseData_Slice = createSlice({
             }
         })
         builder.addCase(bulkSms.rejected,(state, action)=>{
-            Swal.fire({
-                text:action?.payload,
-                icon:'error',
-                allowOutsideClick: false,
-                showCloseButton: true,
-            })
+            toast.error(action?.payload)
             return{
                 ...state,
                 bulkStatus:'rejected'
@@ -257,10 +238,7 @@ const purchaseData_Slice = createSlice({
                         dataAirtimeTp:data
                     }
                 }else{
-                    Swal.mixin(ToastOption).fire({
-                        icon: 'error',
-                        title: message
-                    })
+                    toast.error(message)
                     return{
                         ...state,
                         getDataAirtimeTypeStatus:'failed',
@@ -269,10 +247,7 @@ const purchaseData_Slice = createSlice({
 
         })
         builder.addCase(getDataAirtimeType.rejected,(state, action)=>{
-            Swal.mixin(ToastOption).fire({
-                icon: 'error',
-                title: message
-            })
+           toast.error(action?.payload)
             return{
                 ...state,
                 getDataAirtimeTypeStatus:'rejected'
@@ -299,10 +274,7 @@ const purchaseData_Slice = createSlice({
                         dataList:data
                     }
                 }else{
-                    Swal.mixin(ToastOption).fire({
-                        icon: 'error',
-                        title:message
-                    })
+                    toast.error(message)
                     return{
                         ...state,
                         dataListStatus:'failed',
@@ -311,10 +283,7 @@ const purchaseData_Slice = createSlice({
 
         })
         builder.addCase(getDataList.rejected,(state, action)=>{
-            Swal.mixin(ToastOption).fire({
-                icon: 'error',
-                title:action?.payload
-            })
+            toast.error(action?.payload)
             return{
                 ...state,
                 dataListStatus:'rejected'
@@ -341,10 +310,7 @@ const purchaseData_Slice = createSlice({
                         atm:data
                     }
                 }else{
-                    Swal.mixin(ToastOption).fire({
-                        icon: 'error',
-                        title:message
-                    })
+                    toast.error(message)
                     return{
                         ...state,
                         atmStatus:'failed',
@@ -353,10 +319,7 @@ const purchaseData_Slice = createSlice({
 
         })
         builder.addCase(getAtm.rejected,(state, action)=>{
-            Swal.mixin(ToastOption).fire({
-                icon: 'error',
-                title:action?.payload
-            })
+            toast.error(action?.payload)
             return{
                 ...state,
                 atmStatus:'rejected'

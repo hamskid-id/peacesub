@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
-import { ToastOption, apiBaseUrl, setHeaders } from './apiBaseUrl';
+import {  apiBaseUrl } from './apiBaseUrl';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 
 export const createAccount = createAsyncThunk(
@@ -268,21 +269,14 @@ const auth_Slice = createSlice({
                 message,
             }=action.payload;
             if(status){
-                Swal.mixin(ToastOption).fire({
-                    icon: 'success',
-                    title: message
-                   }).then(function() {
-                    window.location.replace("/login")
-                });
+                toast(message)
+                window.location.replace("/login")
                 return{
                     ...state,
                     registerStatus:'success'
                 }
             }else{
-                Swal.mixin(ToastOption).fire({
-                    icon: 'error',
-                    title: message
-                   })
+                toast.error(message)
                 return{
                     ...state,
                     registerStatus:'failed',
@@ -291,10 +285,7 @@ const auth_Slice = createSlice({
             }
         })
         builder.addCase(registerUser.rejected,(state, action)=>{
-            Swal.mixin(ToastOption).fire({
-                icon: 'error',
-                title: action?.payload
-               })
+            toast.error(action?.payload)
             return{
                 ...state,
                 registerStatus:'rejected',
@@ -315,19 +306,13 @@ const auth_Slice = createSlice({
                 message
             }=action.payload;
             if(status){
-                Swal.mixin(ToastOption).fire({
-                    icon: 'success',
-                    title: message
-                   })
+                   toast(message)
                 return{
                     ...state,
                     forgetStatus:'success'
                 }
             }else{
-                Swal.mixin(ToastOption).fire({
-                    icon: 'error',
-                    title: message
-                   })
+                toast.error(message)
                 return{
                     ...state,
                     forgetStatus:'failed'
@@ -335,10 +320,7 @@ const auth_Slice = createSlice({
             }
         })
         builder.addCase(ForgetPassword.rejected,(state, action)=>{
-            Swal.mixin(ToastOption).fire({
-                icon: 'error',
-                title: action?.payload
-               })
+            toast.error(action?.payload)
             return{
                 ...state,
                 forgetStatus:'rejected'
@@ -359,10 +341,7 @@ const auth_Slice = createSlice({
                     message
                 }=action.payload;
                 if(status){
-                    Swal.mixin(ToastOption).fire({
-                        icon: 'success',
-                        title: "Aulthentication successfull"
-                       })
+                       toast("Aulthentication successfull")
                     localStorage.setItem(
                             'DataHubUserToken',
                             JSON.stringify(data)
@@ -374,10 +353,7 @@ const auth_Slice = createSlice({
                         LoginStatus:'success'
                     }
                 }else {
-                    Swal.mixin(ToastOption).fire({
-                    icon: 'error',
-                    title: message
-                   })
+                    toast.error(message)
                     return{
                 ...state,
                 LoginStatus:'failed',
@@ -387,10 +363,7 @@ const auth_Slice = createSlice({
 
         })
         builder.addCase(LogInUser.rejected,(state, action)=>{
-            Swal.mixin(ToastOption).fire({
-                icon: 'error',
-                title: action.payload
-               })
+           toast.error(action?.payload)
             return{
                 ...state,
                LoginStatus:'rejected',

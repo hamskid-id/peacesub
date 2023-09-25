@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import  axios  from 'axios';
-import { ToastOption, apiBaseUrl, setHeaders } from './apiBaseUrl';
-import Swal from 'sweetalert2';
+import { apiBaseUrl, setHeaders } from './apiBaseUrl';
+import { toast } from 'react-toastify';
 
 export const FetchWallet = createAsyncThunk(
     'wallet/FetchWallet', 
@@ -64,10 +64,7 @@ const wallet_Slice = createSlice({
                         walletList:data
                     }
                 }else{
-                    Swal.mixin(ToastOption).fire({
-                        icon: 'error',
-                        title: message
-                    })
+                    toast.error(message)
                     return{
                         ...state,
                         walletStatus:'failed',
@@ -76,10 +73,7 @@ const wallet_Slice = createSlice({
 
         })
         builder.addCase(FetchWallet.rejected,(state, action)=>{
-            Swal.mixin(ToastOption).fire({
-                icon: 'error',
-                title:action?.payload
-            })
+            toast.error(action?.payload)
             return{
                 ...state,
                 walletStatus:'rejected'
@@ -106,10 +100,7 @@ const wallet_Slice = createSlice({
                        faq:data
                     }
                 }else{
-                    Swal.mixin(ToastOption).fire({
-                        icon: 'error',
-                        title: message
-                    })
+                   toast.error(message)
                     return{
                         ...state,
                         faqStatus:'failed',
@@ -118,10 +109,7 @@ const wallet_Slice = createSlice({
 
         })
         builder.addCase(FetchFaq.rejected,(state, action)=>{
-            Swal.mixin(ToastOption).fire({
-                icon: 'error',
-                title:action?.payload
-            })
+            // toast.error(action?.payload)
             return{
                 ...state,
                 faqStatus:'rejected'
