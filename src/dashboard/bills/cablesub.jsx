@@ -17,7 +17,9 @@ export const CableSub=()=>{
         cableTp,
     } = useSelector(state=>state.cable);
     useEffect(()=>{
-        dispatch(getcableType());
+        dispatch(getcableType({
+            network:"DSTV"
+        }));
     },[dispatch,getcableType])
 
 
@@ -57,6 +59,23 @@ export const CableSub=()=>{
                 </div>
                 <div className="grid lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1 p-4">
                     <form onSubmit={handleSubmit(SubmitHandler)} className="xs:order-last xxs:order-last sm:order-last md:order-first lg:order-first xl:order-first">
+                        <div className="flex flex-col mb-3">
+                            <label
+                                className={`mb-2 text-sm font-medium text-start`}
+                                htmlFor="NetworkTp">
+                                Network Type
+                            </label>
+                            <select
+                                className="text-start rounded-md p-4 border text-xs mb-4"
+                                name="Network"
+                                onChange={(e)=>dispatch(getcableType({network:e.target.value}))}
+                            >
+                                 <option value="DSTV">DSTV</option>
+                                 <option value="STARTIMES">STARTIMES</option>
+                                 <option value="GOTV">GOTV</option>
+                            </select>
+                            {errors.Network && (<p className="text-danger text-sm text-start">{errors.message}</p>)}
+                        </div>
                         <div className="flex flex-col mb-3">
                             <label
                                 className={`mb-2 text-sm font-medium text-start`}

@@ -316,7 +316,7 @@ export const DashboardLayout=({children,metaTitle})=>{
           onClick={()=>{
             dispatch(LogOutUser());
             if(!localStorage.getItem('DataHubUserToken')){
-              window.location.replace("/");
+              navigate("/");
             }
           }
           }

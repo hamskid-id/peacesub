@@ -61,9 +61,11 @@ export const validateCable = createAsyncThunk(
 
 export const getcableType = createAsyncThunk(
     'cable/getcableType', 
-    async () =>{
+    async ({
+        network
+    }) =>{
         try{
-            const response = await axios.get(`${apiBaseUrl}/list-tv/DSTV`,setHeaders());
+            const response = await axios.get(`${apiBaseUrl}/list-tv/${network}`,setHeaders());
             return response?.data
         } catch(err){
             return (

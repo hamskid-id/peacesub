@@ -10,13 +10,15 @@ export const electricityPay = createAsyncThunk(
         type,
         Network,
         phone,
+        amount
     }, {rejectWithValue}) =>{
     try{
         const response = await axios.post(
             `${apiBaseUrl}/purchase-electricity`,{
                 "networkID":Network,
                 "phone":phone,
-                "type":type
+                "type":type,
+                "amount":amount
             },setHeaders()
         );
         return response?.data

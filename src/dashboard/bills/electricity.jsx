@@ -27,11 +27,13 @@ export const ElectricityBill =()=>{
         Network,
         type,
         phone,
+        amount
     })=>{
             dispatch(electricityPay({
                 type,
                 Network,
                 phone,
+                amount
             }))
         }
         console.log(EleBill);
@@ -87,6 +89,21 @@ export const ElectricityBill =()=>{
                                 labelStyle="text-sm font-medium text-start"
                                 register={register}
                                 errors={errors.type}
+                                style="text-start rounded-md p-4 border text-xs mb-4"
+                            />
+                        </div>
+                        <div
+                            className="w-full">
+                            <InputField
+                                name="amount"
+                                subTitle={null}
+                                selectArrayOption={null}
+                                placeHolder="Amount"
+                                type="number"
+                                labelTitle="Amount"
+                                labelStyle="text-sm font-medium text-start"
+                                register={register}
+                                errors={errors.amount}
                                 style="text-start rounded-md p-4 border text-xs mb-4"
                             />
                         </div>
