@@ -67,7 +67,7 @@ export const CableSub=()=>{
                             </label>
                             <select
                                 className="text-start rounded-md p-4 border text-xs mb-4"
-                                name="Network"
+                                name="NetworkType"
                                 onChange={(e)=>dispatch(getcableType({network:e.target.value}))}
                             >
                                  <option value="DSTV">DSTV</option>
