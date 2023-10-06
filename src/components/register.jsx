@@ -8,11 +8,12 @@ import * as Yup from 'yup';
 import { Btn } from "../elements/btn";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../store/authSlice";
+import { toast } from "react-toastify";
 
 export const Register =()=>{
     const dispatch = useDispatch();
     const {registerError,registerStatus} = useSelector(state=>state.auth);
-
+   
     const SubmitHandler =({
         lastname,
         email,
@@ -23,6 +24,11 @@ export const Register =()=>{
         password,
         firstname
     })=>{
+            let now = new Date();
+            let yyyy = now.getFullYear();
+            if(( yyyy - new Date(dob).getFullYear()) < 18){
+                return toast.warning("Only 18yrs and above an register")
+            }
             dispatch(registerUser({
                 lastname,
                 email,

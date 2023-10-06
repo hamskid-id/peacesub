@@ -83,7 +83,7 @@ export const KYC=()=>{
                                         title:"BVN",
                                         labelName:"BVN*",
                                         selectArrayOption:null,
-                                        type:"text",
+                                        type:"number",
                                         error:errors.BVN,
                                         placeHold:"BVN*",
                                         subTitle:null
@@ -91,7 +91,7 @@ export const KYC=()=>{
                                         title:"acc",
                                         labelName:"Account Number*",
                                         selectArrayOption:null,
-                                        type:"acc",
+                                        type:"number",
                                         error:errors.acc,
                                         placeHold:"acc",
                                         subTitle:null

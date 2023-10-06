@@ -9,6 +9,7 @@ import {
 import { LogOutUser } from "../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {Helmet} from "react-helmet";
+import { FetchWallet } from "../store/wallet"
 
 export const DashboardLayout=({children,metaTitle})=>{
     const navigate = useNavigate();
@@ -24,6 +25,10 @@ export const DashboardLayout=({children,metaTitle})=>{
     useEffect(() => {
         initTE({ Sidenav, Ripple,Tab });
     });
+    
+    useEffect(()=>{
+      dispatch(FetchWallet())
+  },[dispatch,FetchWallet])
     return(
         <div className="bg-light-pink">
           {
@@ -40,11 +45,11 @@ export const DashboardLayout=({children,metaTitle})=>{
         data-te-sidenav-content="#content">
         <div className="mt-6">
       <div id="header-content" className="pl-4">
-        <img
+        {/* <img
           src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(26).webp"
           alt="Avatar"
           className="mb-4 h-auto rounded-full align-middle"
-          style={{"maxWidth": "50px"}} />
+          style={{"maxWidth": "50px"}} /> */}
 
         <h4 className="mb-2 text-2xl font-medium leading-[1.2] break-all">{firstname}</h4>
         <p className="mb-4 break-all">{email}</p>

@@ -4,8 +4,6 @@ import { Text } from "../../elements/text"
 import { DashboardLayout } from "../dashLayout"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
-import { FetchWallet } from "../../store/wallet"
 
 export const DashView=()=>{
     const navigate = useNavigate();
@@ -16,9 +14,6 @@ export const DashView=()=>{
     const {
         walletList
     } = useSelector(state=>state.wallet);
-    useEffect(()=>{
-        dispatch(FetchWallet())
-    },[dispatch,FetchWallet])
     const{
         firstname
     }=user

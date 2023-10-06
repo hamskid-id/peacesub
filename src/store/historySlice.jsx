@@ -70,8 +70,25 @@ const history_Slice = createSlice({
        totalSpent:'',
        getTotalFundStatus:'',
        totalFund:'',
+       historyToFilter:[]
     },
     reducers:{
+        sortDataByAmount(state,action){
+            const newArray = [...historyToFilter]
+            const sortByAmount =  newArray.sort((a, b)=> (a.updated_at < b.updated_at) ? -1 : (a.updated_at> b.updated_at) ? 1 : 0);
+            return{
+                ...state,
+                allTrans:sortByAmount
+            }    
+        },
+         searchdata(state,action){
+            const data=action.payload;
+            const filteredData = state.historyToFilter.filter((item)=>item.title.toLowerCase().includes(data.toLowerCase()));
+            return{
+                ...state,
+                allTrans:filteredData
+            }
+        }
     },
 
     extraReducers:(builder)=>{
@@ -93,7 +110,8 @@ const history_Slice = createSlice({
                     return{
                         ...state,
                         getAllTranStatus:'success',
-                        allTrans:data
+                        allTrans:data,
+                        historyToFilter:data
                     }
                 }else{
                     toast.error(message)
@@ -221,4 +239,5 @@ const history_Slice = createSlice({
         })
     }
 })
+export const history_SliceActions = history_Slice.actions;
 export default history_Slice;

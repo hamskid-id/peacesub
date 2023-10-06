@@ -36,7 +36,6 @@ export const ElectricityBill =()=>{
                 amount
             }))
         }
-        console.log(EleBill);
     return(
         <DashboardLayout  metaTitle="Peacesub - Electricity subscription">
             {

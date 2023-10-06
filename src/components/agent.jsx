@@ -1,8 +1,12 @@
+import { useSelector } from "react-redux";
 import { Btn } from "../elements/btn"
 import { Text } from "../elements/text"
 import { RevealAnimation } from "./reveal";
+import { useNavigate } from "react-router-dom";
 
 export const Agent =()=>{
+    const {userLoaded} =useSelector((state)=>state.auth);
+    const navigate = useNavigate()
     return(
         <div className="px-10 py-16 agent">
             <div className="lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full">
@@ -23,6 +27,7 @@ export const Agent =()=>{
                         <Btn
                             style="text-white bg-light-blue py-5 px-8 text-sm"
                             value="Get Started"
+                            clickFunc={()=>userLoaded?navigate("/dashboard"):navigate("/login")}
                         />
                     </RevealAnimation>
                 </div>

@@ -13,8 +13,7 @@ export const BuyAirtime=()=>{
     const {
         purchaseAirtimeStatus,
         airtimeNetwork,
-        getAirtimeNetworkStatus,
-        purchaseAirtimeRes
+        getAirtimeNetworkStatus
     } = useSelector(state=>state.airtime);
     useEffect(()=>{
         dispatch(getairtimeNetwork());
@@ -84,7 +83,7 @@ export const BuyAirtime=()=>{
                                     title:"MobileNumber",
                                     labelName:"Mobile Number",
                                     selectArrayOption:null,
-                                    type:"number",
+                                    type:"tel",
                                     error:errors.MobileNumber,
                                     placeHold:"MobileNumber",
                                     subTitle:null
@@ -92,7 +91,7 @@ export const BuyAirtime=()=>{
                                     title:"Amount",
                                     labelName:"Amount",
                                     selectArrayOption:null,
-                                    type:"text",
+                                    type:"number",
                                     error:errors.Amount,
                                     placeHold:"Amount",
                                     subTitle:null

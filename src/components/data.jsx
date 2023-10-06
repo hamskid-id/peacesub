@@ -2,9 +2,11 @@ import { useNavigate } from "react-router-dom"
 import { Btn } from "../elements/btn"
 import { Text } from "../elements/text"
 import { RevealAnimation } from "./reveal";
+import { useSelector } from "react-redux";
 
 export const Data=({pricingref})=>{
     const navigate = useNavigate();
+    const {userLoaded} =useSelector((state)=>state.auth);
     return(
         <div  className="lg:px-16 md:px-16 xl:px-16 py-20 sm:px-4 xxs:px-4 xs:px-4" ref={pricingref}>
             <RevealAnimation side={true}>
@@ -79,7 +81,7 @@ export const Data=({pricingref})=>{
                                     <Btn
                                         style="text-white bg-tick-blue py-4 px-8 text-sm"
                                         value="Order Now"
-                                        clickFunc={()=>navigate("/dashboard")}
+                                        clickFunc={()=>userLoaded?navigate("/dashboard"):navigate("/login")}
                                     />
                                 </RevealAnimation>
                             </div>

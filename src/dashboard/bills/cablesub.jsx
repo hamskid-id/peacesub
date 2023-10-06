@@ -4,7 +4,7 @@ import { Text } from "../../elements/text";
 import { Btn } from "../../elements/btn";
 import { InputField } from "../../components/cutormFormField";
 import { useDispatch,useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import {getcableType, validateCable } from "../../store/cableSlice";
 import Spinner from "../../spinners/spinner";
 
@@ -16,6 +16,7 @@ export const CableSub=()=>{
         getcableTypeStatus,
         cableTp,
     } = useSelector(state=>state.cable);
+    const[NetworkTp, setNetworkTp] = useState('DSTV')
     useEffect(()=>{
         dispatch(getcableType({
             network:"DSTV"
@@ -35,13 +36,15 @@ export const CableSub=()=>{
         var NetworkInfo = Network.split('|');
         var NetworkId = NetworkInfo[1];
         var NetworkName = NetworkInfo[0];
-        console.log(cableTp)
-        console.log(NetworkInfo, NetworkId, NetworkName )
         dispatch(validateCable({
             Network:NetworkId,
             phone:Phone,
             NetworkName
         }))
+    }
+    const handleCableChange =(e)=>{
+        setNetworkTp(e.target.value)
+        dispatch(getcableType({network:e.target.value}))
     }
 
     return(
@@ -67,14 +70,16 @@ export const CableSub=()=>{
                             </label>
                             <select
                                 className="text-start rounded-md p-4 border text-xs mb-4"
-                                name="NetworkType"
-                                onChange={(e)=>dispatch(getcableType({network:e.target.value}))}
+                                name="NetworkTp"
+                                value={NetworkTp}
+                                onChange={(e)=> handleCableChange(e)}
                             >
+                                
                                  <option value="DSTV">DSTV</option>
                                  <option value="STARTIMES">STARTIMES</option>
                                  <option value="GOTV">GOTV</option>
                             </select>
-                            {errors.Network && (<p className="text-danger text-sm text-start">{errors.message}</p>)}
+                            {errors.NetworkTp && (<p className="text-danger text-sm text-start">{errors.message}</p>)}
                         </div>
                         <div className="flex flex-col mb-3">
                             <label

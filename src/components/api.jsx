@@ -1,8 +1,12 @@
+import { useSelector } from "react-redux";
 import { Btn } from "../elements/btn"
 import { Text } from "../elements/text"
 import { RevealAnimation } from "./reveal"
+import { useNavigate } from "react-router-dom";
 
 export const Api =()=>{
+    const {userLoaded} =useSelector((state)=>state.auth);
+    const navigate = useNavigate()
     return(
         <div className="api-bg py-20">
             <div className="m-auto w-fit p-4">
@@ -23,6 +27,7 @@ export const Api =()=>{
                         <Btn
                             style="text-white bg-tick-blue py-5 px-8 text-sm"
                             value="Get Started"
+                            clickFunc={()=>userLoaded?navigate("/dashboard"):navigate("/login")}
                         />
                     </RevealAnimation>
                 </div>

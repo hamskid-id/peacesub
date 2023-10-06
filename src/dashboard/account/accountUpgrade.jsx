@@ -26,16 +26,16 @@ export const AccountUpgrade =()=>{
                 <div className="flex flex-wrap justify-between p-4 bg-whitesmoke items-center">
                     <div>
                         <Text
-                            style="text-xl text-start text-medium"
+                            style="text-xl text-center text-medium"
                             value="ACCOUNT UPGRADE"
                         />
                     </div>
-                    <div className="w-24">
+                    {/* <div className="w-24">
                         <img 
                             src="https://www.kindpng.com/picc/m/361-3619126_upgrade-icons-hd-png-download.png"
                             alt="object not found"
                         />
-                    </div>
+                    </div> */}
                 </div>
                 {
                     allAccStatus === "pending"?
