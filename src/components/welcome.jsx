@@ -26,13 +26,13 @@ export const WelcomeSection =({homeref})=>{
                         <div className="text-start  lg:w-text-4xl xl:text-4xl md:text-4xl sm:text-4xl xs:text-2xl xxs:text-2xl font-extrabold c-brown ">
                             Welcome To
                         </div>
-                        <div className="text-start lg:w-text-8xl xl:text-8xl md:text-8xl sm:text-6xl xs:text-6xl xxs:text-6xl font-extrabold c-blue break-all">Peacesub</div>
+                        <div className="text-start lg:w-text-8xl xl:text-8xl md:text-8xl sm:text-6xl xs:text-6xl xxs:text-6xl font-extrabold c-blue break-all">5starhubs</div>
                     </RevealAnimation>
                 </div>
                 <RevealAnimation>
                     <Text
                         style="text-start text-xl mb-6 c-brown font-light"
-                        value="peacesub is a registered telecommunication company that provide voice or data transmission services, such as; Mobile Data, Cable Sub, Electric Bill, Airtime (VTU)..."
+                        value="5starhubs is a registered telecommunication company that provide voice or data transmission services, such as; Mobile Data, Cable Sub, Electric Bill, Airtime (VTU)..."
                     />
                 </RevealAnimation>
                 <div className="flex">

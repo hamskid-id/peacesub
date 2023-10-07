@@ -37,7 +37,7 @@ export const Agent =()=>{
                     [
                         {
                             name:"MUHAMMED TOHEEB",
-                            info:"peacesub is best platform when its come to affordable data plan for both end user and resseller, i recommend this platform it's fast automated and secured.",
+                            info:"5starhubs is best platform when its come to affordable data plan for both end user and resseller, i recommend this platform it's fast automated and secured.",
                             profile:"Student",
                             img:"https://peacesub.com.ng/static/styling/img/team/user-2.png"
                         },{
@@ -46,7 +46,7 @@ export const Agent =()=>{
                             profile:"Lead Developer",
                             img:"https://peacesub.com.ng/static/styling/img/team/user-4.png"
                         },{
-                            info:"This site is greate... all thanks to Awoofdata i can really say that since i join this site i have been earning more than before kudos to peacesub kudos to developer....",
+                            info:"This site is greate... all thanks to Awoofdata i can really say that since i join this site i have been earning more than before kudos to 5starhubs kudos to developer....",
                             name:"OPEYEMI OLARENWAJU",
                             profile:"Marketer",
                             img:"https://peacesub.com.ng/static/styling/img/team/user-7.png"

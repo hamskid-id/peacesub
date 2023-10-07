@@ -5,19 +5,19 @@ export const Footer =()=>{
     return(
         <div className="py-16 px-10 bg-light-blue footer grid lg:grid-cols-4 xl:grid-cols-4 md:grid-cols-4 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1 gap-8">
             <div>
-            <div className="w-20 h-20 mb-4">
+            <div className="mb-4">
                 <RevealAnimation side={true}>
                     <img 
-                        src="https://peacesub.com.ng/static/logo.png"
+                        src="https://5starcompany.com.ng/home/img/logo/logo.png"
                         alt="object not found"
-                        className="w-full"
+                        className="w-17 h-17"
                     />
                 </RevealAnimation>
             </div>
             <RevealAnimation>
                 <Text
                     style="text-white mb-4 font-light text-lg"
-                    value="Here at peacesub., we offer you the most affordable and most cheapest data, airtime, Dstv, Gotv and Startimes subscription...."
+                    value="Here at 5starhubs., we offer you the most affordable and most cheapest data, airtime, Dstv, Gotv and Startimes subscription...."
                 />
             </RevealAnimation>
             </div>
@@ -54,7 +54,7 @@ export const Footer =()=>{
                 </RevealAnimation>
                 <div>
                     {
-                        [{phone:"PHONE:",value:"08067556850"},{phone:" EMAIL:",value:"peacesub@gmail.com"},{phone:"ADDRESS:",value:"State University area,Oke Baale,Osogbo, Osun State"}].map((link,index)=>{
+                        [{phone:"PHONE:",value:"08166939205"},{phone:" EMAIL:",value:"info@5starcompany.com.ng"},{phone:"ADDRESS:",value:"Lagos,Nigeria."}].map((link,index)=>{
                             const{
                                 phone,value
                             }=link;
@@ -85,7 +85,7 @@ export const Footer =()=>{
             <RevealAnimation>
                 <Text
                     style="text-white mb-4 font-mediumn text-2xl"
-                    value="ABOUT PEACESUB 2"
+                    value="ABOUT 5STARHUBS2 2"
                 />
             </RevealAnimation>
             <RevealAnimation>

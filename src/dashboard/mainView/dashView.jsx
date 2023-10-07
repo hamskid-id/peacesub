@@ -299,7 +299,7 @@ export const DashView=()=>{
                                     value="Retailer Website"
                                 />
                                 <div className="border p-4 text-start text-sm mb-4">
-                                    Own a PEACESUB.COM.NG retailer website and retail all our services; Such as DATA, Recharge cards printing, AIRTIME and BILLS Payment.
+                                    Own a 5starhubs retailer website and retail all our services; Such as DATA, Recharge cards printing, AIRTIME and BILLS Payment.
                                 </div>
                                 <div className="me-auto w-fit">
                                     <Btn
@@ -314,7 +314,7 @@ export const DashView=()=>{
                                     value="Others"
                                 />
                                 <div className="border p-4 text-start text-sm mb-4">
-                                    Refer people to PEACESUB.COM.NG and earn N500 immediately the person upgrade his/her account to affiliate or topuser
+                                    Refer people to 5starhubs and earn N500 immediately the person upgrade his/her account to affiliate or topuser
                                 </div>
                                 <div className="relative mb-4 flex flex-wrap items-stretch">
                                     <span

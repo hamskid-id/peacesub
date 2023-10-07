@@ -21,9 +21,9 @@ export const Nav =({
         <div className="flex justify-between lg:items-center xl:items-center md:items-center xs:items-start sm:items-start xxs:items-start lg:flex-row xl:flex-row md:flex-row sm:flex-col xs:flex-col xxs:flex-col">
             <div className="lg:w-3/12 xl:w-3/12 md:w-3/12 sm:w-full xs:w-full items-center xxs:w-full flex">
                 <img 
-                    src="https://peacesub.com.ng/static/logo.png"
+                    src="https://5starcompany.com.ng/home/img/logo/logo.png"
                     alt="object not found"
-                    className="w-14 h-14"
+                    className="w-17 h-17"
                 />
                 <span 
                     className="ms-auto hamburger"

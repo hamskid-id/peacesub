@@ -9,14 +9,14 @@ export const About =({aboutref})=>{
              <RevealAnimation side={true}>
                 <Text
                     style="text-center font-medium text-5xl mb-4 mt-10 c-brown"
-                    value="About peacesub"
+                    value="About 5starhubs"
                 />
              </RevealAnimation>
              <RevealAnimation>
                 <Text
                     style="text-start text-sm leading-8 c-brown"
                     value="This is a telecommunication industry playing a major role in distribution, selling affordable and most cheapest data, airtime, Dstv subscription, Gotv subscription, Startimes subscription, Convert Airtime to Cash and Electricity subscription.
-                    Certain things are hard; making payments shouldn't be one of them. peacesub helps you make payments for services you enjoy right from the comfort of your home or office. The experience of total convenience,fast service delivery and easy payment is just at your fingertips.."
+                    Certain things are hard; making payments shouldn't be one of them. 5starhubs helps you make payments for services you enjoy right from the comfort of your home or office. The experience of total convenience,fast service delivery and easy payment is just at your fingertips.."
                 />
              </RevealAnimation>
             <div className="py-4 grid lg:grid-cols-3 xl:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 xxs:grid-cols-1 gap-8 my-4 lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto">
