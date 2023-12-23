@@ -95,14 +95,7 @@ export const DashView=()=>{
                                         style="text-start font-medium text-xl mb-1"
                                         value={`Bank Name: ${provider}`}
                                     />
-                                    <Text
-                                        style="text-start font-medium text-xl mb-1"
-                                        value={`Updated At: ${new Date(updated_at)}`}
-                                    />
-                                    <Text
-                                        style="text-start font-medium text-xl mb-1"
-                                        value={`Assignment: ${assignment}`}
-                                    />
+                                    
                                     <Text
                                         style="text-end font-medium text-xl mb-3"
                                         value={status.toUpperCase()}
@@ -291,7 +284,71 @@ export const DashView=()=>{
                             }
                         </div>
                     </div>
-                    
+                    <div className="col-span-2 bg-white p-4 flex flex-col justify-center items-center shadow">
+                        <div className="grid lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 xxs:grid-cols-1 gap-8 my-4 lg:w-3/4 xl:w-3/4 md:w-3/4 sm:w-full xs:w-full xxs:w-full m-auto">
+                            <div className="p-4 bg-white shadow">
+                                <Text   
+                                    style="text-start font-medium text-lg mb-3"
+                                    value="Retailer Website"
+                                />
+                                <div className="border p-4 text-start text-sm mb-4">
+                                    Own a 5starhubs retailer website and retail all our services; Such as DATA, Recharge cards printing, AIRTIME and BILLS Payment.
+                                </div>
+                                <div className="me-auto w-fit">
+                                    <Btn
+                                        style="px-6 py-2 bg-primary text-white"
+                                        value="Request"
+                                    />
+                                </div>
+                            </div>
+                            <div className="p-4 bg-white shadow">
+                                <Text   
+                                    style="text-start font-medium text-lg mb-3"
+                                    value="Others"
+                                />
+                                <div className="border p-4 text-start text-sm mb-4">
+                                    Refer people to 5starhubs and earn N500 immediately the person upgrade his/her account to affiliate or topuser
+                                </div>
+                                <div className="relative mb-4 flex flex-wrap items-stretch">
+                                    <span
+                                        className="flex items-center whitespace-nowrap rounded-l border border-r-0 border-solid border-neutral-300 px-3 py-[0.25rem] text-center text-base font-normal leading-[1.6] text-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
+                                        >Referal Link</span
+                                    >
+                                    <input
+                                        type="text"
+                                        value="https://5starhubs.vercel.app/signup/?referal=Hamzat27"
+                                        className="relative m-0 block w-[1px] min-w-0 flex-auto border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-4 text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                                        aria-label="Amount (to the nearest dollar)" />
+                                    <span
+                                        className="bg-primary flex items-center whitespace-nowrap rounded-r border border-l-0 border-solid border-neutral-300 px-3 py-[0.25rem] text-center text-base font-normal leading-[1.6] text-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
+                                        ><AiOutlineCopy color="white"/></span
+                                    >
+                                    </div>
+                                    <div className="flex justify-between mb-3">
+                                        <div>
+                                            <Text
+                                                style="font-medium text-lg text-start"
+                                                value="My Total Referaal"
+                                            />
+                                        </div>
+                                        <div>
+                                            <Text
+                                                style="font-medium text-lg text-start"
+                                                value="0"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div
+                                        className="flex justify-between border mb-1 p-4 rounded cursor-auto">
+                                        <Text
+                                            style="text-start text-sm font-mdiumn"
+                                            value="Referral List"
+                                        />
+                                        <AiOutlineArrowRight/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
         </DashboardLayout>
