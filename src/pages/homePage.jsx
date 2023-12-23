@@ -19,7 +19,7 @@ export const HomePage =()=>{
     return(
         <div className="bg-light-pink">
              <Helmet>
-                <title>Peacesub - Perform data transmission services with ease</title>
+                <title>5starhubs - Perform data transmission services with ease</title>
             </Helmet>
             <div className="pt-4  px-10 sm:px-4 xxs:px-4 xs:px-4 md:px-10 lg:px-10 xl:px-10 bg-light-pink relative">
                 
